@@ -192,6 +192,15 @@ class MyObject {
         LIBS.translateX(this.MOVEMATRIX, x);
     }
 
+    setScale(s) {
+        var scale = LIBS.scale(s);
+        this.scaling(scale);
+    }
+    scaling(m4){
+        this.MOVEMATRIX = LIBS.mul(this.MOVEMATRIX, m4);
+        this.child.scaling(m4);
+    }
+
     setIdentityMove() {
         LIBS.set_I4(this.MOVEMATRIX);
     }
@@ -518,6 +527,8 @@ function main() {
     // CIRCLE: mX, mY, mZ, pX, pY, pZ, r, g, b
     // HALF SPHERE: radius, r, g, b, mulXy, pX, pY, pZ
 
+    var chococat = new MyObject([],[], shader_vertex_source, shader_fragment_source);
+
     object = generateSphere(1.0, 20, 17, 17, 1.3, 1.1, 1, 0, 0.5, 0);
     var kepala = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
 
@@ -586,28 +597,28 @@ function main() {
     var bola_topi = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
 
 
-
+    chococat.addChild(kepala);
+    chococat.addChild(badan);
     kepala.addChild(mata_kiri_putih);
     kepala.addChild(mata_kanan_putih);
     kepala.addChild(mata_kiri_hitam);
     kepala.addChild(mata_kanan_hitam);
     kepala.addChild(mulut);
-    kepala.addChild(badan);
-    kepala.addChild(kalung);
     kepala.addChild(telinga_kiri);
     kepala.addChild(telinga_kanan);
     kepala.addChild(telinga_kanan_dalam);
     kepala.addChild(telinga_kiri_dalam);
-    kepala.addChild(kaki_kanan);
-    kepala.addChild(kaki_kiri);
-    kepala.addChild(tangan_kanan);
-    kepala.addChild(tangan_kiri);
     kepala.addChild(kumis_kanan1);
     kepala.addChild(kumis_kanan2);
     kepala.addChild(kumis_kiri1);
     kepala.addChild(kumis_kiri2);
     kepala.addChild(topi);
     kepala.addChild(bola_topi);
+    badan.addChild(kalung);
+    badan.addChild(kaki_kanan);
+    badan.addChild(kaki_kiri);
+    badan.addChild(tangan_kanan);
+    badan.addChild(tangan_kiri);
     
     // Matriks
     var PROJMATRIX = LIBS.get_projection(40, CANVAS.width / CANVAS.height, 1, 100);
@@ -633,13 +644,56 @@ function main() {
                 THETA += dX;
                 PHI += dY;
             }
-            kepala.setIdentityMove();        
-            kepala.setRotateMove(PHI, THETA, 0);            
+            chococat.setIdentityMove();        
+            chococat.setRotateMove(PHI, THETA, 0);   
+            chococat.setTranslateMove(0, -0.3, 0);
+
+            for (let i = 0; i < chococat.child.length; i++) {
+                chococat.child[i].setIdentityMove();
+                chococat.child[i].setRotateMove(PHI, THETA, 0);
+                chococat.child[i].setTranslateMove(0, -0.3, 0);   
+            }
+
+            // kepala toleh kanan kiri
+            if (time <= 1000)
+                kepala.setRotateMove(PHI, LIBS.degToRad(time * 0.02), 0)
+            else if (time > 1000 && time < 3000)
+                kepala.setRotateMove(PHI, LIBS.degToRad(20), 0);
+            else if (time >= 3000 && time <= 5000)
+                kepala.setRotateMove(PHI, LIBS.degToRad((-time + 4000) * 0.02), 0);
+            else if (time > 5000 && time < 7000)
+                kepala.setRotateMove(PHI, LIBS.degToRad(-20), 0);
+            else if (time >= 7000 && time <= 8000)
+                kepala.setRotateMove(PHI, LIBS.degToRad((time - 8000) * 0.02), 0);
+            else
+                kepala.setRotateMove(PHI, THETA, 0);
 
             for (let i = 0; i < kepala.child.length; i++) {
                 kepala.child[i].setIdentityMove();
                 kepala.child[i].setRotateMove(PHI, THETA, 0);
+                kepala.child[i].setTranslateMove(0, -0.3, 0);   
+
+                // kepala toleh kanan kiri
+                if (time <= 1000)
+                    kepala.child[i].setRotateMove(PHI, LIBS.degToRad(time * 0.02), 0)
+                else if (time > 1000 && time < 3000)
+                    kepala.child[i].setRotateMove(PHI, LIBS.degToRad(20), 0);
+                else if (time >= 3000 && time <= 5000)
+                    kepala.child[i].setRotateMove(PHI, LIBS.degToRad((-time + 4000) * 0.02), 0);
+                else if (time > 5000 && time < 7000)
+                    kepala.child[i].setRotateMove(PHI, LIBS.degToRad(-20), 0);
+                else if (time >= 7000 && time <= 8000)
+                    kepala.child[i].setRotateMove(PHI, LIBS.degToRad((time - 8000) * 0.02), 0);
+                else
+                    kepala.child[i].setRotateMove(PHI, THETA, 0);
             }
+
+            for (let i = 0; i < badan.child.length; i++) {
+                badan.child[i].setIdentityMove();
+                badan.child[i].setRotateMove(PHI, THETA, 0);
+                badan.child[i].setTranslateMove(0, -0.3, 0);   
+            }
+
             glMatrix.mat4.rotateX(telinga_kiri.MOVEMATRIX, telinga_kiri.MOVEMATRIX, LIBS.degToRad(10));
             glMatrix.mat4.rotateZ(telinga_kiri.MOVEMATRIX, telinga_kiri.MOVEMATRIX, LIBS.degToRad(32));
 
@@ -668,12 +722,24 @@ function main() {
         GL.viewport(0, 0, CANVAS.width, CANVAS.height);
         GL.clear(GL.COLOR_BUFFER_BIT);
 
+        chococat.setUniformMatrix4(PROJMATRIX, VIEWMATRIX);
         kepala.setUniformMatrix4(PROJMATRIX, VIEWMATRIX);
+        badan.setUniformMatrix4(PROJMATRIX, VIEWMATRIX);
+
+        for (let i = 0; i < chococat.child.length; i++) {
+            chococat.child[i].setUniformMatrix4(PROJMATRIX, VIEWMATRIX);
+        }
 
         for (let i = 0; i < kepala.child.length; i++) {
             kepala.child[i].setUniformMatrix4(PROJMATRIX, VIEWMATRIX);
         }
-        kepala.draw();
+
+        for (let i = 0; i < badan.child.length; i++) {
+            badan.child[i].setUniformMatrix4(PROJMATRIX, VIEWMATRIX);
+        }
+
+
+        chococat.draw();
         GL.flush();
         window.requestAnimationFrame(animate);
     }

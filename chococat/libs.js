@@ -154,5 +154,16 @@ var LIBS = {
         }
       }
       return rm;
+    },
+
+    scale: function (x) {
+      var mat4 = glMatrix.mat4.create();
+      for (let index = 0; index < mat4.length-(mat4.length/4); index++) {
+          if (mat4[index]!= 1) {
+              continue;
+          }
+          mat4[index] *= x;
+      }
+      return mat4;
     }
   };
