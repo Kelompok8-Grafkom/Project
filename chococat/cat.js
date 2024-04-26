@@ -6,7 +6,7 @@ function normalizeScreen(x, y, width, height) {
     return [nx, ny]
 }
 
-function generateBSpline(controlPoint, m, degree) {
+function generateBSpline(controlPoint, m, degree, z) {
     var curves = [];
     var knotVector = []
 
@@ -64,16 +64,17 @@ function generateBSpline(controlPoint, m, degree) {
         for (var key = 0; key < n; key++) {
 
             var C = basisFunc(key, degree, u);
-            console.log(C);
+            // console.log(C);
             x += (controlPoint[key * 2] * C);
             y += (controlPoint[key * 2 + 1] * C);
-            console.log(t + " " + degree + " " + x + " " + y + " " + C);
+            // console.log(t + " " + degree + " " + x + " " + y + " " + C);
         }
         curves.push(x);
         curves.push(y);
+        curves.push(z, 252 / 255, 15 / 255, 192 / 255);
 
     }
-    console.log(curves)
+    // console.log(curves)
     return curves;
 }
 
@@ -180,6 +181,22 @@ class MyObject {
         }
     }
 
+    drawLine() {
+        GL.useProgram(this.SHADER_PROGRAM);
+        GL.bindBuffer(GL.ARRAY_BUFFER, this.OBJECT_VERTEX);
+
+        // Memberikan detail dari triangle (dari perhitungan 4*(2+3) didapat 4 (merupakan tipe data antara byte ato bit ato mbo opo lol) dikali 2 posisi + 3 warna)
+        GL.vertexAttribPointer(this._position, 3, GL.FLOAT, false, 4 * (3 + 3), 0);
+
+        // Dia 2*4 soalnya colornya mulai dari setelah angka ke-2 di variable triangle_vertex dan dikali 4 soalnya tipe datanya
+        GL.vertexAttribPointer(this._color, 3, GL.FLOAT, false, 4 * (3 + 3), 3 * 4);
+
+        // Buffer faces
+        GL.bindBuffer(GL.ELEMENT_ARRAY_BUFFER, this.OBJECT_FACES);
+        // Angka 3 bergantung pada jumlah isi array face
+        GL.drawElements(GL.LINE_STRIP, this.object_faces.length, GL.UNSIGNED_SHORT, 0);
+    }
+
     setRotateMove(PHI, THETA, r) {
         LIBS.rotateZ(this.MOVEMATRIX, r);
         LIBS.rotateY(this.MOVEMATRIX, THETA);
@@ -196,9 +213,8 @@ class MyObject {
         var scale = LIBS.scale(s);
         this.scaling(scale);
     }
-    scaling(m4){
+    scaling(m4) {
         this.MOVEMATRIX = LIBS.mul(this.MOVEMATRIX, m4);
-        this.child.scaling(m4);
     }
 
     setIdentityMove() {
@@ -521,6 +537,25 @@ function main() {
         return [tabung_vertex, tabung_faces];
     }
 
+    var generateCurve = function (array, z) {
+        var curve = [];
+        var vertex = [];
+        var faces = [];
+
+        for (let i = 0; i < array.length;) {
+            var node = normalizeScreen(array[i], array[i + 1], CANVAS.width, CANVAS.height);
+            curve.push(node[0], node[1]);
+            i += 2;
+        }
+        vertex = generateBSpline(curve, 100, 2, z);
+
+        for (let i = 0; i < vertex.length / 6; i++) {
+            faces.push(i);
+        }
+
+        return [vertex, faces];
+    }
+
     var object;
 
     // SPHERE: radius, r, g, b, mulX, mulY, mulZ, pX, pY, pZ
@@ -619,6 +654,16 @@ function main() {
     badan.addChild(kaki_kiri);
     badan.addChild(tangan_kanan);
     badan.addChild(tangan_kiri);
+
+    var curveObjects = [];
+
+    // var z = 1.05;
+    // for (let i = 0; i <= 100; i++) {
+    //     object = generateCurve([540, 600, 700, 800, 900, 393], z);
+    //     var curveObject1 = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
+    //     curveObjects.push(curveObject1);
+    //     z-=0.001;
+    // }
     
     // Matriks
     var PROJMATRIX = LIBS.get_projection(40, CANVAS.width / CANVAS.height, 1, 100);
@@ -645,8 +690,22 @@ function main() {
                 PHI += dY;
             }
             chococat.setIdentityMove();        
+
+            for (let i = 0; i < curveObjects.length; i++) {
+                curveObjects[i].setIdentityMove();
+            }
+
             chococat.setRotateMove(PHI, THETA, 0);   
+
+            for (let i = 0; i < curveObjects.length; i++) {
+                curveObjects[i].setRotateMove(PHI, THETA, 0);
+            }
+
             chococat.setTranslateMove(0, -0.3, 0);
+
+            for (let i = 0; i < curveObjects.length; i++) {
+                curveObjects[i].setTranslateMove(0, -0.3, 0);
+            }
 
             for (let i = 0; i < chococat.child.length; i++) {
                 chococat.child[i].setIdentityMove();
@@ -655,16 +714,16 @@ function main() {
             }
 
             // kepala toleh kanan kiri
-            if (time <= 1000)
-                kepala.setRotateMove(PHI, LIBS.degToRad(time * 0.02), 0)
-            else if (time > 1000 && time < 3000)
-                kepala.setRotateMove(PHI, LIBS.degToRad(20), 0);
-            else if (time >= 3000 && time <= 5000)
-                kepala.setRotateMove(PHI, LIBS.degToRad((-time + 4000) * 0.02), 0);
-            else if (time > 5000 && time < 7000)
-                kepala.setRotateMove(PHI, LIBS.degToRad(-20), 0);
-            else if (time >= 7000 && time <= 8000)
-                kepala.setRotateMove(PHI, LIBS.degToRad((time - 8000) * 0.02), 0);
+            // if (time <= 1000)
+            //     kepala.setRotateMove(PHI, LIBS.degToRad(time * 0.02), 0)
+            // else if (time > 1000 && time < 3000)
+            //     kepala.setRotateMove(PHI, LIBS.degToRad(20), 0);
+            // else if (time >= 3000 && time <= 5000)
+            //     kepala.setRotateMove(PHI, LIBS.degToRad((-time + 4000) * 0.02), 0);
+            // else if (time > 5000 && time < 7000)
+            //     kepala.setRotateMove(PHI, LIBS.degToRad(-20), 0);
+            // else if (time >= 7000 && time <= 8000)
+            //     kepala.setRotateMove(PHI, LIBS.degToRad((time - 8000) * 0.02), 0);
 
             for (let i = 0; i < kepala.child.length; i++) {
                 kepala.child[i].setIdentityMove();
@@ -672,16 +731,16 @@ function main() {
                 kepala.child[i].setTranslateMove(0, -0.3, 0);   
 
                 // kepala toleh kanan kiri
-                if (time <= 1000)
-                    kepala.child[i].setRotateMove(PHI, LIBS.degToRad(time * 0.02), 0)
-                else if (time > 1000 && time < 3000)
-                    kepala.child[i].setRotateMove(PHI, LIBS.degToRad(20), 0);
-                else if (time >= 3000 && time <= 5000)
-                    kepala.child[i].setRotateMove(PHI, LIBS.degToRad((-time + 4000) * 0.02), 0);
-                else if (time > 5000 && time < 7000)
-                    kepala.child[i].setRotateMove(PHI, LIBS.degToRad(-20), 0);
-                else if (time >= 7000 && time <= 8000)
-                    kepala.child[i].setRotateMove(PHI, LIBS.degToRad((time - 8000) * 0.02), 0);
+                // if (time <= 1000)
+                //     kepala.child[i].setRotateMove(PHI, LIBS.degToRad(time * 0.02), 0)
+                // else if (time > 1000 && time < 3000)
+                //     kepala.child[i].setRotateMove(PHI, LIBS.degToRad(20), 0);
+                // else if (time >= 3000 && time <= 5000)
+                //     kepala.child[i].setRotateMove(PHI, LIBS.degToRad((-time + 4000) * 0.02), 0);
+                // else if (time > 5000 && time < 7000)
+                //     kepala.child[i].setRotateMove(PHI, LIBS.degToRad(-20), 0);
+                // else if (time >= 7000 && time <= 8000)
+                //     kepala.child[i].setRotateMove(PHI, LIBS.degToRad((time - 8000) * 0.02), 0);
             }
 
             for (let i = 0; i < badan.child.length; i++) {
@@ -713,6 +772,19 @@ function main() {
 
             glMatrix.mat4.rotateX(topi.MOVEMATRIX, topi.MOVEMATRIX, LIBS.degToRad(-90));
 
+            // kedip
+            if (time >= 1000 && time <= 1200) {
+                mata_kanan_hitam.setScale((1000 - time) / 1700);
+                mata_kiri_hitam.setScale((1000 - time) / 1700);
+                mata_kanan_putih.setScale((1000 - time) / 1700);
+                mata_kiri_putih.setScale((1000 - time) / 1700);
+            } else if (time >= 1200 && time <= 1400) {
+                mata_kanan_hitam.setScale(time / 1800);
+                mata_kiri_hitam.setScale(time / 1800);
+                mata_kanan_putih.setScale(time / 1800);
+                mata_kiri_putih.setScale(time / 1800);
+            }
+
             time_prev = time;
         }
         GL.viewport(0, 0, CANVAS.width, CANVAS.height);
@@ -726,6 +798,10 @@ function main() {
             chococat.child[i].setUniformMatrix4(PROJMATRIX, VIEWMATRIX);
         }
 
+        for (let i = 0; i < curveObjects.length; i++) {
+            curveObjects[i].setUniformMatrix4(PROJMATRIX, VIEWMATRIX);
+        }
+
         for (let i = 0; i < kepala.child.length; i++) {
             kepala.child[i].setUniformMatrix4(PROJMATRIX, VIEWMATRIX);
         }
@@ -736,6 +812,9 @@ function main() {
 
 
         chococat.draw();
+        for (let i = 0; i < curveObjects.length; i++) {
+            curveObjects[i].drawLine();
+        }
         GL.flush();
         window.requestAnimationFrame(animate);
     }
