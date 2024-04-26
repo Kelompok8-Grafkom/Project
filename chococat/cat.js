@@ -665,8 +665,6 @@ function main() {
                 kepala.setRotateMove(PHI, LIBS.degToRad(-20), 0);
             else if (time >= 7000 && time <= 8000)
                 kepala.setRotateMove(PHI, LIBS.degToRad((time - 8000) * 0.02), 0);
-            else
-                kepala.setRotateMove(PHI, THETA, 0);
 
             for (let i = 0; i < kepala.child.length; i++) {
                 kepala.child[i].setIdentityMove();
@@ -684,8 +682,6 @@ function main() {
                     kepala.child[i].setRotateMove(PHI, LIBS.degToRad(-20), 0);
                 else if (time >= 7000 && time <= 8000)
                     kepala.child[i].setRotateMove(PHI, LIBS.degToRad((time - 8000) * 0.02), 0);
-                else
-                    kepala.child[i].setRotateMove(PHI, THETA, 0);
             }
 
             for (let i = 0; i < badan.child.length; i++) {
