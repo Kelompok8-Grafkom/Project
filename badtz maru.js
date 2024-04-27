@@ -682,16 +682,16 @@ function main() {
 
     var curveObjects = [];
 
-    var z = 0.63;
+    var z = 0.75;
     for (let i = 0; i <= 100; i++) {
-        object = generateCurve([1568, 853, 1533, 798, 1444, 776, 1348, 822, 1430, 938, 1591, 980], z);
+        object = generateCurve([1568 - 580, 853 - 80, 1533 - 580, 798 - 80, 1444 - 580, 776 - 80, 1348 - 580, 822 - 80, 1430 - 580, 938 - 80, 1591 - 580, 980 - 80], z);
         var curveObject1 = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
         curveObjects.push(curveObject1);
 
-        object = generateCurve([1568, 853, 1603, 798, 1692, 776, 1788, 822, 1706, 938, 1545, 980], z);
+        object = generateCurve([1568 - 580, 853 - 80, 1603 - 580, 798 - 80, 1692 - 580, 776 - 80, 1788 - 580, 822 - 80, 1706 - 580, 938 - 80, 1545 - 580, 980 - 80], z);
         var curveObject2 = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
         curveObjects.push(curveObject2);
-        z-=0.001;
+        z -= 0.001;
     }
 
     // Matriks
@@ -719,58 +719,193 @@ function main() {
                 PHI += dY;
             }
             kepala.setIdentityMove();
-            for (let i = 0; i < curveObjects.length; i++) {
-                curveObjects[i].setIdentityMove();
-            }
             kepala.setRotateMove(PHI, THETA, 0);
             for (let i = 0; i < curveObjects.length; i++) {
+                curveObjects[i].setIdentityMove();
                 curveObjects[i].setRotateMove(PHI, THETA, 0);
             }
-            // glMatrix.mat4.rotateY(kepala.MOVEMATRIX, kepala.MOVEMATRIX, LIBS.degToRad(70));
-            // kepala toleh kanan kiri
-            // if (time <= 500)
-            //     kepala.setRotateMove(PHI, LIBS.degToRad(time * 0.05), 0)
-            // else if (time > 500 && time < 1500)
-            //     kepala.setRotateMove(PHI, LIBS.degToRad(25), 0);
-            // else if (time >= 1500 && time <= 2500)
-            //     kepala.setRotateMove(PHI, LIBS.degToRad((-time + 2000) * 0.05), 0);
-            // else if (time > 2500 && time < 3500)
-            //     kepala.setRotateMove(PHI, LIBS.degToRad(-25), 0);
-            // else if (time >= 3500 && time <= 4000)
-            //     kepala.setRotateMove(PHI, LIBS.degToRad((time - 4000) * 0.05), 0);
-            // else
-            //     kepala.setRotateMove(PHI, THETA, 0);
 
             for (let i = 0; i < kepala.child.length; i++) {
                 kepala.child[i].setIdentityMove();
                 kepala.child[i].setRotateMove(PHI, THETA, 0);
-                // glMatrix.mat4.rotateY(kepala.child[i].MOVEMATRIX, kepala.child[i].MOVEMATRIX, LIBS.degToRad(70));
-                // isi kepala toleh kanan kiri
-                // if (i != kepala.child.length - 1) {
-                //     if (time <= 500)
-                //         kepala.child[i].setRotateMove(PHI, LIBS.degToRad(time * 0.05), 0);
-                //     else if (time > 500 && time < 1500)
-                //         kepala.child[i].setRotateMove(PHI, LIBS.degToRad(25), 0);
-                //     else if (time >= 1500 && time <= 2500)
-                //         // hasil perhitungan kalo dri awal 1000 ms, trs mw muter kanan kiri, brarti dri kanan ke tengah hrs dri 1000 detik ke 0, caranya
-                //         // -time + (1000 + time)
-                //         kepala.child[i].setRotateMove(PHI, LIBS.degToRad((-time + 2000) * 0.05), 0);
-                //     else if (time > 2500 && time < 3500)
-                //         kepala.child[i].setRotateMove(PHI, LIBS.degToRad(-25), 0);
-                //     else if (time >= 3500 && time <= 4000)
-                //         kepala.child[i].setRotateMove(PHI, LIBS.degToRad((time - 4000) * 0.05), 0);
-                //     else
-                //         kepala.child[i].setRotateMove(PHI, THETA, 0);
-                // }
             }
 
             // badan.setRotateMove(LIBS.degToRad(time * 0.05), THETA, 0);
             for (let i = 0; i < badan.child.length; i++) {
                 badan.child[i].setIdentityMove();
                 badan.child[i].setRotateMove(PHI, THETA, 0);
-                // glMatrix.mat4.rotateY(badan.child[i].MOVEMATRIX, badan.child[i].MOVEMATRIX, LIBS.degToRad(70));
-                // badan.child[i].setRotateMove(LIBS.degToRad(time * 0.05), THETA, 0);
             }
+
+
+            // ============================ ANIMATION ==============================================
+
+            // ================== Kepala toleh kanan kiri ==========================================
+            // // Kepala
+            // // kepala toleh kanan kiri
+            if (time <= 500)
+                kepala.setRotateMove(PHI, LIBS.degToRad(time * 0.05), 0)
+            else if (time > 500 && time < 1500)
+                kepala.setRotateMove(PHI, LIBS.degToRad(25), 0);
+            else if (time >= 1500 && time <= 2500)
+                kepala.setRotateMove(PHI, LIBS.degToRad((-time + 2000) * 0.05), 0);
+            else if (time > 2500 && time < 3500)
+                kepala.setRotateMove(PHI, LIBS.degToRad(-25), 0);
+            else if (time >= 3500 && time <= 4000)
+                kepala.setRotateMove(PHI, LIBS.degToRad((time - 4000) * 0.05), 0);
+            else
+                kepala.setRotateMove(PHI, THETA, 0);
+
+            // isi kepala
+            for (let i = 0; i < kepala.child.length; i++) {
+                // isi kepala toleh kanan kiri
+                if (i != kepala.child.length - 1) {
+                    if (time <= 500)
+                        kepala.child[i].setRotateMove(PHI, LIBS.degToRad(time * 0.05), 0);
+                    else if (time > 500 && time < 1500)
+                        kepala.child[i].setRotateMove(PHI, LIBS.degToRad(25), 0);
+                    else if (time >= 1500 && time <= 2500)
+                        // hasil perhitungan kalo dri awal 1000 ms, trs mw muter kanan kiri, brarti dri kanan ke tengah hrs dri 1000 detik ke 0, caranya
+                        // -time + (1000 + time)
+                        kepala.child[i].setRotateMove(PHI, LIBS.degToRad((-time + 2000) * 0.05), 0);
+                    else if (time > 2500 && time < 3500)
+                        kepala.child[i].setRotateMove(PHI, LIBS.degToRad(-25), 0);
+                    else if (time >= 3500 && time <= 4000)
+                        kepala.child[i].setRotateMove(PHI, LIBS.degToRad((time - 4000) * 0.05), 0);
+                    else
+                        kepala.child[i].setRotateMove(PHI, THETA, 0);
+                }
+            }
+
+            // ============================= jalan ================================================
+
+            // translate objek biar keliatan jalan
+            if (time >= 4000 && time <= 12000) {
+                glMatrix.mat4.rotateY(kepala.MOVEMATRIX, kepala.MOVEMATRIX, LIBS.degToRad(50));
+                kepala.setTranslateMove(time / 10000, 0, 0);
+
+                for (let i = 0; i < kepala.child.length; i++) {
+                    glMatrix.mat4.rotateY(kepala.child[i].MOVEMATRIX, kepala.child[i].MOVEMATRIX, LIBS.degToRad(50));
+                    kepala.child[i].setTranslateMove(time / 10000, 0, 0);
+                }
+
+                for (let i = 0; i < badan.child.length; i++) {
+                    glMatrix.mat4.rotateY(badan.child[i].MOVEMATRIX, badan.child[i].MOVEMATRIX, LIBS.degToRad(50));
+                    badan.child[i].setTranslateMove(time / 10000, 0, 0);                    
+                }
+
+                for (let i = 0; i < curveObjects.length; i++) {
+                    glMatrix.mat4.rotateY(curveObjects[i].MOVEMATRIX, curveObjects[i].MOVEMATRIX, LIBS.degToRad(50));
+                    curveObjects[i].setTranslateMove(time / 10000, 0, 0);
+                }           
+            }            
+
+            // animasi pergerakan tangan dan kaki untuk jalan
+            if (time >= 4000 && time <= 5000) {
+                glMatrix.mat4.rotateX(tangan_kanan.MOVEMATRIX, tangan_kanan.MOVEMATRIX, LIBS.degToRad((time - 4000) * 0.015));
+                glMatrix.mat4.rotateX(tangan_kiri.MOVEMATRIX, tangan_kiri.MOVEMATRIX, LIBS.degToRad((time - 4000) * -0.015));
+                glMatrix.mat4.rotateX(kaki_kanan.MOVEMATRIX, kaki_kanan.MOVEMATRIX, LIBS.degToRad((time - 4000) * -0.002));
+                glMatrix.mat4.rotateX(kaki_kiri.MOVEMATRIX, kaki_kiri.MOVEMATRIX, LIBS.degToRad((time - 4000) * 0.002));
+            } else if (time >= 5000 && time <= 6000) {
+                glMatrix.mat4.rotateX(tangan_kanan.MOVEMATRIX, tangan_kanan.MOVEMATRIX, LIBS.degToRad((-time + 6000) * 0.015));
+                glMatrix.mat4.rotateX(tangan_kiri.MOVEMATRIX, tangan_kiri.MOVEMATRIX, LIBS.degToRad((-time + 6000) * -0.015));
+                glMatrix.mat4.rotateX(kaki_kiri.MOVEMATRIX, kaki_kiri.MOVEMATRIX, LIBS.degToRad((-time + 6000) * 0.002));
+                glMatrix.mat4.rotateX(kaki_kanan.MOVEMATRIX, kaki_kanan.MOVEMATRIX, LIBS.degToRad((-time + 6000) * -0.002));
+            } else if (time >= 6000 && time <= 7000) {
+                glMatrix.mat4.rotateX(tangan_kanan.MOVEMATRIX, tangan_kanan.MOVEMATRIX, LIBS.degToRad((time - 6000) * -0.015));
+                glMatrix.mat4.rotateX(tangan_kiri.MOVEMATRIX, tangan_kiri.MOVEMATRIX, LIBS.degToRad((time - 6000) * 0.015));
+                glMatrix.mat4.rotateX(kaki_kiri.MOVEMATRIX, kaki_kiri.MOVEMATRIX, LIBS.degToRad((time - 6000) * -0.002));
+                glMatrix.mat4.rotateX(kaki_kanan.MOVEMATRIX, kaki_kanan.MOVEMATRIX, LIBS.degToRad((time - 6000) * 0.002));
+            } else if (time >= 7000 && time <= 8000) {
+                glMatrix.mat4.rotateX(tangan_kanan.MOVEMATRIX, tangan_kanan.MOVEMATRIX, LIBS.degToRad((-time + 8000) * -0.015));
+                glMatrix.mat4.rotateX(tangan_kiri.MOVEMATRIX, tangan_kiri.MOVEMATRIX, LIBS.degToRad((-time + 8000) * 0.015));
+                glMatrix.mat4.rotateX(kaki_kiri.MOVEMATRIX, kaki_kiri.MOVEMATRIX, LIBS.degToRad((-time + 8000) * -0.002));
+                glMatrix.mat4.rotateX(kaki_kanan.MOVEMATRIX, kaki_kanan.MOVEMATRIX, LIBS.degToRad((-time + 8000) * 0.002));
+            } else if (time >= 8000 && time <= 9000) {
+                glMatrix.mat4.rotateX(tangan_kanan.MOVEMATRIX, tangan_kanan.MOVEMATRIX, LIBS.degToRad((time - 8000) * 0.015));
+                glMatrix.mat4.rotateX(tangan_kiri.MOVEMATRIX, tangan_kiri.MOVEMATRIX, LIBS.degToRad((time - 8000) * -0.015));
+                glMatrix.mat4.rotateX(kaki_kanan.MOVEMATRIX, kaki_kanan.MOVEMATRIX, LIBS.degToRad((time - 8000) * -0.002));
+                glMatrix.mat4.rotateX(kaki_kiri.MOVEMATRIX, kaki_kiri.MOVEMATRIX, LIBS.degToRad((time - 8000) * 0.002));
+            } else if (time >= 9000 && time <= 10000) {
+                glMatrix.mat4.rotateX(tangan_kanan.MOVEMATRIX, tangan_kanan.MOVEMATRIX, LIBS.degToRad((-time + 10000) * 0.015));
+                glMatrix.mat4.rotateX(tangan_kiri.MOVEMATRIX, tangan_kiri.MOVEMATRIX, LIBS.degToRad((-time + 10000) * -0.015));
+                glMatrix.mat4.rotateX(kaki_kiri.MOVEMATRIX, kaki_kiri.MOVEMATRIX, LIBS.degToRad((-time + 10000) * 0.002));
+                glMatrix.mat4.rotateX(kaki_kanan.MOVEMATRIX, kaki_kanan.MOVEMATRIX, LIBS.degToRad((-time + 10000) * -0.002));
+            } else if (time >= 10000 && time <= 11000) {
+                glMatrix.mat4.rotateX(tangan_kanan.MOVEMATRIX, tangan_kanan.MOVEMATRIX, LIBS.degToRad((time - 10000) * -0.015));
+                glMatrix.mat4.rotateX(tangan_kiri.MOVEMATRIX, tangan_kiri.MOVEMATRIX, LIBS.degToRad((time - 10000) * 0.015));
+                glMatrix.mat4.rotateX(kaki_kiri.MOVEMATRIX, kaki_kiri.MOVEMATRIX, LIBS.degToRad((time - 10000) * -0.002));
+                glMatrix.mat4.rotateX(kaki_kanan.MOVEMATRIX, kaki_kanan.MOVEMATRIX, LIBS.degToRad((time - 10000) * 0.002));
+            } else if (time >= 11000 && time <= 12000) {
+                glMatrix.mat4.rotateX(tangan_kanan.MOVEMATRIX, tangan_kanan.MOVEMATRIX, LIBS.degToRad((-time + 12000) * -0.015));
+                glMatrix.mat4.rotateX(tangan_kiri.MOVEMATRIX, tangan_kiri.MOVEMATRIX, LIBS.degToRad((-time + 12000) * 0.015));
+                glMatrix.mat4.rotateX(kaki_kiri.MOVEMATRIX, kaki_kiri.MOVEMATRIX, LIBS.degToRad((-time + 12000) * -0.002));
+                glMatrix.mat4.rotateX(kaki_kanan.MOVEMATRIX, kaki_kanan.MOVEMATRIX, LIBS.degToRad((-time + 12000) * 0.002));
+            } else {
+                glMatrix.mat4.rotateX(tangan_kanan.MOVEMATRIX, tangan_kanan.MOVEMATRIX, LIBS.degToRad(0));
+                glMatrix.mat4.rotateX(tangan_kiri.MOVEMATRIX, tangan_kiri.MOVEMATRIX, LIBS.degToRad(0));
+                glMatrix.mat4.rotateX(kaki_kiri.MOVEMATRIX, kaki_kiri.MOVEMATRIX, LIBS.degToRad(0));
+                glMatrix.mat4.rotateX(kaki_kanan.MOVEMATRIX, kaki_kanan.MOVEMATRIX, LIBS.degToRad(0));
+            }
+
+            // ========================================== Waving =================================================================
+            // dari detik 8-9
+            // nambah sudut dari 0 - 70 derajat, trs ditranslate turun dari 0 - (-1) biar lokasi e ga ngawur
+            // bawah" ngulangi sama kek ini cuma ganti detikan
+            // if (time >= 1000 && time <= 1500) {
+            //     glMatrix.mat4.rotateZ(tangan_kanan.MOVEMATRIX, tangan_kanan.MOVEMATRIX, LIBS.degToRad((time - 1000) * 0.07));
+            //     tangan_kanan.setTranslateMove(0, -(time - 1000) / 1000, 0);
+            // // dari detik 9 - 10
+            // // ngurangi sudut dari 70 - 0 derajat, trs ditranslate balik dari -1 - 0
+            // // bawah" ngulangi sama kek ini cuma ganti detikan
+            // } else if (time >= 1500 && time <= 2000) {
+            //     glMatrix.mat4.rotateZ(tangan_kanan.MOVEMATRIX, tangan_kanan.MOVEMATRIX, LIBS.degToRad((-time + 2000) * 0.07));
+            //     tangan_kanan.setTranslateMove(0, (time - 2000) / 1000, 0);
+            // } else if (time >= 2000 && time <= 2500) {
+            //     glMatrix.mat4.rotateZ(tangan_kanan.MOVEMATRIX, tangan_kanan.MOVEMATRIX, LIBS.degToRad((time - 2000) * 0.07));
+            //     tangan_kanan.setTranslateMove(0, -(time - 2000) / 1000, 0);
+            // } else if (time >= 2500 && time <= 3000) {
+            //     glMatrix.mat4.rotateZ(tangan_kanan.MOVEMATRIX, tangan_kanan.MOVEMATRIX, LIBS.degToRad((-time + 3000) * 0.07));
+            //     tangan_kanan.setTranslateMove(0, (time - 3000) / 1000, 0);
+            // } else {
+            //     glMatrix.mat4.rotateZ(tangan_kanan.MOVEMATRIX, tangan_kanan.MOVEMATRIX, LIBS.degToRad(0));
+            //     tangan_kanan.setTranslateMove(0, 0, 0);
+            // }
+
+            // kedip
+            if (time >= 500 && time <= 800) {
+                mata_kanan.setScale((800 - time) / 300);
+                mata_kiri.setScale((800 - time) / 300)
+            }
+            if (time >= 800 && time <= 1000) {
+                mata_kanan.setScale(time / 1000);
+                mata_kiri.setScale(time / 1000);
+            }
+            if (time >= 2500 && time <= 2800) {
+                mata_kanan.setScale((2800 - time) / 300);
+                mata_kiri.setScale((2800 - time) / 300)
+            }
+            if (time >= 2800 && time <= 3000) {
+                mata_kanan.setScale(time / 3000);
+                mata_kiri.setScale(time / 3000);
+            }
+            if (time >= 5500 && time <= 5800) {
+                mata_kanan.setScale((5800 - time) / 300);
+                mata_kiri.setScale((5800 - time) / 300)
+            }
+            if (time >= 5800 && time <= 6000) {
+                mata_kanan.setScale(time / 6000);
+                mata_kiri.setScale(time / 6000);
+            }
+            if (time >= 8500 && time <= 8800) {
+                mata_kanan.setScale((8000 - time) / 300);
+                mata_kiri.setScale((8000 - time) / 300)
+            }
+            if (time >= 8800 && time <= 9000) {
+                mata_kanan.setScale(time / 9000);
+                mata_kiri.setScale(time / 9000);
+            }
+
+            // ========================================================================================
 
             // derajat putarnya melawan arah jarum jam (kalo + melawan arah, kalo - searah) 
             // PS. Jangan lupa kalau mau rotasi berdasarkan time yg dibawah juga phiny diganti LIBS.degToRad(time * 0.05) :)
@@ -781,73 +916,6 @@ function main() {
             glMatrix.mat4.rotateZ(tanduk_4.MOVEMATRIX, tanduk_4.MOVEMATRIX, LIBS.degToRad(-40));
             glMatrix.mat4.rotateZ(tangan_kanan.MOVEMATRIX, tangan_kanan.MOVEMATRIX, LIBS.degToRad(60));
             glMatrix.mat4.rotateZ(tangan_kiri.MOVEMATRIX, tangan_kiri.MOVEMATRIX, LIBS.degToRad(-60));
-
-            // testing jalan
-            // kaki_kiri.setTranslateMove(0.3, 0, 0);
-            // badan.setTranslateMove(0.3, 0, 0);
-
-            // tangan ngewave
-            // dari detik 8-9
-            // nambah sudut dari 0 - 70 derajat, trs ditranslate turun dari 0 - (-1) biar lokasi e ga ngawur
-            // bawah" ngulangi sama kek ini cuma ganti detikan
-            // if (time >= 8000 && time <= 9000) {
-            //     glMatrix.mat4.rotateZ(tangan_kanan.MOVEMATRIX, tangan_kanan.MOVEMATRIX, LIBS.degToRad((time - 8000) * 0.07));
-            //     tangan_kanan.setTranslateMove(0, -(time - 8000) / 1000, 0);
-            // // dari detik 9 - 10
-            // // ngurangi sudut dari 70 - 0 derajat, trs ditranslate balik dari -1 - 0
-            // // bawah" ngulangi sama kek ini cuma ganti detikan
-            // } else if (time >= 9000 && time <= 10000) {
-            //     glMatrix.mat4.rotateZ(tangan_kanan.MOVEMATRIX, tangan_kanan.MOVEMATRIX, LIBS.degToRad((-time + 10000) * 0.07));
-            //     tangan_kanan.setTranslateMove(0, (time - 10000) / 1000, 0);
-            // } else if (time >= 10000 && time <= 11000) {
-            //     glMatrix.mat4.rotateZ(tangan_kanan.MOVEMATRIX, tangan_kanan.MOVEMATRIX, LIBS.degToRad((time - 10000) * 0.07));
-            //     tangan_kanan.setTranslateMove(0, -(time - 10000) / 1000, 0);
-            // } else if (time >= 11000 && time <= 12000) {
-            //     glMatrix.mat4.rotateZ(tangan_kanan.MOVEMATRIX, tangan_kanan.MOVEMATRIX, LIBS.degToRad((-time + 12000) * 0.07));
-            //     tangan_kanan.setTranslateMove(0, (time - 12000) / 1000, 0);
-            // } else if (time >= 12000 && time <= 13000) {
-            //     glMatrix.mat4.rotateZ(tangan_kanan.MOVEMATRIX, tangan_kanan.MOVEMATRIX, LIBS.degToRad((time - 12000) * 0.07));
-            //     tangan_kanan.setTranslateMove(0, -(time - 12000) / 1000, 0);
-            // } else if (time >= 13000 && time <= 14000) {
-            //     glMatrix.mat4.rotateZ(tangan_kanan.MOVEMATRIX, tangan_kanan.MOVEMATRIX, LIBS.degToRad((-time + 14000) * 0.07));
-            //     tangan_kanan.setTranslateMove(0, (time - 14000) / 1000, 0);
-            // } else {
-            //     glMatrix.mat4.rotateZ(tangan_kanan.MOVEMATRIX, tangan_kanan.MOVEMATRIX, LIBS.degToRad(0));
-            //     tangan_kanan.setTranslateMove(0, 0, 0);
-            // }
-
-            // var timeKedip;
-
-            // if (time % 2500 == 0) {
-            //     timeKedip = -time;
-            // }
-            // kedip
-            if (time >= 500 && time <= 800) {
-                mata_kanan.setScale((800 - time) / 300);
-                mata_kiri.setScale((800 - time) / 300)
-            } 
-            if (time >= 800 && time <= 1000) {
-                mata_kanan.setScale(time / 1000);
-                mata_kiri.setScale(time / 1000);
-            }
-            if (time >= 2500 && time <= 2800) {
-                mata_kanan.setScale((2800 - time) / 300);
-                mata_kiri.setScale((2800 - time) / 300)
-            } 
-            if (time >= 2800 && time <= 3000) {
-                mata_kanan.setScale(time / 3000);
-                mata_kiri.setScale(time / 3000);
-            }
-            if (time >= 5500 && time <= 5800) {
-                mata_kanan.setScale((5800 - time) / 300);
-                mata_kiri.setScale((5800 - time) / 300)
-            } 
-            if (time >= 5800 && time <= 6000) {
-                mata_kanan.setScale(time / 6000);
-                mata_kiri.setScale(time / 6000);
-            }
-
-            // timeKedip+=time;
             time_prev = time;
         }
         GL.viewport(0, 0, CANVAS.width, CANVAS.height);
