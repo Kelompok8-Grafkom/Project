@@ -585,6 +585,21 @@ function main() {
     object = generateTabung(0, -2, 0, 0, 0, 0, 0.35, 0, 0.35, 0.2, 1.2, 0.1, 51, 39, 14)
     var batang = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
 
+    object = generateSphere(0.15, 250, 0, 0, 1, 1, 1, -1, -0.2, 0.8);
+    var apel1 = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
+
+    object = generateSphere(0.15, 250, 0, 0, 1, 1, 1, 0, 0.2, 1);
+    var apel2 = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
+
+    object = generateSphere(0.15, 250, 0, 0, 1, 1, 1, 0.9, -0.2, 0.8);
+    var apel3 = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
+
+    object = generateSphere(0.15, 250, 0, 0, 1, 1, 1, -0.8, 0.7, 0.6);
+    var apel4 = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
+
+    object = generateSphere(0.15, 250, 0, 0, 1, 1, 1, 0.8, 0.7, 0.6);
+    var apel5 = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
+
     pohon.addChild(daun1);
     pohon.addChild(daun2);
     pohon.addChild(daun3);
@@ -592,6 +607,11 @@ function main() {
     pohon.addChild(daun5);
     pohon.addChild(daun6);
     pohon.addChild(batang);
+    pohon.addChild(apel1);
+    pohon.addChild(apel2);
+    pohon.addChild(apel3);
+    pohon.addChild(apel4);
+    pohon.addChild(apel5);
     
     // Matriks
     var PROJMATRIX = LIBS.get_projection(40, CANVAS.width / CANVAS.height, 1, 100);
@@ -626,6 +646,21 @@ function main() {
                 pohon.child[i].setIdentityMove();
                 pohon.child[i].setRotateMove(PHI, THETA, 0);
                 pohon.child[i].setTranslateMove(0, 0, 0);   
+            }
+
+            if (time >= 1000 && time <= 3000) {
+                apel1.setTranslateMove(0, -(time - 1000) / 1100, 0);
+            } else if (time >= 3000 && time <= 5000) {
+                apel1.setScale(0);
+                apel2.setTranslateMove(0, -(time - 3000) / 1100, 0);
+            } else if (time >= 5000 && time <= 7000) {
+                apel1.setScale(0);
+                apel2.setScale(0);
+                apel3.setTranslateMove(0, -(time - 5000) / 1100, 0);
+            } else if (time > 1000) {
+                apel1.setScale(0);
+                apel2.setScale(0);
+                apel3.setScale(0);
             }
 
             time_prev = time;
