@@ -749,6 +749,54 @@ function main() {
                 badan.child[i].setTranslateMove(0, -0.3, 0);   
             }
 
+            // tangan ngewave
+            if (time >= 1000 && time <= 2000) {
+                glMatrix.mat4.rotateX(tangan_kanan.MOVEMATRIX, tangan_kanan.MOVEMATRIX, LIBS.degToRad((time - 1000) * 0.015));
+                glMatrix.mat4.rotateX(tangan_kiri.MOVEMATRIX, tangan_kiri.MOVEMATRIX, LIBS.degToRad((time - 1000) * -0.015));
+                glMatrix.mat4.rotateX(kaki_kanan.MOVEMATRIX, kaki_kanan.MOVEMATRIX, LIBS.degToRad((time - 1000) * -0.015));
+                glMatrix.mat4.rotateX(kaki_kiri.MOVEMATRIX, kaki_kiri.MOVEMATRIX, LIBS.degToRad((time - 1000) * 0.015));
+            } else if (time >= 2000 && time <= 3000) {
+                glMatrix.mat4.rotateX(tangan_kanan.MOVEMATRIX, tangan_kanan.MOVEMATRIX, LIBS.degToRad((-time + 3000) * 0.015));
+                glMatrix.mat4.rotateX(tangan_kiri.MOVEMATRIX, tangan_kiri.MOVEMATRIX, LIBS.degToRad((-time + 3000) * -0.015));
+                glMatrix.mat4.rotateX(kaki_kiri.MOVEMATRIX, kaki_kiri.MOVEMATRIX, LIBS.degToRad((-time + 3000) * 0.012));
+                glMatrix.mat4.rotateX(kaki_kanan.MOVEMATRIX, kaki_kanan.MOVEMATRIX, LIBS.degToRad((-time + 3000) * -0.012));
+            } else if (time >= 3000 && time <= 4000) {
+                glMatrix.mat4.rotateX(tangan_kanan.MOVEMATRIX, tangan_kanan.MOVEMATRIX, LIBS.degToRad((time - 3000) * -0.015));
+                glMatrix.mat4.rotateX(tangan_kiri.MOVEMATRIX, tangan_kiri.MOVEMATRIX, LIBS.degToRad((time - 3000) * 0.015));
+                glMatrix.mat4.rotateX(kaki_kiri.MOVEMATRIX, kaki_kiri.MOVEMATRIX, LIBS.degToRad((time - 3000) * -0.012));
+                glMatrix.mat4.rotateX(kaki_kanan.MOVEMATRIX, kaki_kanan.MOVEMATRIX, LIBS.degToRad((time - 3000) * 0.012));
+            } else if (time >= 4000 && time <= 5000) {
+                glMatrix.mat4.rotateX(tangan_kanan.MOVEMATRIX, tangan_kanan.MOVEMATRIX, LIBS.degToRad((-time + 5000) * -0.015));
+                glMatrix.mat4.rotateX(tangan_kiri.MOVEMATRIX, tangan_kiri.MOVEMATRIX, LIBS.degToRad((-time + 5000) * 0.015));
+                glMatrix.mat4.rotateX(kaki_kiri.MOVEMATRIX, kaki_kiri.MOVEMATRIX, LIBS.degToRad((-time + 5000) * -0.012));
+                glMatrix.mat4.rotateX(kaki_kanan.MOVEMATRIX, kaki_kanan.MOVEMATRIX, LIBS.degToRad((-time + 5000) * 0.012));
+            } else if (time >= 5000 && time <= 6000) {
+                glMatrix.mat4.rotateX(tangan_kanan.MOVEMATRIX, tangan_kanan.MOVEMATRIX, LIBS.degToRad((time - 5000) * 0.015));
+                glMatrix.mat4.rotateX(tangan_kiri.MOVEMATRIX, tangan_kiri.MOVEMATRIX, LIBS.degToRad((time - 5000) * -0.015));
+                glMatrix.mat4.rotateX(kaki_kanan.MOVEMATRIX, kaki_kanan.MOVEMATRIX, LIBS.degToRad((time - 5000) * -0.015));
+                glMatrix.mat4.rotateX(kaki_kiri.MOVEMATRIX, kaki_kiri.MOVEMATRIX, LIBS.degToRad((time - 5000) * 0.015));
+            } else if (time >= 6000 && time <= 7000) {
+                glMatrix.mat4.rotateX(tangan_kanan.MOVEMATRIX, tangan_kanan.MOVEMATRIX, LIBS.degToRad((-time + 7000) * 0.015));
+                glMatrix.mat4.rotateX(tangan_kiri.MOVEMATRIX, tangan_kiri.MOVEMATRIX, LIBS.degToRad((-time + 7000) * -0.015));
+                glMatrix.mat4.rotateX(kaki_kiri.MOVEMATRIX, kaki_kiri.MOVEMATRIX, LIBS.degToRad((-time + 7000) * 0.012));
+                glMatrix.mat4.rotateX(kaki_kanan.MOVEMATRIX, kaki_kanan.MOVEMATRIX, LIBS.degToRad((-time + 7000) * -0.012));
+            } else if (time >= 7000 && time <= 8000) {
+                glMatrix.mat4.rotateX(tangan_kanan.MOVEMATRIX, tangan_kanan.MOVEMATRIX, LIBS.degToRad((time - 7000) * -0.015));
+                glMatrix.mat4.rotateX(tangan_kiri.MOVEMATRIX, tangan_kiri.MOVEMATRIX, LIBS.degToRad((time - 7000) * 0.015));
+                glMatrix.mat4.rotateX(kaki_kiri.MOVEMATRIX, kaki_kiri.MOVEMATRIX, LIBS.degToRad((time - 7000) * -0.012));
+                glMatrix.mat4.rotateX(kaki_kanan.MOVEMATRIX, kaki_kanan.MOVEMATRIX, LIBS.degToRad((time - 7000) * 0.012));
+            } else if (time >= 8000 && time <= 9000) {
+                glMatrix.mat4.rotateX(tangan_kanan.MOVEMATRIX, tangan_kanan.MOVEMATRIX, LIBS.degToRad((-time + 9000) * -0.015));
+                glMatrix.mat4.rotateX(tangan_kiri.MOVEMATRIX, tangan_kiri.MOVEMATRIX, LIBS.degToRad((-time + 9000) * 0.015));
+                glMatrix.mat4.rotateX(kaki_kiri.MOVEMATRIX, kaki_kiri.MOVEMATRIX, LIBS.degToRad((-time + 9000) * -0.012));
+                glMatrix.mat4.rotateX(kaki_kanan.MOVEMATRIX, kaki_kanan.MOVEMATRIX, LIBS.degToRad((-time + 9000) * 0.012));
+            } else {
+                glMatrix.mat4.rotateX(tangan_kanan.MOVEMATRIX, tangan_kanan.MOVEMATRIX, LIBS.degToRad(0));
+                glMatrix.mat4.rotateX(tangan_kiri.MOVEMATRIX, tangan_kiri.MOVEMATRIX, LIBS.degToRad(0));
+                glMatrix.mat4.rotateX(kaki_kiri.MOVEMATRIX, kaki_kiri.MOVEMATRIX, LIBS.degToRad(0));
+                glMatrix.mat4.rotateX(kaki_kanan.MOVEMATRIX, kaki_kanan.MOVEMATRIX, LIBS.degToRad(0));
+            }
+
             glMatrix.mat4.rotateX(telinga_kiri.MOVEMATRIX, telinga_kiri.MOVEMATRIX, LIBS.degToRad(10));
             glMatrix.mat4.rotateZ(telinga_kiri.MOVEMATRIX, telinga_kiri.MOVEMATRIX, LIBS.degToRad(32));
 
