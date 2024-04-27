@@ -325,8 +325,8 @@ function main() {
     // pX, pY, pZ = posisi sumbu X, Y, Z
     var generateSphere = function (radius, r, g, b, mulX, mulY, mulZ, pX, pY, pZ) {
         let stackAngle, sectorAngle;
-        const sectorCount = 72;
-        const stackCount = 24;
+        const sectorCount = 100;
+        const stackCount = 100;
 
         let sectorStep = 2 * Math.PI / sectorCount;
         let stackStep = Math.PI / stackCount;
@@ -682,7 +682,7 @@ function main() {
 
     var curveObjects = [];
 
-    var z = 0.65;
+    var z = 0.63;
     for (let i = 0; i <= 100; i++) {
         object = generateCurve([1568, 853, 1533, 798, 1444, 776, 1348, 822, 1430, 938, 1591, 980], z);
         var curveObject1 = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
@@ -728,16 +728,16 @@ function main() {
             }
             // glMatrix.mat4.rotateY(kepala.MOVEMATRIX, kepala.MOVEMATRIX, LIBS.degToRad(70));
             // kepala toleh kanan kiri
-            // if (time <= 1000)
+            // if (time <= 500)
             //     kepala.setRotateMove(PHI, LIBS.degToRad(time * 0.05), 0)
-            // else if (time > 1000 && time < 3000)
-            //     kepala.setRotateMove(PHI, LIBS.degToRad(50), 0);
-            // else if (time >= 3000 && time <= 5000)
-            //     kepala.setRotateMove(PHI, LIBS.degToRad((-time + 4000) * 0.05), 0);
-            // else if (time > 5000 && time < 7000)
-            //     kepala.setRotateMove(PHI, LIBS.degToRad(-50), 0);
-            // else if (time >= 7000 && time <= 8000)
-            //     kepala.setRotateMove(PHI, LIBS.degToRad((time - 8000) * 0.05), 0);
+            // else if (time > 500 && time < 1500)
+            //     kepala.setRotateMove(PHI, LIBS.degToRad(25), 0);
+            // else if (time >= 1500 && time <= 2500)
+            //     kepala.setRotateMove(PHI, LIBS.degToRad((-time + 2000) * 0.05), 0);
+            // else if (time > 2500 && time < 3500)
+            //     kepala.setRotateMove(PHI, LIBS.degToRad(-25), 0);
+            // else if (time >= 3500 && time <= 4000)
+            //     kepala.setRotateMove(PHI, LIBS.degToRad((time - 4000) * 0.05), 0);
             // else
             //     kepala.setRotateMove(PHI, THETA, 0);
 
@@ -745,21 +745,20 @@ function main() {
                 kepala.child[i].setIdentityMove();
                 kepala.child[i].setRotateMove(PHI, THETA, 0);
                 // glMatrix.mat4.rotateY(kepala.child[i].MOVEMATRIX, kepala.child[i].MOVEMATRIX, LIBS.degToRad(70));
-
                 // isi kepala toleh kanan kiri
                 // if (i != kepala.child.length - 1) {
-                //     if (time <= 1000)
+                //     if (time <= 500)
                 //         kepala.child[i].setRotateMove(PHI, LIBS.degToRad(time * 0.05), 0);
-                //     else if (time > 1000 && time < 3000)
-                //         kepala.child[i].setRotateMove(PHI, LIBS.degToRad(50), 0);
-                //     else if (time >= 3000 && time <= 5000)
+                //     else if (time > 500 && time < 1500)
+                //         kepala.child[i].setRotateMove(PHI, LIBS.degToRad(25), 0);
+                //     else if (time >= 1500 && time <= 2500)
                 //         // hasil perhitungan kalo dri awal 1000 ms, trs mw muter kanan kiri, brarti dri kanan ke tengah hrs dri 1000 detik ke 0, caranya
                 //         // -time + (1000 + time)
-                //         kepala.child[i].setRotateMove(PHI, LIBS.degToRad((-time + 4000) * 0.05), 0);
-                //     else if (time > 5000 && time < 7000)
-                //         kepala.child[i].setRotateMove(PHI, LIBS.degToRad(-50), 0);
-                //     else if (time >= 7000 && time <= 8000)
-                //         kepala.child[i].setRotateMove(PHI, LIBS.degToRad((time - 8000) * 0.05), 0);
+                //         kepala.child[i].setRotateMove(PHI, LIBS.degToRad((-time + 2000) * 0.05), 0);
+                //     else if (time > 2500 && time < 3500)
+                //         kepala.child[i].setRotateMove(PHI, LIBS.degToRad(-25), 0);
+                //     else if (time >= 3500 && time <= 4000)
+                //         kepala.child[i].setRotateMove(PHI, LIBS.degToRad((time - 4000) * 0.05), 0);
                 //     else
                 //         kepala.child[i].setRotateMove(PHI, THETA, 0);
                 // }
@@ -817,15 +816,38 @@ function main() {
             //     tangan_kanan.setTranslateMove(0, 0, 0);
             // }
 
-            // kedip
-            // if (time >= 500 && time <= 800) {
-            //     mata_kanan.setScale((800 - time) / 300);
-            //     mata_kiri.setScale((800 - time) / 300)
-            // } else if (time >= 800 && time <= 1000) {
-            //     mata_kanan.setScale(time / 1000);
-            //     mata_kiri.setScale(time / 1000);
-            // }
+            // var timeKedip;
 
+            // if (time % 2500 == 0) {
+            //     timeKedip = -time;
+            // }
+            // kedip
+            if (time >= 500 && time <= 800) {
+                mata_kanan.setScale((800 - time) / 300);
+                mata_kiri.setScale((800 - time) / 300)
+            } 
+            if (time >= 800 && time <= 1000) {
+                mata_kanan.setScale(time / 1000);
+                mata_kiri.setScale(time / 1000);
+            }
+            if (time >= 2500 && time <= 2800) {
+                mata_kanan.setScale((2800 - time) / 300);
+                mata_kiri.setScale((2800 - time) / 300)
+            } 
+            if (time >= 2800 && time <= 3000) {
+                mata_kanan.setScale(time / 3000);
+                mata_kiri.setScale(time / 3000);
+            }
+            if (time >= 5500 && time <= 5800) {
+                mata_kanan.setScale((5800 - time) / 300);
+                mata_kiri.setScale((5800 - time) / 300)
+            } 
+            if (time >= 5800 && time <= 6000) {
+                mata_kanan.setScale(time / 6000);
+                mata_kiri.setScale(time / 6000);
+            }
+
+            // timeKedip+=time;
             time_prev = time;
         }
         GL.viewport(0, 0, CANVAS.width, CANVAS.height);
