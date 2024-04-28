@@ -744,7 +744,7 @@ function main() {
 
     // ==================================================== ChocoCat Objects ======================================================================
     object = generateSphere(1.0, 20, 17, 17, 1.3, 1.1, 1, 0, 0.5, 0);
-    var kepala = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
+    var cat_kepala = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
 
     object = generateSphere(0.4, 257, 257, 257, 1, 0.9, 1, -0.4, 0.4, 0.6);
     var mata_kiri_putih = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
@@ -762,7 +762,7 @@ function main() {
     var mulut = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
 
     object = generateSphere(0.75, 20, 17, 17, 1.0, 1.2, 0.7, 0, -0.8, 0);
-    var badan = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
+    var cat_badan = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
 
     object = generateSphere(1.0, 94, 146, 209, 0.75, 0.12, 0.52, 0, -0.48, 0);
     var kalung = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
@@ -811,28 +811,28 @@ function main() {
     var bola_topi = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
 
 
-    chocoCat.addChild(kepala);
-    chocoCat.addChild(badan);
-    kepala.addChild(mata_kiri_putih);
-    kepala.addChild(mata_kanan_putih);
-    kepala.addChild(mata_kiri_hitam);
-    kepala.addChild(mata_kanan_hitam);
-    kepala.addChild(mulut);
-    kepala.addChild(telinga_kiri);
-    kepala.addChild(telinga_kanan);
-    kepala.addChild(telinga_kanan_dalam);
-    kepala.addChild(telinga_kiri_dalam);
-    kepala.addChild(kumis_kanan1);
-    kepala.addChild(kumis_kanan2);
-    kepala.addChild(kumis_kiri1);
-    kepala.addChild(kumis_kiri2);
-    kepala.addChild(topi);
-    kepala.addChild(bola_topi);
-    badan.addChild(kalung);
-    badan.addChild(kaki_kanan);
-    badan.addChild(kaki_kiri);
-    badan.addChild(tangan_kanan);
-    badan.addChild(tangan_kiri);
+    chocoCat.addChild(cat_kepala);
+    chocoCat.addChild(cat_badan);
+    cat_kepala.addChild(mata_kiri_putih);
+    cat_kepala.addChild(mata_kanan_putih);
+    cat_kepala.addChild(mata_kiri_hitam);
+    cat_kepala.addChild(mata_kanan_hitam);
+    cat_kepala.addChild(mulut);
+    cat_kepala.addChild(telinga_kiri);
+    cat_kepala.addChild(telinga_kanan);
+    cat_kepala.addChild(telinga_kanan_dalam);
+    cat_kepala.addChild(telinga_kiri_dalam);
+    cat_kepala.addChild(kumis_kanan1);
+    cat_kepala.addChild(kumis_kanan2);
+    cat_kepala.addChild(kumis_kiri1);
+    cat_kepala.addChild(kumis_kiri2);
+    cat_kepala.addChild(topi);
+    cat_kepala.addChild(bola_topi);
+    cat_badan.addChild(kalung);
+    cat_badan.addChild(kaki_kanan);
+    cat_badan.addChild(kaki_kiri);
+    cat_badan.addChild(tangan_kanan);
+    cat_badan.addChild(tangan_kiri);
     // ============================================================================================================================================
 
     // Matriks
