@@ -930,6 +930,7 @@ function main() {
     cat_badan.addChild(cat_tangan_kiri);
 
     var cat_curve = [];
+    var cat_ekor_curve = [];
 
     var curve = [0.075, -0.4, 0.19, 0.51, 0.42, -0.59, -0.15, 0.05, 0.65, 0.05, 0.035, -0.44];
     var y = -0.85;
@@ -956,10 +957,14 @@ function main() {
         }
         var ekor = new MyObject(vertex, faces, shader_vertex_source, shader_fragment_source);
         y += 0.006;
-        cat_curve.push(ekor);
+        cat_ekor_curve.push(ekor);
     }
 
     cat_curve.forEach(obj => {
+        cat_badan.addChild(obj);
+    });
+
+    cat_ekor_curve.forEach(obj => {
         cat_badan.addChild(obj);
     });
     // ============================================================================================================================================
@@ -3883,6 +3888,10 @@ function main() {
 
         for (let i = 0; i < cat_curve.length; i++) {
             cat_curve[i].drawLine();
+        }
+
+        for (let i = 0; i < cat_ekor_curve.length; i++) {
+            cat_ekor_curve[i].drawLine();
         }
 
         for (let i = 0; i < rory_curveObjects.length; i++) {
