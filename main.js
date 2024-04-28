@@ -1049,17 +1049,17 @@ function main() {
                 cat_mata_kanan_putih.setScale(time / 2400);
                 cat_mata_kiri_putih.setScale(time / 2400);
             }
-            if (time >= 4000 && time <= 4200) {
-                cat_mata_kanan_hitam.setScale((4000 - time) / 1500);
-                cat_mata_kiri_hitam.setScale((4000 - time) / 1500);
-                cat_mata_kanan_putih.setScale((4000 - time) / 1500);
-                cat_mata_kiri_putih.setScale((4000 - time) / 1500);
+            if (time >= 5000 && time <= 5200) {
+                cat_mata_kanan_hitam.setScale((5000 - time) / 1500);
+                cat_mata_kiri_hitam.setScale((5000 - time) / 1500);
+                cat_mata_kanan_putih.setScale((5000 - time) / 1500);
+                cat_mata_kiri_putih.setScale((5000 - time) / 1500);
             } 
-            if (time >= 4200 && time <= 4400) {
-                cat_mata_kanan_hitam.setScale(time / 4400);
-                cat_mata_kiri_hitam.setScale(time / 4400);
-                cat_mata_kanan_putih.setScale(time / 4400);
-                cat_mata_kiri_putih.setScale(time / 4400);
+            if (time >= 5200 && time <= 5400) {
+                cat_mata_kanan_hitam.setScale(time / 5400);
+                cat_mata_kiri_hitam.setScale(time / 5400);
+                cat_mata_kanan_putih.setScale(time / 5400);
+                cat_mata_kiri_putih.setScale(time / 5400);
             }
 
             badtzMaru.setPosition(-4.5, 0, 0);
