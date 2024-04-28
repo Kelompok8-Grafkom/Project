@@ -1506,6 +1506,8 @@ function main() {
             //         badtz_kepala.child[i].setRotateMove(PHI, THETA, 0);
             // }
 
+            glMatrix.mat4.fromRotationTranslationScaleOrigin(apel1.MOVEMATRIX, [0.0, 0.0, 0.0, 1.0], [0.0, 0.0, 0.0], [0.0, 0.0, 0.0], [0.0, 0.0, 0.0]);
+
             if (time >= 300 && time <= 600) {
                 rory_pupil_kanan.setScale((600 - time) / 300);
                 rory_pupil_kiri.setScale((600 - time) / 300)
@@ -1580,11 +1582,11 @@ function main() {
                 badtz_mata_kanan.setScale(time / 12000);
                 badtz_mata_kiri.setScale(time / 12000);
             }
-            if (time >= 13500 && time <= 14800) {
+            if (time >= 13500 && time <= 13800) {
                 badtz_mata_kanan.setScale((13500 - time) / 300);
                 badtz_mata_kiri.setScale((13500 - time) / 300)
             }
-            if (time >= 14800 && time <= 15000) {
+            if (time >= 13800 && time <= 14000) {
                 badtz_mata_kanan.setScale(time / 15000);
                 badtz_mata_kiri.setScale(time / 15000);
             }
