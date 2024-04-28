@@ -1315,6 +1315,16 @@ function main() {
                 badtz_badan.child[i].setScale(0.5)
             }
 
+            cat_kepala.setScale(0.5)
+            for (let i = 0; i < cat_kepala.child.length; i++) {
+                cat_kepala.child[i].setScale(0.5)
+            }
+
+            cat_badan.setScale(0.5)
+            for (let i = 0; i < cat_badan.child.length; i++) {
+                cat_badan.child[i].setScale(0.5)
+            }
+
             // ChocoCat
             glMatrix.mat4.rotateX(cat_telinga_kiri.MOVEMATRIX, cat_telinga_kiri.MOVEMATRIX, LIBS.degToRad(10));
             glMatrix.mat4.rotateZ(cat_telinga_kiri.MOVEMATRIX, cat_telinga_kiri.MOVEMATRIX, LIBS.degToRad(32));
