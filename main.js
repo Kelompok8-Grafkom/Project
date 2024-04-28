@@ -2186,45 +2186,7 @@ function main() {
             rory.setIdentityMove();
             rory.setRotateMove(PHI, THETA, 0);
             world.setIdentityMove();
-            world.setRotateMove(PHI, THETA, 0);
-
-
-            // ============================ ANIMATION ==============================================
-
-            // ================== Kepala toleh kanan kiri ==========================================
-            // // Kepala
-            // // kepala toleh kanan kiri
-            // if (time <= 500)
-            //     badtz_kepala.setRotateMove(PHI, LIBS.degToRad(time * 0.05), 0)
-            // else if (time > 500 && time < 1500)
-            //     badtz_kepala.setRotateMove(PHI, LIBS.degToRad(25), 0);
-            // else if (time >= 1500 && time <= 2500)
-            //     badtz_kepala.setRotateMove(PHI, LIBS.degToRad((-time + 2000) * 0.05), 0);
-            // else if (time > 2500 && time < 3500)
-            //     badtz_kepala.setRotateMove(PHI, LIBS.degToRad(-25), 0);
-            // else if (time >= 3500 && time <= 4000)
-            //     badtz_kepala.setRotateMove(PHI, LIBS.degToRad((time - 4000) * 0.05), 0);
-            // else
-            //     badtz_kepala.setRotateMove(PHI, THETA, 0);
-
-            // isi kepala
-            // for (let i = 0; i < badtz_kepala.child.length; i++) {
-            //     // isi kepala toleh kanan kiri
-            //     if (time <= 500)
-            //         badtz_kepala.child[i].setRotateMove(PHI, LIBS.degToRad(time * 0.05), 0);
-            //     else if (time > 500 && time < 1500)
-            //         badtz_kepala.child[i].setRotateMove(PHI, LIBS.degToRad(25), 0);
-            //     else if (time >= 1500 && time <= 2500)
-            //         // hasil perhitungan kalo dri awal 1000 ms, trs mw muter kanan kiri, brarti dri kanan ke tengah hrs dri 1000 detik ke 0, caranya
-            //         // -time + (1000 + time)
-            //         badtz_kepala.child[i].setRotateMove(PHI, LIBS.degToRad((-time + 2000) * 0.05), 0);
-            //     else if (time > 2500 && time < 3500)
-            //         badtz_kepala.child[i].setRotateMove(PHI, LIBS.degToRad(-25), 0);
-            //     else if (time >= 3500 && time <= 4000)
-            //         badtz_kepala.child[i].setRotateMove(PHI, LIBS.degToRad((time - 4000) * 0.05), 0);
-            //     else
-            //         badtz_kepala.child[i].setRotateMove(PHI, THETA, 0);
-            // }            
+            world.setRotateMove(PHI, THETA, 0);          
 
             if (time >= 300 && time <= 600) {
                 rory_pupil_kanan.setScale((600 - time) / 300);
@@ -3249,16 +3211,6 @@ function main() {
                 glMatrix.mat4.rotateX(badtz_kaki_kiri.MOVEMATRIX, badtz_kaki_kiri.MOVEMATRIX, LIBS.degToRad((time - 37000) * -0.01));
                 glMatrix.mat4.rotateX(badtz_kaki_kanan.MOVEMATRIX, badtz_kaki_kanan.MOVEMATRIX, LIBS.degToRad((time - 37000) * 0.01));
 
-                // badtz_kepala.setTranslateMove((time - 37000) / 3000, 0, 0);
-                // for (let i = 0; i < badtz_kepala.child.length; i++) {
-                //     badtz_kepala.child[i].setTranslateMove((time - 37000) / 3000, 0, 0);
-                // }
-
-                // badtz_badan.setTranslateMove((time - 37000) / 3000, 0, 0);
-                // for (let i = 0; i < badtz_badan.child.length; i++) {
-                //     badtz_badan.child[i].setTranslateMove((time - 37000) / 3000, 0, 0);
-                // }
-
                 glMatrix.mat4.rotateX(cat_tangan_kanan.MOVEMATRIX, cat_tangan_kanan.MOVEMATRIX, LIBS.degToRad((time - 37000) * -0.08));
                 glMatrix.mat4.rotateX(cat_tangan_kiri.MOVEMATRIX, cat_tangan_kiri.MOVEMATRIX, LIBS.degToRad((time - 37000) * 0.08));
                 glMatrix.mat4.rotateX(cat_kaki_kiri.MOVEMATRIX, cat_kaki_kiri.MOVEMATRIX, LIBS.degToRad((time - 37000) * -0.01));
@@ -3273,16 +3225,6 @@ function main() {
                 glMatrix.mat4.rotateX(badtz_tangan_kiri.MOVEMATRIX, badtz_tangan_kiri.MOVEMATRIX, LIBS.degToRad((-time + 38500) * 0.08));
                 glMatrix.mat4.rotateX(badtz_kaki_kiri.MOVEMATRIX, badtz_kaki_kiri.MOVEMATRIX, LIBS.degToRad((-time + 38500) * -0.01));
                 glMatrix.mat4.rotateX(badtz_kaki_kanan.MOVEMATRIX, badtz_kaki_kanan.MOVEMATRIX, LIBS.degToRad((-time + 38500) * 0.01));
-
-                // badtz_kepala.setTranslateMove((-time + 37800) / 3000, 0, 0);
-                // for (let i = 0; i < badtz_kepala.child.length; i++) {
-                //     badtz_kepala.child[i].setTranslateMove((-time + 37800) / 3000, 0, 0);
-                // }
-
-                // badtz_badan.setTranslateMove((-time + 37800) / 3000, 0, 0);
-                // for (let i = 0; i < badtz_badan.child.length; i++) {
-                //     badtz_badan.child[i].setTranslateMove((-time + 37800) / 3000, 0, 0);
-                // }
 
                 glMatrix.mat4.rotateX(cat_tangan_kanan.MOVEMATRIX, cat_tangan_kanan.MOVEMATRIX, LIBS.degToRad((-time + 38500) * -0.08));
                 glMatrix.mat4.rotateX(cat_tangan_kiri.MOVEMATRIX, cat_tangan_kiri.MOVEMATRIX, LIBS.degToRad((-time + 38500) * 0.08));
@@ -3888,10 +3830,6 @@ function main() {
         for (let i = 0; i < rory_curveObjects.length; i++) {
             rory_curveObjects[i].drawLine();
         }
-
-        // tangan_kiri.draw();
-        // tangan_kanan.draw();
-        // penutup_mata_kanan.draw();
 
         GL.flush();
         window.requestAnimationFrame(animate);
