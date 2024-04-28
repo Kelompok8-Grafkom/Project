@@ -243,7 +243,7 @@ function main() {
     var THETA = 0, PHI = 0;
 
     // variable untuk menghentikan benda dari bergerak setelah mouse dilepas
-    var AMORTIZATION = 0.95;
+    var AMORTIZATION = -0.45;
 
     var mouseDown = function (e) {
         drag = true;
@@ -686,7 +686,7 @@ function main() {
         3.5, -0.8, -2.5,     25/255, 97/255, 29/255,
       ];
 
-    var tanah_faces = [
+    var balok_faces = [
         0, 1, 2,
         0, 2, 3,
    
@@ -706,11 +706,116 @@ function main() {
         20, 22, 23
     ];
 
-    var tanah = new MyObject(tanah_vertex, tanah_faces, shader_vertex_source, shader_fragment_source);
+    var tanah = new MyObject(tanah_vertex, balok_faces, shader_vertex_source, shader_fragment_source);
+
+    // kursi
+    var papan_vertex = [
+        -1, -0.45, -2,     66/255, 56/255, 43/255, 
+        1, -0.45, -2,     66/255, 56/255, 43/255,
+        1,  -0.35, -2,     66/255, 56/255, 43/255,
+        -1,  -0.35, -2,     66/255, 56/255, 43/255,
+    
+        -1, -0.45, -1.5,     66/255, 56/255, 43/255,
+        1, -0.45, -1.5,     66/255, 56/255, 43/255,
+        1,  -0.35, -1.5,     66/255, 56/255, 43/255,
+        -1,  -0.35, -1.5,     66/255, 56/255, 43/255,
+    
+        -1, -0.45, -2,     66/255, 56/255, 43/255,
+        -1,  -0.35, -2,     66/255, 56/255, 43/255,
+        -1,  -0.35,  -1.5,     66/255, 56/255, 43/255,
+        -1, -0.45,  -1.5,     66/255, 56/255, 43/255,
+    
+        1, -0.45, -2,     66/255, 56/255, 43/255,
+        1,  -0.35, -2,     66/255, 56/255, 43/255,
+        1,  -0.35,  -1.5,     66/255, 56/255, 43/255,
+        1, -0.45,  -1.5,     66/255, 56/255, 43/255,
+    
+        -1, -0.45, -2,     66/255, 56/255, 43/255,
+        -1, -0.45,  -1.5,     66/255, 56/255, 43/255,
+        1, -0.45,  -1.5,     66/255, 56/255, 43/255,
+        1, -0.45, -2,     66/255, 56/255, 43/255,
+    
+        -1, -0.35, -2,    92/255, 59/255, 36/255,
+        -1, -0.35,  -1.5,    92/255, 59/255, 36/255,
+        1, -0.35,  -1.5,     92/255, 59/255, 36/255,
+        1, -0.35, -2,     92/255, 59/255, 36/255,
+      ];
+
+    var tiang1_vertex = [
+        -1, -0.8, -2,     133/255, 133/255, 133/255, 
+        -0.9, -0.8, -2,     133/255, 133/255, 133/255,
+        -0.9,  -0.45, -2,     133/255, 133/255, 133/255,
+        -1,  -0.45, -2,     133/255, 133/255, 133/255,
+    
+        -1, -0.8, -1.5,     133/255, 133/255, 133/255,
+        -0.9, -0.8, -1.5,     133/255, 133/255, 133/255,
+        -0.9,  -0.45, -1.5,     133/255, 133/255, 133/255,
+        -1,  -0.45, -1.5,     133/255, 133/255, 133/255,
+    
+        -1, -0.8, -2,     133/255, 133/255, 133/255,
+        -1,  -0.45, -2,     133/255, 133/255, 133/255,
+        -1,  -0.45,  -1.5,     133/255, 133/255, 133/255,
+        -1, -0.8,  -1.5,     133/255, 133/255, 133/255,
+    
+        -0.9, -0.8, -2,     133/255, 133/255, 133/255,
+        -0.9,  -0.45, -2,     133/255, 133/255, 133/255,
+        -0.9,  -0.45,  -1.5,     133/255, 133/255, 133/255,
+        -0.9, -0.8,  -1.5,     133/255, 133/255, 133/255,
+    
+        -1, -0.8, -2,     133/255, 133/255, 133/255,
+        -1, -0.8,  -1.5,     133/255, 133/255, 133/255,
+        -0.9, -0.8,  -1.5,     133/255, 133/255, 133/255,
+        -0.9, -0.8, -2,     133/255, 133/255, 133/255,
+    
+        -1, -0.45, -2,    133/255, 133/255, 133/255,
+        -1, -0.45,  -1.5,    133/255, 133/255, 133/255,
+        -0.9, -0.45,  -1.5,     133/255, 133/255, 133/255,
+        -0.9, -0.45, -2,     133/255, 133/255, 133/255,
+      ];
+
+      var tiang2_vertex = [
+        1, -0.8, -2,     133/255, 133/255, 133/255, 
+        0.9, -0.8, -2,     133/255, 133/255, 133/255,
+        0.9,  -0.45, -2,     133/255, 133/255, 133/255,
+        1,  -0.45, -2,     133/255, 133/255, 133/255,
+    
+        1, -0.8, -1.5,     133/255, 133/255, 133/255,
+        0.9, -0.8, -1.5,     133/255, 133/255, 133/255,
+        0.9,  -0.45, -1.5,     133/255, 133/255, 133/255,
+        1,  -0.45, -1.5,     133/255, 133/255, 133/255,
+    
+        1, -0.8, -2,     133/255, 133/255, 133/255,
+        1,  -0.45, -2,     133/255, 133/255, 133/255,
+        1,  -0.45,  -1.5,     133/255, 133/255, 133/255,
+        1, -0.8,  -1.5,     133/255, 133/255, 133/255,
+    
+        0.9, -0.8, -2,     133/255, 133/255, 133/255,
+        0.9,  -0.45, -2,     133/255, 133/255, 133/255,
+        0.9,  -0.45,  -1.5,     133/255, 133/255, 133/255,
+        0.9, -0.8,  -1.5,     133/255, 133/255, 133/255,
+    
+        1, -0.8, -2,     133/255, 133/255, 133/255,
+        1, -0.8,  -1.5,     133/255, 133/255, 133/255,
+        0.9, -0.8,  -1.5,     133/255, 133/255, 133/255,
+        0.9, -0.8, -2,     133/255, 133/255, 133/255,
+    
+        1, -0.45, -2,    133/255, 133/255, 133/255,
+        1, -0.45,  -1.5,    133/255, 133/255, 133/255,
+        0.9, -0.45,  -1.5,     133/255, 133/255, 133/255,
+        0.9, -0.45, -2,     133/255, 133/255, 133/255,
+      ];
+
+    var kursi = new MyObject(papan_vertex, balok_faces, shader_vertex_source, shader_fragment_source);
+    var tiang1 = new MyObject(tiang1_vertex, balok_faces, shader_vertex_source, shader_fragment_source);
+    var tiang2 = new MyObject(tiang2_vertex, balok_faces, shader_vertex_source, shader_fragment_source);
+
+    kursi.addChild(tiang1);
+    kursi.addChild(tiang2);
 
     world.addChild(pohon);
     world.addChild(pohon2);
     world.addChild(tanah);
+    world.addChild(kursi);
     
     // Matriks
     var PROJMATRIX = LIBS.get_projection(40, CANVAS.width / CANVAS.height, 1, 100);
@@ -761,6 +866,11 @@ function main() {
                 pohon2.child[i].setScale(0.7);
             }
 
+            for (let i = 0; i < kursi.child.length; i++) {
+                kursi.child[i].setIdentityMove();
+                kursi.child[i].setRotateMove(PHI, THETA, 0);
+            }
+
             if (time >= 1000 && time <= 3000) {
                 apel1.setTranslateMove(0, -(time - 1000) / 1550, 0);
             } else if (time >= 3000 && time <= 5000) {
@@ -777,6 +887,9 @@ function main() {
             }
 
             glMatrix.mat4.rotateX(tanah.MOVEMATRIX, tanah.MOVEMATRIX, LIBS.degToRad(15));
+            glMatrix.mat4.rotateX(kursi.MOVEMATRIX, kursi.MOVEMATRIX, LIBS.degToRad(15));
+            glMatrix.mat4.rotateX(tiang1.MOVEMATRIX, tiang1.MOVEMATRIX, LIBS.degToRad(15));
+            glMatrix.mat4.rotateX(tiang2.MOVEMATRIX, tiang2.MOVEMATRIX, LIBS.degToRad(15));
 
             time_prev = time;
         }
@@ -786,6 +899,7 @@ function main() {
         world.setUniformMatrix4(PROJMATRIX, VIEWMATRIX);
         pohon.setUniformMatrix4(PROJMATRIX, VIEWMATRIX);
         pohon2.setUniformMatrix4(PROJMATRIX, VIEWMATRIX);
+        kursi.setUniformMatrix4(PROJMATRIX, VIEWMATRIX);
         tanah.setUniformMatrix4(PROJMATRIX, VIEWMATRIX);
 
         for (let i = 0; i < pohon.child.length; i++) {
@@ -794,6 +908,10 @@ function main() {
 
         for (let i = 0; i < pohon2.child.length; i++) {
             pohon2.child[i].setUniformMatrix4(PROJMATRIX, VIEWMATRIX);
+        }
+
+        for (let i = 0; i < kursi.child.length; i++) {
+            kursi.child[i].setUniformMatrix4(PROJMATRIX, VIEWMATRIX);
         }
 
         world.draw();
