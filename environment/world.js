@@ -869,6 +869,21 @@ function main() {
     lampu2.addChild(tiang_lampu2);
     lampu2.addChild(bawah_tiang2);
 
+    var bush = new MyObject([],[], shader_vertex_source, shader_fragment_source);
+
+    object = generateSphere(0.3, 29, 56, 28, 1, 1, 1, -2.55, -0.4, -1);
+    var daun_bush = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
+
+    object = generateSphere(0.2, 29, 56, 28, 1.3, 1, 1, -2.25, -0.4, -1.2);
+    var daun_bush2 = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
+
+    object = generateSphere(0.2, 29, 56, 28, 1.2, 1, 1, -2.95, -0.5, -1);
+    var daun_bush3 = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
+
+    bush.addChild(daun_bush);
+    bush.addChild(daun_bush2);
+    bush.addChild(daun_bush3);
+
     world.addChild(pohon);
     world.addChild(pohon2);
     world.addChild(tanah);
@@ -876,6 +891,7 @@ function main() {
     world.addChild(cone);
     world.addChild(lampu);
     world.addChild(lampu2);
+    world.addChild(bush);
     
     // Matriks
     var PROJMATRIX = LIBS.get_projection(40, CANVAS.width / CANVAS.height, 1, 100);
@@ -943,6 +959,11 @@ function main() {
                 lampu2.child[i].setRotateMove(PHI, THETA, 0);
             }
 
+            for (let i = 0; i < bush.child.length; i++) {
+                bush.child[i].setIdentityMove();
+                bush.child[i].setRotateMove(PHI, THETA, 0);
+            }
+
             if (time >= 1000 && time <= 3000) {
                 apel1.setTranslateMove(0, -(time - 1000) / 1550, 0);
             } else if (time >= 3000 && time <= 5000) {
@@ -988,6 +1009,7 @@ function main() {
         cone.setUniformMatrix4(PROJMATRIX, VIEWMATRIX);
         lampu.setUniformMatrix4(PROJMATRIX, VIEWMATRIX);
         lampu2.setUniformMatrix4(PROJMATRIX, VIEWMATRIX);
+        bush.setUniformMatrix4(PROJMATRIX, VIEWMATRIX);
 
         for (let i = 0; i < pohon.child.length; i++) {
             pohon.child[i].setUniformMatrix4(PROJMATRIX, VIEWMATRIX);
@@ -1008,6 +1030,10 @@ function main() {
         for (let i = 0; i < lampu.child.length; i++) {
             lampu.child[i].setUniformMatrix4(PROJMATRIX, VIEWMATRIX);
             lampu2.child[i].setUniformMatrix4(PROJMATRIX, VIEWMATRIX);
+        }
+
+        for (let i = 0; i < bush.child.length; i++) {
+            bush.child[i].setUniformMatrix4(PROJMATRIX, VIEWMATRIX);
         }
 
         world.draw();
