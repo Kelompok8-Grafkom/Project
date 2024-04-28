@@ -2224,9 +2224,7 @@ function main() {
             //         badtz_kepala.child[i].setRotateMove(PHI, LIBS.degToRad((time - 4000) * 0.05), 0);
             //     else
             //         badtz_kepala.child[i].setRotateMove(PHI, THETA, 0);
-            // }
-
-            glMatrix.mat4.fromRotationTranslationScaleOrigin(apel1.MOVEMATRIX, [0.0, 0.0, 0.0, 1.0], [0.0, 0.0, 0.0], [0.0, 0.0, 0.0], [0.0, 0.0, 0.0]);
+            // }            
 
             if (time >= 300 && time <= 600) {
                 rory_pupil_kanan.setScale((600 - time) / 300);
