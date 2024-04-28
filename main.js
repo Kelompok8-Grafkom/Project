@@ -1572,6 +1572,48 @@ function main() {
                 badtz_mata_kanan.setScale(time / 9000);
                 badtz_mata_kiri.setScale(time / 9000);
             }
+            if (time >= 10500 && time <= 11800) {
+                badtz_mata_kanan.setScale((10500 - time) / 300);
+                badtz_mata_kiri.setScale((10500 - time) / 300)
+            }
+            if (time >= 11800 && time <= 12000) {
+                badtz_mata_kanan.setScale(time / 12000);
+                badtz_mata_kiri.setScale(time / 12000);
+            }
+            if (time >= 13500 && time <= 14800) {
+                badtz_mata_kanan.setScale((13500 - time) / 300);
+                badtz_mata_kiri.setScale((13500 - time) / 300)
+            }
+            if (time >= 14800 && time <= 15000) {
+                badtz_mata_kanan.setScale(time / 15000);
+                badtz_mata_kiri.setScale(time / 15000);
+            }
+            if (time >= 17500 && time <= 18800) {
+                badtz_mata_kanan.setScale((17500 - time) / 300);
+                badtz_mata_kiri.setScale((17500 - time) / 300)
+            }
+            if (time >= 18800 && time <= 19000) {
+                badtz_mata_kanan.setScale(time / 19000);
+                badtz_mata_kiri.setScale(time / 19000);
+            }
+            if (time >= 20500 && time <= 20800) {
+                badtz_mata_kanan.setScale((20500 - time) / 300);
+                badtz_mata_kiri.setScale((20500 - time) / 300)
+            }
+            if (time >= 20800 && time <= 21000) {
+                badtz_mata_kanan.setScale(time / 21000);
+                badtz_mata_kiri.setScale(time / 21000);
+            }
+            if (time >= 22500 && time <= 23800) {
+                badtz_mata_kanan.setScale((22500 - time) / 300);
+                badtz_mata_kiri.setScale((22500 - time) / 300)
+            }
+            if (time >= 23800 && time <= 24000) {
+                badtz_mata_kanan.setScale(time / 24000);
+                badtz_mata_kiri.setScale(time / 24000);
+            }
+
+            
             if (time >= 2000 && time <= 2200) {
                 cat_mata_kanan_hitam.setScale((2000 - time) / 1500);
                 cat_mata_kiri_hitam.setScale((2000 - time) / 1500);
