@@ -1171,6 +1171,39 @@ function main() {
             //         badtz_kepala.child[i].setRotateMove(PHI, THETA, 0);
             // }
 
+            if (time >= 300 && time <= 600) {
+                rory_pupil_kanan.setScale((600 - time) / 300);
+                rory_pupil_kiri.setScale((600 - time) / 300)
+            }
+            if (time >= 600 && time <= 900) {
+                rory_pupil_kanan.setScale(time / 900);
+                rory_pupil_kiri.setScale(time / 900);
+            }
+            if (time >= 2000 && time <= 2300) {
+                rory_pupil_kanan.setScale((2300 - time) / 300);
+                rory_pupil_kiri.setScale((2300 - time) / 300)
+            }
+            if (time >= 2300 && time <= 2600) {
+                rory_pupil_kanan.setScale(time / 2600);
+                rory_pupil_kiri.setScale(time / 2600);
+            }
+            if (time >= 5300 && time <= 5600) {
+                rory_pupil_kanan.setScale((5600 - time) / 300);
+                rory_pupil_kiri.setScale((5600 - time) / 300)
+            }
+            if (time >= 5600 && time <= 5900) {
+                rory_pupil_kanan.setScale(time / 5900);
+                rory_pupil_kiri.setScale(time / 5900);
+            }
+            if (time >= 7300 && time <= 7600) {
+                rory_pupil_kanan.setScale((7600 - time) / 300);
+                rory_pupil_kiri.setScale((7600 - time) / 300)
+            }
+            if (time >= 7600 && time <= 7900) {
+                rory_pupil_kanan.setScale(time / 7900);
+                rory_pupil_kiri.setScale(time / 7900);
+            }
+
             // kedip
             if (time >= 500 && time <= 800) {
                 badtz_mata_kanan.setScale((800 - time) / 300);
@@ -1241,261 +1274,230 @@ function main() {
             // cat_tangan_kanan.setTranslateMove(-0.2, -1.2, 0);
 
             // ===================================================== Lompat ===============================================================
-            if (time <= 500) {
+            if (time >= 3000 && time <= 3500) {
                 // badtz maru
-                badtz_kepala.setTranslateMove(0, time / 5000, 0);
-                badtz_badan.setTranslateMove(0, time / 5000, 0);
+                badtz_kepala.setTranslateMove(0, (time-3000) / 1000, 0);
+                badtz_badan.setTranslateMove(0, (time-3000) / 1000, 0);
                 for (let i = 0; i < badtz_kepala.child.length; i++) {                    
-                    badtz_kepala.child[i].setTranslateMove(0, time / 5000, 0);
+                    badtz_kepala.child[i].setTranslateMove(0, (time-3000) / 1000, 0);
                 }
-
                 for (let i = 0; i < badtz_badan.child.length; i++) {                    
-                    badtz_badan.child[i].setTranslateMove(0, time / 5000, 0);
+                    badtz_badan.child[i].setTranslateMove(0, (time-3000) / 1000, 0);
                 }
-
-                for (let i = 0; i < curveObjects.length; i++) {                    
-                    curveObjects[i].setTranslateMove(0, time / 50000, 0);
-                }
-
-                glMatrix.mat4.rotateZ(badtz_tangan_kanan.MOVEMATRIX, badtz_tangan_kanan.MOVEMATRIX, LIBS.degToRad((time) * 0.07));
-                badtz_tangan_kanan.setTranslateMove(0, -(time) / 1000, 0);
-                glMatrix.mat4.rotateZ(badtz_tangan_kiri.MOVEMATRIX, badtz_tangan_kiri.MOVEMATRIX, LIBS.degToRad(-(time) * 0.07));
-                badtz_tangan_kiri.setTranslateMove(0, -(time) / 1000, 0);          
                 
+
+                glMatrix.mat4.rotateZ(badtz_tangan_kanan.MOVEMATRIX, badtz_tangan_kanan.MOVEMATRIX, LIBS.degToRad((time - 3000) * 0.07));
+                badtz_tangan_kanan.setTranslateMove(0, -(time - 3000) / 1000, 0);
+                glMatrix.mat4.rotateZ(badtz_tangan_kiri.MOVEMATRIX, badtz_tangan_kiri.MOVEMATRIX, LIBS.degToRad(-(time - 3000) * 0.07));
+                badtz_tangan_kiri.setTranslateMove(0, -(time - 3000) / 1000, 0);
+
                 // chococat
-                cat_kepala.setTranslateMove(0, time / 5000, 0);
-                cat_badan.setTranslateMove(0, time / 5000, 0);
+                cat_kepala.setTranslateMove(0, (time-3000) / 1000, 0);
+                cat_badan.setTranslateMove(0, (time-3000) / 1000, 0);
                 for (let i = 0; i < cat_kepala.child.length; i++) {                    
-                    cat_kepala.child[i].setTranslateMove(0, time / 5000, 0);
+                    cat_kepala.child[i].setTranslateMove(0, (time-3000) / 1000, 0);
                 }
-
                 for (let i = 0; i < cat_badan.child.length; i++) {                    
-                    cat_badan.child[i].setTranslateMove(0, time / 5000, 0);
+                    cat_badan.child[i].setTranslateMove(0, (time-3000) / 1000, 0);
                 }
 
-                for (let i = 0; i < curveObjects.length; i++) {                    
-                    curveObjects[i].setTranslateMove(0, time / 50000, 0);
-                }
-
-                glMatrix.mat4.rotateZ(cat_tangan_kanan.MOVEMATRIX, cat_tangan_kanan.MOVEMATRIX, LIBS.degToRad((time) * 0.07));
-                cat_tangan_kanan.setTranslateMove(-(time) / 1500, -(time) / 1000, 0);
-                glMatrix.mat4.rotateZ(cat_tangan_kiri.MOVEMATRIX, cat_tangan_kiri.MOVEMATRIX, LIBS.degToRad(-(time) * 0.07));
-                cat_tangan_kiri.setTranslateMove((time) / 1500, -(time) / 1000, 0);  
+                glMatrix.mat4.rotateZ(cat_tangan_kanan.MOVEMATRIX, cat_tangan_kanan.MOVEMATRIX, LIBS.degToRad((time - 3000) * 0.07));
+                cat_tangan_kanan.setTranslateMove(-(time - 3000) / 1500, -(time - 3000) / 1000, 0);
+                glMatrix.mat4.rotateZ(cat_tangan_kiri.MOVEMATRIX, cat_tangan_kiri.MOVEMATRIX, LIBS.degToRad(-(time - 3000) * 0.07));
+                cat_tangan_kiri.setTranslateMove((time - 3000) / 1500, -(time - 3000) / 1000, 0);
 
                 // rory
-                rory_kepala.setTranslateMove(0, time / 5000, 0);
-                rory_badan.setTranslateMove(0, time / 5000, 0);
+                rory_kepala.setTranslateMove(0, (time-3000) / 1000, 0);
+                rory_badan.setTranslateMove(0, (time-3000) / 1000, 0);
                 for (let i = 0; i < rory_kepala.child.length; i++) {                    
-                    rory_kepala.child[i].setTranslateMove(0, time / 5000, 0);
+                    rory_kepala.child[i].setTranslateMove(0, (time-3000) / 1000, 0);
+                }
+                for (let i = 0; i < rory_badan.child.length; i++) {                    
+                    rory_badan.child[i].setTranslateMove(0, (time-3000) / 1000, 0);
                 }
 
-                for (let i = 0; i < rory_badan.child.length; i++) {                    
-                    rory_badan.child[i].setTranslateMove(0, time / 5000, 0);
-                }   
+                glMatrix.mat4.rotateZ(rory_tangan_kanan.MOVEMATRIX, rory_tangan_kanan.MOVEMATRIX, LIBS.degToRad((time - 3000) * 0.07));
+                rory_tangan_kanan.setTranslateMove(0, -(time - 3000) / 1000, 0);
+                glMatrix.mat4.rotateZ(rory_tangan_kiri.MOVEMATRIX, rory_tangan_kiri.MOVEMATRIX, LIBS.degToRad(-(time - 3000) * 0.07));
+                rory_tangan_kiri.setTranslateMove(0, -(time - 3000) / 1000, 0);
 
-                glMatrix.mat4.rotateZ(rory_tangan_kanan.MOVEMATRIX, rory_tangan_kanan.MOVEMATRIX, LIBS.degToRad((time) * 0.07));
-                rory_tangan_kanan.setTranslateMove(0, -(time) / 1000, 0);
-                glMatrix.mat4.rotateZ(rory_tangan_kiri.MOVEMATRIX, rory_tangan_kiri.MOVEMATRIX, LIBS.degToRad(-(time) * 0.07));
-                rory_tangan_kiri.setTranslateMove(0, -(time) / 1000, 0);
-
-            } else if (time >= 500 && time <= 1000) {
+            } else if (time >= 3500 && time <= 4000) {
                 // badtz maru
-                badtz_kepala.setTranslateMove(0, (-time + 1000) / 5000, 0);
-                badtz_badan.setTranslateMove(0, (-time + 1000) / 5000, 0);
+                badtz_kepala.setTranslateMove(0, (-time + 4000) / 1000, 0);
+                badtz_badan.setTranslateMove(0, (-time + 4000) / 1000, 0);
                 for (let i = 0; i < badtz_kepala.child.length; i++) {
-                    badtz_kepala.child[i].setTranslateMove(0, (-time + 1000) / 5000, 0);
+                    badtz_kepala.child[i].setTranslateMove(0, (-time + 4000) / 1000, 0);
                 }
                 for (let i = 0; i < badtz_badan.child.length; i++) {                    
-                    badtz_badan.child[i].setTranslateMove(0, (-time + 1000) / 5000, 0);
+                    badtz_badan.child[i].setTranslateMove(0, (-time + 4000) / 1000, 0);
                 }
-                for (let i = 0; i < curveObjects.length; i++) {                    
-                    curveObjects[i].setTranslateMove(0, (-time + 1000) / 50000, 0);
-                }
+                
 
-                glMatrix.mat4.rotateZ(badtz_tangan_kanan.MOVEMATRIX, badtz_tangan_kanan.MOVEMATRIX, LIBS.degToRad((-time + 1000) * 0.07));
-                badtz_tangan_kanan.setTranslateMove(0, (time - 1000) / 1000, 0);
-                glMatrix.mat4.rotateZ(badtz_tangan_kiri.MOVEMATRIX, badtz_tangan_kiri.MOVEMATRIX, LIBS.degToRad((-time + 1000) * -0.07));
-                badtz_tangan_kiri.setTranslateMove(0, (time - 1000) / 1000, 0);
+                glMatrix.mat4.rotateZ(badtz_tangan_kanan.MOVEMATRIX, badtz_tangan_kanan.MOVEMATRIX, LIBS.degToRad((-time + 4000) * 0.07));
+                badtz_tangan_kanan.setTranslateMove(0, (time - 4000) / 1000, 0);
+                glMatrix.mat4.rotateZ(badtz_tangan_kiri.MOVEMATRIX, badtz_tangan_kiri.MOVEMATRIX, LIBS.degToRad((-time + 4000) * -0.07));
+                badtz_tangan_kiri.setTranslateMove(0, (time - 4000) / 1000, 0);
 
                 // chococat
-                cat_kepala.setTranslateMove(0, (-time + 1000) / 5000, 0);
-                cat_badan.setTranslateMove(0, (-time + 1000) / 5000, 0);
+                cat_kepala.setTranslateMove(0, (-time + 4000) / 1000, 0);
+                cat_badan.setTranslateMove(0, (-time + 4000) / 1000, 0);
                 for (let i = 0; i < cat_kepala.child.length; i++) {
-                    cat_kepala.child[i].setTranslateMove(0, (-time + 1000) / 5000, 0);
+                    cat_kepala.child[i].setTranslateMove(0, (-time + 4000) / 1000, 0);
                 }
                 for (let i = 0; i < cat_badan.child.length; i++) {                    
-                    cat_badan.child[i].setTranslateMove(0, (-time + 1000) / 5000, 0);
-                }
-                for (let i = 0; i < curveObjects.length; i++) {                    
-                    curveObjects[i].setTranslateMove(0, (-time + 1000) / 50000, 0);
+                    cat_badan.child[i].setTranslateMove(0, (-time + 4000) / 1000, 0);
                 }
 
-                glMatrix.mat4.rotateZ(cat_tangan_kanan.MOVEMATRIX, cat_tangan_kanan.MOVEMATRIX, LIBS.degToRad((-time + 1000) * 0.07));
-                cat_tangan_kanan.setTranslateMove((time - 1000) / 1500, (time - 1000) / 1000, 0);
-                glMatrix.mat4.rotateZ(cat_tangan_kiri.MOVEMATRIX, cat_tangan_kiri.MOVEMATRIX, LIBS.degToRad((-time + 1000) * -0.07));
-                cat_tangan_kiri.setTranslateMove(-(time - 1000) / 1500, (time - 1000) / 1000, 0);
+                glMatrix.mat4.rotateZ(cat_tangan_kanan.MOVEMATRIX, cat_tangan_kanan.MOVEMATRIX, LIBS.degToRad((-time + 4000) * 0.07));
+                cat_tangan_kanan.setTranslateMove((time - 4000) / 1500, (time - 4000) / 1000, 0);
+                glMatrix.mat4.rotateZ(cat_tangan_kiri.MOVEMATRIX, cat_tangan_kiri.MOVEMATRIX, LIBS.degToRad((-time + 4000) * -0.07));
+                cat_tangan_kiri.setTranslateMove(-(time - 4000) / 1500, (time - 4000) / 1000, 0);
 
                 // rory
-                rory_kepala.setTranslateMove(0, (-time + 1000) / 5000, 0);
-                rory_badan.setTranslateMove(0, (-time + 1000) / 5000, 0);
+                rory_kepala.setTranslateMove(0, (-time + 4000) / 1000, 0);
+                rory_badan.setTranslateMove(0, (-time + 4000) / 1000, 0);
                 for (let i = 0; i < rory_kepala.child.length; i++) {
-                    rory_kepala.child[i].setTranslateMove(0, (-time + 1000) / 5000, 0);
+                    rory_kepala.child[i].setTranslateMove(0, (-time + 4000) / 1000, 0);
                 }
                 for (let i = 0; i < rory_badan.child.length; i++) {                    
-                    rory_badan.child[i].setTranslateMove(0, (-time + 1000) / 5000, 0);
+                    rory_badan.child[i].setTranslateMove(0, (-time + 4000) / 1000, 0);
                 }          
 
-                glMatrix.mat4.rotateZ(rory_tangan_kanan.MOVEMATRIX, rory_tangan_kanan.MOVEMATRIX, LIBS.degToRad((-time + 1000) * 0.07));
-                rory_tangan_kanan.setTranslateMove(0, (time - 1000) / 1000, 0);
-                glMatrix.mat4.rotateZ(rory_tangan_kiri.MOVEMATRIX, rory_tangan_kiri.MOVEMATRIX, LIBS.degToRad((-time + 1000) * -0.07));
-                rory_tangan_kiri.setTranslateMove(0, (time - 1000) / 1000, 0);
+                glMatrix.mat4.rotateZ(rory_tangan_kanan.MOVEMATRIX, rory_tangan_kanan.MOVEMATRIX, LIBS.degToRad((-time + 4000) * 0.07));
+                rory_tangan_kanan.setTranslateMove(0, (time - 4000) / 1000, 0);
+                glMatrix.mat4.rotateZ(rory_tangan_kiri.MOVEMATRIX, rory_tangan_kiri.MOVEMATRIX, LIBS.degToRad((-time + 4000) * -0.07));
+                rory_tangan_kiri.setTranslateMove(0, (time - 4000) / 1000, 0);
 
-            } else if (time >= 1000 && time <= 1500) {
+            } else if (time >= 4000 && time <= 4500) {
                 // badtz maru
-                badtz_kepala.setTranslateMove(0, (time-1000) / 5000, 0);
-                badtz_badan.setTranslateMove(0, (time-1000) / 5000, 0);
+                badtz_kepala.setTranslateMove(0, (time-4000) / 1000, 0);
+                badtz_badan.setTranslateMove(0, (time-4000) / 1000, 0);
                 for (let i = 0; i < badtz_kepala.child.length; i++) {                    
-                    badtz_kepala.child[i].setTranslateMove(0, (time-1000) / 5000, 0);
+                    badtz_kepala.child[i].setTranslateMove(0, (time-4000) / 1000, 0);
                 }
                 for (let i = 0; i < badtz_badan.child.length; i++) {                    
-                    badtz_badan.child[i].setTranslateMove(0, (time-1000) / 5000, 0);
+                    badtz_badan.child[i].setTranslateMove(0, (time-4000) / 1000, 0);
                 }
-                for (let i = 0; i < curveObjects.length; i++) {                    
-                    curveObjects[i].setTranslateMove(0, (time-1000) / 50000, 0);
-                }
+            
 
-                glMatrix.mat4.rotateZ(badtz_tangan_kanan.MOVEMATRIX, badtz_tangan_kanan.MOVEMATRIX, LIBS.degToRad((time - 1000) * 0.07));
-                badtz_tangan_kanan.setTranslateMove(0, -(time - 1000) / 1000, 0);
-                glMatrix.mat4.rotateZ(badtz_tangan_kiri.MOVEMATRIX, badtz_tangan_kiri.MOVEMATRIX, LIBS.degToRad(-(time - 1000) * 0.07));
-                badtz_tangan_kiri.setTranslateMove(0, -(time - 1000) / 1000, 0);
+                glMatrix.mat4.rotateZ(badtz_tangan_kanan.MOVEMATRIX, badtz_tangan_kanan.MOVEMATRIX, LIBS.degToRad((time - 4000) * 0.07));
+                badtz_tangan_kanan.setTranslateMove(0, -(time - 4000) / 1000, 0);
+                glMatrix.mat4.rotateZ(badtz_tangan_kiri.MOVEMATRIX, badtz_tangan_kiri.MOVEMATRIX, LIBS.degToRad(-(time - 4000) * 0.07));
+                badtz_tangan_kiri.setTranslateMove(0, -(time - 4000) / 1000, 0);
 
                 // chococat
-                cat_kepala.setTranslateMove(0, (time-1000) / 5000, 0);
-                cat_badan.setTranslateMove(0, (time-1000) / 5000, 0);
+                cat_kepala.setTranslateMove(0, (time-4000) / 1000, 0);
+                cat_badan.setTranslateMove(0, (time-4000) / 1000, 0);
                 for (let i = 0; i < cat_kepala.child.length; i++) {                    
-                    cat_kepala.child[i].setTranslateMove(0, (time-1000) / 5000, 0);
+                    cat_kepala.child[i].setTranslateMove(0, (time-4000) / 1000, 0);
                 }
                 for (let i = 0; i < cat_badan.child.length; i++) {                    
-                    cat_badan.child[i].setTranslateMove(0, (time-1000) / 5000, 0);
-                }
-                for (let i = 0; i < curveObjects.length; i++) {                    
-                    curveObjects[i].setTranslateMove(0, (time-1000) / 50000, 0);
+                    cat_badan.child[i].setTranslateMove(0, (time-4000) / 1000, 0);
                 }
 
-                glMatrix.mat4.rotateZ(cat_tangan_kanan.MOVEMATRIX, cat_tangan_kanan.MOVEMATRIX, LIBS.degToRad((time - 1000) * 0.07));
-                cat_tangan_kanan.setTranslateMove(-(time - 1000) / 1500, -(time - 1000) / 1000, 0);
-                glMatrix.mat4.rotateZ(cat_tangan_kiri.MOVEMATRIX, cat_tangan_kiri.MOVEMATRIX, LIBS.degToRad(-(time - 1000) * 0.07));
-                cat_tangan_kiri.setTranslateMove((time - 1000) / 1500, -(time - 1000) / 1000, 0);
+                glMatrix.mat4.rotateZ(cat_tangan_kanan.MOVEMATRIX, cat_tangan_kanan.MOVEMATRIX, LIBS.degToRad((time - 4000) * 0.07));
+                cat_tangan_kanan.setTranslateMove(-(time - 4000) / 1500, -(time - 4000) / 1000, 0);
+                glMatrix.mat4.rotateZ(cat_tangan_kiri.MOVEMATRIX, cat_tangan_kiri.MOVEMATRIX, LIBS.degToRad(-(time - 4000) * 0.07));
+                cat_tangan_kiri.setTranslateMove((time - 4000) / 1500, -(time - 4000) / 1000, 0);
 
                 // rory
-                rory_kepala.setTranslateMove(0, (time-1000) / 5000, 0);
-                rory_badan.setTranslateMove(0, (time-1000) / 5000, 0);
+                rory_kepala.setTranslateMove(0, (time-4000) / 1000, 0);
+                rory_badan.setTranslateMove(0, (time-4000) / 1000, 0);
                 for (let i = 0; i < rory_kepala.child.length; i++) {                    
-                    rory_kepala.child[i].setTranslateMove(0, (time-1000) / 5000, 0);
+                    rory_kepala.child[i].setTranslateMove(0, (time-4000) / 1000, 0);
                 }
                 for (let i = 0; i < rory_badan.child.length; i++) {                    
-                    rory_badan.child[i].setTranslateMove(0, (time-1000) / 5000, 0);
-                }
-                for (let i = 0; i < curveObjects.length; i++) {                    
-                    curveObjects[i].setTranslateMove(0, (time-1000) / 50000, 0);
+                    rory_badan.child[i].setTranslateMove(0, (time-4000) / 1000, 0);
                 }
 
-                glMatrix.mat4.rotateZ(rory_tangan_kanan.MOVEMATRIX, rory_tangan_kanan.MOVEMATRIX, LIBS.degToRad((time - 1000) * 0.07));
-                rory_tangan_kanan.setTranslateMove(0, -(time - 1000) / 1000, 0);
-                glMatrix.mat4.rotateZ(rory_tangan_kiri.MOVEMATRIX, rory_tangan_kiri.MOVEMATRIX, LIBS.degToRad(-(time - 1000) * 0.07));
-                rory_tangan_kiri.setTranslateMove(0, -(time - 1000) / 1000, 0);
+                glMatrix.mat4.rotateZ(rory_tangan_kanan.MOVEMATRIX, rory_tangan_kanan.MOVEMATRIX, LIBS.degToRad((time - 4000) * 0.07));
+                rory_tangan_kanan.setTranslateMove(0, -(time - 4000) / 1000, 0);
+                glMatrix.mat4.rotateZ(rory_tangan_kiri.MOVEMATRIX, rory_tangan_kiri.MOVEMATRIX, LIBS.degToRad(-(time - 4000) * 0.07));
+                rory_tangan_kiri.setTranslateMove(0, -(time - 4000) / 1000, 0);
 
-            } else if (time >= 1500 && time <= 2000) {
+            } else if (time >= 4500 && time <= 5000) {
                 // badtz maru
-                badtz_kepala.setTranslateMove(0, (-time + 2000) / 5000, 0);
-                badtz_badan.setTranslateMove(0, (-time + 2000) / 5000, 0);
+                badtz_kepala.setTranslateMove(0, (-time + 5000) / 1000, 0);
+                badtz_badan.setTranslateMove(0, (-time + 5000) / 1000, 0);
                 for (let i = 0; i < badtz_kepala.child.length; i++) {                    
-                    badtz_kepala.child[i].setTranslateMove(0, (-time + 2000) / 5000, 0);
+                    badtz_kepala.child[i].setTranslateMove(0, (-time + 5000) / 1000, 0);
                 }
                 for (let i = 0; i < badtz_badan.child.length; i++) {                    
-                    badtz_badan.child[i].setTranslateMove(0, (-time + 2000) / 5000, 0);
+                    badtz_badan.child[i].setTranslateMove(0, (-time + 5000) / 1000, 0);
                 }
-                for (let i = 0; i < curveObjects.length; i++) {                    
-                    curveObjects[i].setTranslateMove(0, (-time + 2000) / 50000, 0);
-                }
+        
 
-                glMatrix.mat4.rotateZ(badtz_tangan_kanan.MOVEMATRIX, badtz_tangan_kanan.MOVEMATRIX, LIBS.degToRad((-time + 2000) * 0.07));
-                badtz_tangan_kanan.setTranslateMove(0, (time - 2000) / 1000, 0);
-                glMatrix.mat4.rotateZ(badtz_tangan_kiri.MOVEMATRIX, badtz_tangan_kiri.MOVEMATRIX, LIBS.degToRad((-time + 2000) * -0.07));
-                badtz_tangan_kiri.setTranslateMove(0, (time - 2000) / 1000, 0);
+                glMatrix.mat4.rotateZ(badtz_tangan_kanan.MOVEMATRIX, badtz_tangan_kanan.MOVEMATRIX, LIBS.degToRad((-time + 5000) * 0.07));
+                badtz_tangan_kanan.setTranslateMove(0, (time - 5000) / 1000, 0);
+                glMatrix.mat4.rotateZ(badtz_tangan_kiri.MOVEMATRIX, badtz_tangan_kiri.MOVEMATRIX, LIBS.degToRad((-time + 5000) * -0.07));
+                badtz_tangan_kiri.setTranslateMove(0, (time - 5000) / 1000, 0);
 
                 // chococat
-                cat_kepala.setTranslateMove(0, (-time + 2000) / 5000, 0);
-                cat_badan.setTranslateMove(0, (-time + 2000) / 5000, 0);
+                cat_kepala.setTranslateMove(0, (-time + 5000) / 1000, 0);
+                cat_badan.setTranslateMove(0, (-time + 5000) / 1000, 0);
                 for (let i = 0; i < cat_kepala.child.length; i++) {                    
-                    cat_kepala.child[i].setTranslateMove(0, (-time + 2000) / 5000, 0);
+                    cat_kepala.child[i].setTranslateMove(0, (-time + 5000) / 1000, 0);
                 }
                 for (let i = 0; i < cat_badan.child.length; i++) {                    
-                    cat_badan.child[i].setTranslateMove(0, (-time + 2000) / 5000, 0);
-                }
-                for (let i = 0; i < curveObjects.length; i++) {                    
-                    curveObjects[i].setTranslateMove(0, (-time + 2000) / 50000, 0);
+                    cat_badan.child[i].setTranslateMove(0, (-time + 5000) / 1000, 0);
                 }
 
-                glMatrix.mat4.rotateZ(cat_tangan_kanan.MOVEMATRIX, cat_tangan_kanan.MOVEMATRIX, LIBS.degToRad((-time + 2000) * 0.07));
-                cat_tangan_kanan.setTranslateMove((time - 2000) / 1500, (time - 2000) / 1000, 0);
-                glMatrix.mat4.rotateZ(cat_tangan_kiri.MOVEMATRIX, cat_tangan_kiri.MOVEMATRIX, LIBS.degToRad((-time + 2000) * -0.07));
-                cat_tangan_kiri.setTranslateMove(-(time - 2000) / 1500, (time - 2000) / 1000, 0);
+                glMatrix.mat4.rotateZ(cat_tangan_kanan.MOVEMATRIX, cat_tangan_kanan.MOVEMATRIX, LIBS.degToRad((-time + 5000) * 0.07));
+                cat_tangan_kanan.setTranslateMove((time - 5000) / 1500, (time - 5000) / 1000, 0);
+                glMatrix.mat4.rotateZ(cat_tangan_kiri.MOVEMATRIX, cat_tangan_kiri.MOVEMATRIX, LIBS.degToRad((-time + 5000) * -0.07));
+                cat_tangan_kiri.setTranslateMove(-(time - 5000) / 1500, (time - 5000) / 1000, 0);
 
                 // rory
-                rory_kepala.setTranslateMove(0, (-time + 2000) / 5000, 0);
-                rory_badan.setTranslateMove(0, (-time + 2000) / 5000, 0);
+                rory_kepala.setTranslateMove(0, (-time + 5000) / 1000, 0);
+                rory_badan.setTranslateMove(0, (-time + 5000) / 1000, 0);
                 for (let i = 0; i < rory_kepala.child.length; i++) {                    
-                    rory_kepala.child[i].setTranslateMove(0, (-time + 2000) / 5000, 0);
+                    rory_kepala.child[i].setTranslateMove(0, (-time + 5000) / 1000, 0);
                 }
                 for (let i = 0; i < rory_badan.child.length; i++) {                    
-                    rory_badan.child[i].setTranslateMove(0, (-time + 2000) / 5000, 0);
-                }
-                for (let i = 0; i < curveObjects.length; i++) {                    
-                    curveObjects[i].setTranslateMove(0, (-time + 2000) / 50000, 0);
+                    rory_badan.child[i].setTranslateMove(0, (-time + 5000) / 1000, 0);
                 }
 
-                glMatrix.mat4.rotateZ(rory_tangan_kanan.MOVEMATRIX, rory_tangan_kanan.MOVEMATRIX, LIBS.degToRad((-time + 2000) * 0.07));
-                rory_tangan_kanan.setTranslateMove(0, (time - 2000) / 1000, 0);
-                glMatrix.mat4.rotateZ(rory_tangan_kiri.MOVEMATRIX, rory_tangan_kiri.MOVEMATRIX, LIBS.degToRad((-time + 2000) * -0.07));
-                rory_tangan_kiri.setTranslateMove(0, (time - 2000) / 1000, 0);
+                glMatrix.mat4.rotateZ(rory_tangan_kanan.MOVEMATRIX, rory_tangan_kanan.MOVEMATRIX, LIBS.degToRad((-time + 5000) * 0.07));
+                rory_tangan_kanan.setTranslateMove(0, (time - 5000) / 1000, 0);
+                glMatrix.mat4.rotateZ(rory_tangan_kiri.MOVEMATRIX, rory_tangan_kiri.MOVEMATRIX, LIBS.degToRad((-time + 5000) * -0.07));
+                rory_tangan_kiri.setTranslateMove(0, (time - 5000) / 1000, 0);
 
             }
 
             // ========================================== Waving =================================================================
             // nambah sudut dari 0 - 70 derajat, trs ditranslate turun dari 0 - (-1) biar lokasi e ga ngawur
             // bawah" ngulangi sama kek ini cuma ganti detikan
-            if (time >= 3500 && time <= 4300) {
-                glMatrix.mat4.rotateZ(badtz_tangan_kanan.MOVEMATRIX, badtz_tangan_kanan.MOVEMATRIX, LIBS.degToRad((time - 3500) * 0.07));
-                badtz_tangan_kanan.setTranslateMove(0, -(time - 3500) / 1000, 0);
-                glMatrix.mat4.rotateZ(rory_tangan_kanan.MOVEMATRIX, rory_tangan_kanan.MOVEMATRIX, LIBS.degToRad((time - 3500) * 0.07));
-                rory_tangan_kanan.setTranslateMove(-(time - 3500) / 3000, -(time - 3500) / 1000, 0);
-                glMatrix.mat4.rotateZ(cat_tangan_kanan.MOVEMATRIX, cat_tangan_kanan.MOVEMATRIX, LIBS.degToRad((time - 3500) * 0.07));
-                cat_tangan_kanan.setTranslateMove(-(time - 3500) / 2200, -(time - 3500) / 1000, 0);
+            if (time >= 7500 && time <= 8300) {
+                glMatrix.mat4.rotateZ(badtz_tangan_kanan.MOVEMATRIX, badtz_tangan_kanan.MOVEMATRIX, LIBS.degToRad((time - 7500) * 0.07));
+                badtz_tangan_kanan.setTranslateMove(0, -(time - 7500) / 1000, 0);
+                glMatrix.mat4.rotateZ(rory_tangan_kanan.MOVEMATRIX, rory_tangan_kanan.MOVEMATRIX, LIBS.degToRad((time - 7500) * 0.07));
+                rory_tangan_kanan.setTranslateMove(-(time - 7500) / 3000, -(time - 7500) / 1000, 0);
+                glMatrix.mat4.rotateZ(cat_tangan_kanan.MOVEMATRIX, cat_tangan_kanan.MOVEMATRIX, LIBS.degToRad((time - 7500) * 0.07));
+                cat_tangan_kanan.setTranslateMove(-(time - 7500) / 2200, -(time - 7500) / 1000, 0);
             // dari detik 9 - 10
             // ngurangi sudut dari 70 - 0 derajat, trs ditranslate balik dari -1 - 0
             // bawah" ngulangi sama kek ini cuma ganti detikan
-            } else if (time >= 4300 && time <= 5000) {
-                glMatrix.mat4.rotateZ(badtz_tangan_kanan.MOVEMATRIX, badtz_tangan_kanan.MOVEMATRIX, LIBS.degToRad((-time + 5000) * 0.07));
-                badtz_tangan_kanan.setTranslateMove(0, (time - 5000) / 1000, 0);
-                glMatrix.mat4.rotateZ(rory_tangan_kanan.MOVEMATRIX, rory_tangan_kanan.MOVEMATRIX, LIBS.degToRad((-time + 5000) * 0.07));
-                rory_tangan_kanan.setTranslateMove((time - 5000) / 3000, (time - 5000) / 1000, 0);
-                glMatrix.mat4.rotateZ(cat_tangan_kanan.MOVEMATRIX, cat_tangan_kanan.MOVEMATRIX, LIBS.degToRad((-time + 5000) * 0.07));
-                cat_tangan_kanan.setTranslateMove((time - 5000) / 2200, (time - 5000) / 1000, 0);
-            } else if (time >= 5000 && time <= 5500) {
-                glMatrix.mat4.rotateZ(badtz_tangan_kanan.MOVEMATRIX, badtz_tangan_kanan.MOVEMATRIX, LIBS.degToRad((time - 5000) * 0.07));
-                badtz_tangan_kanan.setTranslateMove(0, -(time - 5000) / 1000, 0);
-                glMatrix.mat4.rotateZ(rory_tangan_kanan.MOVEMATRIX, rory_tangan_kanan.MOVEMATRIX, LIBS.degToRad((time - 5000) * 0.07));
-                rory_tangan_kanan.setTranslateMove(-(time - 5000) / 3000, -(time - 5000) / 1000, 0);
-                glMatrix.mat4.rotateZ(cat_tangan_kanan.MOVEMATRIX, cat_tangan_kanan.MOVEMATRIX, LIBS.degToRad((time - 5000) * 0.07));
-                cat_tangan_kanan.setTranslateMove(-(time - 5000) / 2200, -(time - 5000) / 1000, 0);
-            } else if (time >= 5500 && time <= 6000) {
-                glMatrix.mat4.rotateZ(badtz_tangan_kanan.MOVEMATRIX, badtz_tangan_kanan.MOVEMATRIX, LIBS.degToRad((-time + 6000) * 0.07));
-                badtz_tangan_kanan.setTranslateMove(0, (time - 6000) / 1000, 0);
-                glMatrix.mat4.rotateZ(rory_tangan_kanan.MOVEMATRIX, rory_tangan_kanan.MOVEMATRIX, LIBS.degToRad((-time + 6000) * 0.07));
-                rory_tangan_kanan.setTranslateMove((time - 6000) / 3000, (time - 6000) / 1000, 0);
-                glMatrix.mat4.rotateZ(cat_tangan_kanan.MOVEMATRIX, cat_tangan_kanan.MOVEMATRIX, LIBS.degToRad((-time + 6000) * 0.07));
-                cat_tangan_kanan.setTranslateMove((time - 6000) / 2200, (time - 6000) / 1000, 0);
+            } else if (time >= 8300 && time <= 9000) {
+                glMatrix.mat4.rotateZ(badtz_tangan_kanan.MOVEMATRIX, badtz_tangan_kanan.MOVEMATRIX, LIBS.degToRad((-time + 9000) * 0.07));
+                badtz_tangan_kanan.setTranslateMove(0, (time - 9000) / 1000, 0);
+                glMatrix.mat4.rotateZ(rory_tangan_kanan.MOVEMATRIX, rory_tangan_kanan.MOVEMATRIX, LIBS.degToRad((-time + 9000) * 0.07));
+                rory_tangan_kanan.setTranslateMove((time - 9000) / 3000, (time - 9000) / 1000, 0);
+                glMatrix.mat4.rotateZ(cat_tangan_kanan.MOVEMATRIX, cat_tangan_kanan.MOVEMATRIX, LIBS.degToRad((-time + 9000) * 0.07));
+                cat_tangan_kanan.setTranslateMove((time - 9000) / 2200, (time - 9000) / 1000, 0);
+            } else if (time >= 9000 && time <= 9500) {
+                glMatrix.mat4.rotateZ(badtz_tangan_kanan.MOVEMATRIX, badtz_tangan_kanan.MOVEMATRIX, LIBS.degToRad((time - 9000) * 0.07));
+                badtz_tangan_kanan.setTranslateMove(0, -(time - 9000) / 1000, 0);
+                glMatrix.mat4.rotateZ(rory_tangan_kanan.MOVEMATRIX, rory_tangan_kanan.MOVEMATRIX, LIBS.degToRad((time - 9000) * 0.07));
+                rory_tangan_kanan.setTranslateMove(-(time - 9000) / 3000, -(time - 9000) / 1000, 0);
+                glMatrix.mat4.rotateZ(cat_tangan_kanan.MOVEMATRIX, cat_tangan_kanan.MOVEMATRIX, LIBS.degToRad((time - 9000) * 0.07));
+                cat_tangan_kanan.setTranslateMove(-(time - 9000) / 2200, -(time - 9000) / 1000, 0);
+            } else if (time >= 9500 && time <= 10000) {
+                glMatrix.mat4.rotateZ(badtz_tangan_kanan.MOVEMATRIX, badtz_tangan_kanan.MOVEMATRIX, LIBS.degToRad((-time + 10000) * 0.07));
+                badtz_tangan_kanan.setTranslateMove(0, (time - 10000) / 1000, 0);
+                glMatrix.mat4.rotateZ(rory_tangan_kanan.MOVEMATRIX, rory_tangan_kanan.MOVEMATRIX, LIBS.degToRad((-time + 10000) * 0.07));
+                rory_tangan_kanan.setTranslateMove((time - 10000) / 3000, (time - 10000) / 1000, 0);
+                glMatrix.mat4.rotateZ(cat_tangan_kanan.MOVEMATRIX, cat_tangan_kanan.MOVEMATRIX, LIBS.degToRad((-time + 10000) * 0.07));
+                cat_tangan_kanan.setTranslateMove((time - 10000) / 2200, (time - 10000) / 1000, 0);
             } else {
                 glMatrix.mat4.rotateZ(badtz_tangan_kanan.MOVEMATRIX, badtz_tangan_kanan.MOVEMATRIX, LIBS.degToRad(0));
                 badtz_tangan_kanan.setTranslateMove(0, 0, 0);
@@ -1506,31 +1508,31 @@ function main() {
             }
 
             // =================================== Kepala noleh ===========================================
-            if (time >= 8000 && time <= 8800)
-                badtz_kepala.setRotateMove(PHI, LIBS.degToRad((time - 8000) * 0.05), 0)
-            else if (time > 8800)
+            if (time >= 12000 && time <= 12800)
+                badtz_kepala.setRotateMove(PHI, LIBS.degToRad((time - 12000) * 0.05), 0)
+            else if (time > 12800)
                 badtz_kepala.setRotateMove(PHI, LIBS.degToRad(40), 0);
 
             // =================================== Badan noleh ============================================
-            if (time >= 9500 && time <= 10300) {
-                badtz_badan.setRotateMove(PHI, LIBS.degToRad((time - 9500) * 0.05), 0)
-            } else if (time > 10300) {
+            if (time >= 13500 && time <= 14300) {
+                badtz_badan.setRotateMove(PHI, LIBS.degToRad((time - 13500) * 0.05), 0)
+            } else if (time > 14300) {
                 badtz_badan.setRotateMove(PHI, LIBS.degToRad(40), 0);
             }
 
             // ========================================== Waving =================================================================
-            if (time >= 11000 && time <= 11800) {
-                glMatrix.mat4.rotateZ(badtz_tangan_kiri.MOVEMATRIX, badtz_tangan_kiri.MOVEMATRIX, LIBS.degToRad(-(time - 11000) * 0.07));
-                badtz_tangan_kiri.setTranslateMove(0, -(time - 11000) / 1000, 0);
-            } else if (time >= 11800 && time <= 12500) {
-                glMatrix.mat4.rotateZ(badtz_tangan_kiri.MOVEMATRIX, badtz_tangan_kiri.MOVEMATRIX, LIBS.degToRad(-(-time + 12500) * 0.07));
-                badtz_tangan_kiri.setTranslateMove(0, (time - 12500) / 1000, 0);
-            } else if (time >= 12500 && time <= 13000) {
-                glMatrix.mat4.rotateZ(badtz_tangan_kiri.MOVEMATRIX, badtz_tangan_kiri.MOVEMATRIX, LIBS.degToRad(-(time - 12500) * 0.07));
-                badtz_tangan_kiri.setTranslateMove(0, -(time - 12500) / 1000, 0);
-            } else if (time >= 13000 && time <= 13500) {
-                glMatrix.mat4.rotateZ(badtz_tangan_kiri.MOVEMATRIX, badtz_tangan_kiri.MOVEMATRIX, LIBS.degToRad(-(-time + 13500) * 0.07));
-                badtz_tangan_kiri.setTranslateMove(0, (time - 13500) / 1000, 0);
+            if (time >= 15000 && time <= 15800) {
+                glMatrix.mat4.rotateZ(badtz_tangan_kiri.MOVEMATRIX, badtz_tangan_kiri.MOVEMATRIX, LIBS.degToRad(-(time - 15000) * 0.07));
+                badtz_tangan_kiri.setTranslateMove(0, -(time - 15000) / 1000, 0);
+            } else if (time >= 15800 && time <= 16500) {
+                glMatrix.mat4.rotateZ(badtz_tangan_kiri.MOVEMATRIX, badtz_tangan_kiri.MOVEMATRIX, LIBS.degToRad(-(-time + 16500) * 0.07));
+                badtz_tangan_kiri.setTranslateMove(0, (time - 16500) / 1000, 0);
+            } else if (time >= 16500 && time <= 17000) {
+                glMatrix.mat4.rotateZ(badtz_tangan_kiri.MOVEMATRIX, badtz_tangan_kiri.MOVEMATRIX, LIBS.degToRad(-(time - 16500) * 0.07));
+                badtz_tangan_kiri.setTranslateMove(0, -(time - 16500) / 1000, 0);
+            } else if (time >= 17000 && time <= 17500) {
+                glMatrix.mat4.rotateZ(badtz_tangan_kiri.MOVEMATRIX, badtz_tangan_kiri.MOVEMATRIX, LIBS.degToRad(-(-time + 17500) * 0.07));
+                badtz_tangan_kiri.setTranslateMove(0, (time - 17500) / 1000, 0);
             } else {
                 glMatrix.mat4.rotateZ(badtz_tangan_kiri.MOVEMATRIX, badtz_tangan_kiri.MOVEMATRIX, LIBS.degToRad(0));
                 badtz_tangan_kiri.setTranslateMove(0, 0, 0);
@@ -1539,44 +1541,44 @@ function main() {
             // ====================================================================================================================
 
             // =================================== Kepala noleh ===========================================
-            if (time >= 10000 && time <= 10800)
-                cat_kepala.setRotateMove(PHI, LIBS.degToRad(-(time - 10000) * 0.05), 0)
-            else if (time > 10800)
+            if (time >= 15000 && time <= 15800)
+                cat_kepala.setRotateMove(PHI, LIBS.degToRad(-(time - 15000) * 0.05), 0)
+            else if (time > 15800)
                 cat_kepala.setRotateMove(PHI, LIBS.degToRad(-40), 0);
 
             // =================================== Badan noleh ============================================
-            if (time >= 11000 && time <= 11800) {
-                cat_badan.setRotateMove(PHI, LIBS.degToRad(-(time - 11000) * 0.05), 0)
-            } else if (time > 11800) {
+            if (time >= 16000 && time <= 16800) {
+                cat_badan.setRotateMove(PHI, LIBS.degToRad(-(time - 16000) * 0.05), 0)
+            } else if (time > 16800) {
                 cat_badan.setRotateMove(PHI, LIBS.degToRad(-40), 0);
             }
 
             // =================================== Kepala noleh ===========================================
-            if (time >= 10000 && time <= 10800)
-                rory_kepala.setRotateMove(PHI, LIBS.degToRad(-(time - 10000) * 0.05), 0)
-            else if (time > 10800)
+            if (time >= 15000 && time <= 15800)
+                rory_kepala.setRotateMove(PHI, LIBS.degToRad(-(time - 15000) * 0.05), 0)
+            else if (time > 15800)
                 rory_kepala.setRotateMove(PHI, LIBS.degToRad(-40), 0);
 
             // =================================== Badan noleh ============================================
-            if (time >= 11000 && time <= 11800) {
-                rory_badan.setRotateMove(PHI, LIBS.degToRad(-(time - 11000) * 0.05), 0)
-            } else if (time > 11800) {
+            if (time >= 16000 && time <= 16800) {
+                rory_badan.setRotateMove(PHI, LIBS.degToRad(-(time - 16000) * 0.05), 0)
+            } else if (time > 16800) {
                 rory_badan.setRotateMove(PHI, LIBS.degToRad(-40), 0);
             }
 
             // ========================================== Waving =================================================================
-            if (time >= 13000 && time <= 13800) {
-                glMatrix.mat4.rotateZ(rory_tangan_kanan.MOVEMATRIX, rory_tangan_kanan.MOVEMATRIX, LIBS.degToRad((time - 13000) * 0.15));
-                rory_tangan_kanan.setTranslateMove(-(time - 13000) / 3000, -(time - 13000) / 800, 0);
-            } else if (time >= 13800 && time <= 14500) {
-                glMatrix.mat4.rotateZ(rory_tangan_kanan.MOVEMATRIX, rory_tangan_kanan.MOVEMATRIX, LIBS.degToRad((-time + 14500) * 0.15));
-                rory_tangan_kanan.setTranslateMove((time - 14500) / 3000, (time - 14500) / 800, 0);
-            } else if (time >= 14500 && time <= 15000) {
-                glMatrix.mat4.rotateZ(rory_tangan_kanan.MOVEMATRIX, rory_tangan_kanan.MOVEMATRIX, LIBS.degToRad((time - 14500) * 0.15));
-                rory_tangan_kanan.setTranslateMove(-(time - 14500) / 3000, -(time - 14500) / 800, 0);
-            } else if (time >= 15000 && time <= 15500) {
-                glMatrix.mat4.rotateZ(rory_tangan_kanan.MOVEMATRIX, rory_tangan_kanan.MOVEMATRIX, LIBS.degToRad((-time + 15500) * 0.15));
-                rory_tangan_kanan.setTranslateMove((time - 15500) / 3000, (time - 15500) / 800, 0);
+            if (time >= 18000 && time <= 18800) {
+                glMatrix.mat4.rotateZ(rory_tangan_kanan.MOVEMATRIX, rory_tangan_kanan.MOVEMATRIX, LIBS.degToRad((time - 18000) * 0.15));
+                rory_tangan_kanan.setTranslateMove(-(time - 18000) / 3000, -(time - 18000) / 800, 0);
+            } else if (time >= 18800 && time <= 19500) {
+                glMatrix.mat4.rotateZ(rory_tangan_kanan.MOVEMATRIX, rory_tangan_kanan.MOVEMATRIX, LIBS.degToRad((-time + 19500) * 0.15));
+                rory_tangan_kanan.setTranslateMove((time - 19500) / 3000, (time - 19500) / 800, 0);
+            } else if (time >= 19500 && time <= 20000) {
+                glMatrix.mat4.rotateZ(rory_tangan_kanan.MOVEMATRIX, rory_tangan_kanan.MOVEMATRIX, LIBS.degToRad((time - 19500) * 0.15));
+                rory_tangan_kanan.setTranslateMove(-(time - 19500) / 3000, -(time - 19500) / 800, 0);
+            } else if (time >= 20000 && time <= 20500) {
+                glMatrix.mat4.rotateZ(rory_tangan_kanan.MOVEMATRIX, rory_tangan_kanan.MOVEMATRIX, LIBS.degToRad((-time + 20500) * 0.15));
+                rory_tangan_kanan.setTranslateMove((time - 20500) / 3000, (time - 20500) / 800, 0);
             } else {
                 glMatrix.mat4.rotateZ(rory_tangan_kanan.MOVEMATRIX, rory_tangan_kanan.MOVEMATRIX, LIBS.degToRad(0));
                 rory_tangan_kanan.setTranslateMove(0, 0, 0);
@@ -1585,18 +1587,18 @@ function main() {
             // ====================================================================================================================
 
             // ========================================== Waving =================================================================
-            if (time >= 13000 && time <= 13800) {
-                glMatrix.mat4.rotateZ(cat_tangan_kanan.MOVEMATRIX, cat_tangan_kanan.MOVEMATRIX, LIBS.degToRad((time - 13000) * 0.07));
-                cat_tangan_kanan.setTranslateMove(-(time - 13000) / 2200, -(time - 13000) / 1000, 0);
-            } else if (time >= 13800 && time <= 14500) {
-                glMatrix.mat4.rotateZ(cat_tangan_kanan.MOVEMATRIX, cat_tangan_kanan.MOVEMATRIX, LIBS.degToRad((-time + 14500) * 0.07));
-                cat_tangan_kanan.setTranslateMove((time - 14500) / 2200, (time - 14500) / 1000, 0);
-            } else if (time >= 14500 && time <= 15000) {
-                glMatrix.mat4.rotateZ(cat_tangan_kanan.MOVEMATRIX, cat_tangan_kanan.MOVEMATRIX, LIBS.degToRad((time - 14500) * 0.07));
-                cat_tangan_kanan.setTranslateMove(-(time - 14500) / 2200, -(time - 14500) / 1000, 0);
-            } else if (time >= 15000 && time <= 15500) {
-                glMatrix.mat4.rotateZ(cat_tangan_kanan.MOVEMATRIX, cat_tangan_kanan.MOVEMATRIX, LIBS.degToRad((-time + 15500) * 0.07));
-                cat_tangan_kanan.setTranslateMove((time - 15500) / 2200, (time - 15500) / 1000, 0);
+            if (time >= 18000 && time <= 18800) {
+                glMatrix.mat4.rotateZ(cat_tangan_kanan.MOVEMATRIX, cat_tangan_kanan.MOVEMATRIX, LIBS.degToRad((time - 18000) * 0.07));
+                cat_tangan_kanan.setTranslateMove(-(time - 18000) / 2200, -(time - 18000) / 1000, 0);
+            } else if (time >= 18800 && time <= 19500) {
+                glMatrix.mat4.rotateZ(cat_tangan_kanan.MOVEMATRIX, cat_tangan_kanan.MOVEMATRIX, LIBS.degToRad((-time + 19500) * 0.07));
+                cat_tangan_kanan.setTranslateMove((time - 19500) / 2200, (time - 19500) / 1000, 0);
+            } else if (time >= 19500 && time <= 20000) {
+                glMatrix.mat4.rotateZ(cat_tangan_kanan.MOVEMATRIX, cat_tangan_kanan.MOVEMATRIX, LIBS.degToRad((time - 19500) * 0.07));
+                cat_tangan_kanan.setTranslateMove(-(time - 19500) / 2200, -(time - 19500) / 1000, 0);
+            } else if (time >= 20000 && time <= 20500) {
+                glMatrix.mat4.rotateZ(cat_tangan_kanan.MOVEMATRIX, cat_tangan_kanan.MOVEMATRIX, LIBS.degToRad((-time + 20500) * 0.07));
+                cat_tangan_kanan.setTranslateMove((time - 20500) / 2200, (time - 20500) / 1000, 0);
             } else {
                 glMatrix.mat4.rotateZ(cat_tangan_kanan.MOVEMATRIX, cat_tangan_kanan.MOVEMATRIX, LIBS.degToRad(0));
                 cat_tangan_kanan.setTranslateMove(0, 0, 0);
@@ -1723,86 +1725,86 @@ function main() {
             // }
 
             // Chococat jalan
-            if (time >= 4000 && time <= 12000) {
-                glMatrix.mat4.rotateY(cat_kepala.MOVEMATRIX, cat_kepala.MOVEMATRIX, LIBS.degToRad(20));
-                cat_kepala.setTranslateMove(time / 6000, 0, 0);
+            // if (time >= 4000 && time <= 12000) {
+            //     glMatrix.mat4.rotateY(cat_kepala.MOVEMATRIX, cat_kepala.MOVEMATRIX, LIBS.degToRad(20));
+            //     cat_kepala.setTranslateMove(time / 6000, 0, 0);
 
-                glMatrix.mat4.rotateY(cat_badan.MOVEMATRIX, cat_badan.MOVEMATRIX, LIBS.degToRad(20));
-                cat_badan.setTranslateMove(time / 6000, 0, 0);  
-                for (let i = 0; i < cat_kepala.child.length; i++) {
-                    glMatrix.mat4.rotateY(cat_kepala.child[i].MOVEMATRIX, cat_kepala.child[i].MOVEMATRIX, LIBS.degToRad(20));
-                    cat_kepala.child[i].setTranslateMove(time / 6000, 0, 0);
-                }
+            //     glMatrix.mat4.rotateY(cat_badan.MOVEMATRIX, cat_badan.MOVEMATRIX, LIBS.degToRad(20));
+            //     cat_badan.setTranslateMove(time / 6000, 0, 0);  
+            //     for (let i = 0; i < cat_kepala.child.length; i++) {
+            //         glMatrix.mat4.rotateY(cat_kepala.child[i].MOVEMATRIX, cat_kepala.child[i].MOVEMATRIX, LIBS.degToRad(20));
+            //         cat_kepala.child[i].setTranslateMove(time / 6000, 0, 0);
+            //     }
 
-                for (let i = 0; i < cat_badan.child.length; i++) {
-                    glMatrix.mat4.rotateY(cat_badan.child[i].MOVEMATRIX, cat_badan.child[i].MOVEMATRIX, LIBS.degToRad(20));
-                    cat_badan.child[i].setTranslateMove(time / 6000, 0, 0);                    
-                }
-            }
+            //     for (let i = 0; i < cat_badan.child.length; i++) {
+            //         glMatrix.mat4.rotateY(cat_badan.child[i].MOVEMATRIX, cat_badan.child[i].MOVEMATRIX, LIBS.degToRad(20));
+            //         cat_badan.child[i].setTranslateMove(time / 6000, 0, 0);                    
+            //     }
+            // }
 
-            if (time > 12000) {
-                glMatrix.mat4.rotateY(cat_kepala.MOVEMATRIX, cat_kepala.MOVEMATRIX, LIBS.degToRad(-10));
-                cat_kepala.setTranslateMove(12000 / 6000, 0, 0);
+            // if (time > 12000) {
+            //     glMatrix.mat4.rotateY(cat_kepala.MOVEMATRIX, cat_kepala.MOVEMATRIX, LIBS.degToRad(-10));
+            //     cat_kepala.setTranslateMove(12000 / 6000, 0, 0);
 
-                glMatrix.mat4.rotateY(cat_badan.MOVEMATRIX, cat_badan.MOVEMATRIX, LIBS.degToRad(-10));
-                cat_badan.setTranslateMove(12000 / 6000, 0, 0);  
-                for (let i = 0; i < cat_kepala.child.length; i++) {
-                    glMatrix.mat4.rotateY(cat_kepala.child[i].MOVEMATRIX, cat_kepala.child[i].MOVEMATRIX, LIBS.degToRad(-10));
-                    cat_kepala.child[i].setTranslateMove(12000 / 6000, 0, 0);
-                }
+            //     glMatrix.mat4.rotateY(cat_badan.MOVEMATRIX, cat_badan.MOVEMATRIX, LIBS.degToRad(-10));
+            //     cat_badan.setTranslateMove(12000 / 6000, 0, 0);  
+            //     for (let i = 0; i < cat_kepala.child.length; i++) {
+            //         glMatrix.mat4.rotateY(cat_kepala.child[i].MOVEMATRIX, cat_kepala.child[i].MOVEMATRIX, LIBS.degToRad(-10));
+            //         cat_kepala.child[i].setTranslateMove(12000 / 6000, 0, 0);
+            //     }
 
-                for (let i = 0; i < cat_badan.child.length; i++) {
-                    glMatrix.mat4.rotateY(cat_badan.child[i].MOVEMATRIX, cat_badan.child[i].MOVEMATRIX, LIBS.degToRad(-10));
-                    cat_badan.child[i].setTranslateMove(12000 / 6000, 0, 0);                    
-                }
-            }
+            //     for (let i = 0; i < cat_badan.child.length; i++) {
+            //         glMatrix.mat4.rotateY(cat_badan.child[i].MOVEMATRIX, cat_badan.child[i].MOVEMATRIX, LIBS.degToRad(-10));
+            //         cat_badan.child[i].setTranslateMove(12000 / 6000, 0, 0);                    
+            //     }
+            // }
 
-            if (time >= 4000 && time <= 5000) {
-                glMatrix.mat4.rotateX(cat_tangan_kanan.MOVEMATRIX, cat_tangan_kanan.MOVEMATRIX, LIBS.degToRad((time - 4000) * 0.015));
-                glMatrix.mat4.rotateX(cat_tangan_kiri.MOVEMATRIX, cat_tangan_kiri.MOVEMATRIX, LIBS.degToRad((time - 4000) * -0.015));
-                glMatrix.mat4.rotateX(cat_kaki_kanan.MOVEMATRIX, cat_kaki_kanan.MOVEMATRIX, LIBS.degToRad((time - 4000) * -0.015));
-                glMatrix.mat4.rotateX(cat_kaki_kiri.MOVEMATRIX, cat_kaki_kiri.MOVEMATRIX, LIBS.degToRad((time - 4000) * 0.015));
-            } else if (time >= 5000 && time <= 6000) {
-                glMatrix.mat4.rotateX(cat_tangan_kanan.MOVEMATRIX, cat_tangan_kanan.MOVEMATRIX, LIBS.degToRad((-time + 6000) * 0.015));
-                glMatrix.mat4.rotateX(cat_tangan_kiri.MOVEMATRIX, cat_tangan_kiri.MOVEMATRIX, LIBS.degToRad((-time + 6000) * -0.015));
-                glMatrix.mat4.rotateX(cat_kaki_kiri.MOVEMATRIX, cat_kaki_kiri.MOVEMATRIX, LIBS.degToRad((-time + 6000) * 0.012));
-                glMatrix.mat4.rotateX(cat_kaki_kanan.MOVEMATRIX, cat_kaki_kanan.MOVEMATRIX, LIBS.degToRad((-time + 6000) * -0.012));
-            } else if (time >= 6000 && time <= 7000) {
-                glMatrix.mat4.rotateX(cat_tangan_kanan.MOVEMATRIX, cat_tangan_kanan.MOVEMATRIX, LIBS.degToRad((time - 6000) * -0.015));
-                glMatrix.mat4.rotateX(cat_tangan_kiri.MOVEMATRIX, cat_tangan_kiri.MOVEMATRIX, LIBS.degToRad((time - 6000) * 0.015));
-                glMatrix.mat4.rotateX(cat_kaki_kiri.MOVEMATRIX, cat_kaki_kiri.MOVEMATRIX, LIBS.degToRad((time - 6000) * -0.012));
-                glMatrix.mat4.rotateX(cat_kaki_kanan.MOVEMATRIX, cat_kaki_kanan.MOVEMATRIX, LIBS.degToRad((time - 6000) * 0.012));
-            } else if (time >= 7000 && time <= 8000) {
-                glMatrix.mat4.rotateX(cat_tangan_kanan.MOVEMATRIX, cat_tangan_kanan.MOVEMATRIX, LIBS.degToRad((-time + 8000) * -0.015));
-                glMatrix.mat4.rotateX(cat_tangan_kiri.MOVEMATRIX, cat_tangan_kiri.MOVEMATRIX, LIBS.degToRad((-time + 8000) * 0.015));
-                glMatrix.mat4.rotateX(cat_kaki_kiri.MOVEMATRIX, cat_kaki_kiri.MOVEMATRIX, LIBS.degToRad((-time + 8000) * -0.012));
-                glMatrix.mat4.rotateX(cat_kaki_kanan.MOVEMATRIX, cat_kaki_kanan.MOVEMATRIX, LIBS.degToRad((-time + 8000) * 0.012));
-            } else if (time >= 8000 && time <= 9000) {
-                glMatrix.mat4.rotateX(cat_tangan_kanan.MOVEMATRIX, cat_tangan_kanan.MOVEMATRIX, LIBS.degToRad((time - 8000) * 0.015));
-                glMatrix.mat4.rotateX(cat_tangan_kiri.MOVEMATRIX, cat_tangan_kiri.MOVEMATRIX, LIBS.degToRad((time - 8000) * -0.015));
-                glMatrix.mat4.rotateX(cat_kaki_kanan.MOVEMATRIX, cat_kaki_kanan.MOVEMATRIX, LIBS.degToRad((time - 8000) * -0.015));
-                glMatrix.mat4.rotateX(cat_kaki_kiri.MOVEMATRIX, cat_kaki_kiri.MOVEMATRIX, LIBS.degToRad((time - 8000) * 0.015));
-            } else if (time >= 9000 && time <= 10000) {
-                glMatrix.mat4.rotateX(cat_tangan_kanan.MOVEMATRIX, cat_tangan_kanan.MOVEMATRIX, LIBS.degToRad((-time + 10000) * 0.015));
-                glMatrix.mat4.rotateX(cat_tangan_kiri.MOVEMATRIX, cat_tangan_kiri.MOVEMATRIX, LIBS.degToRad((-time + 10000) * -0.015));
-                glMatrix.mat4.rotateX(cat_kaki_kiri.MOVEMATRIX, cat_kaki_kiri.MOVEMATRIX, LIBS.degToRad((-time + 10000) * 0.012));
-                glMatrix.mat4.rotateX(cat_kaki_kanan.MOVEMATRIX, cat_kaki_kanan.MOVEMATRIX, LIBS.degToRad((-time + 10000) * -0.012));
-            } else if (time >= 10000 && time <= 11000) {
-                glMatrix.mat4.rotateX(cat_tangan_kanan.MOVEMATRIX, cat_tangan_kanan.MOVEMATRIX, LIBS.degToRad((time - 10000) * -0.015));
-                glMatrix.mat4.rotateX(cat_tangan_kiri.MOVEMATRIX, cat_tangan_kiri.MOVEMATRIX, LIBS.degToRad((time - 10000) * 0.015));
-                glMatrix.mat4.rotateX(cat_kaki_kiri.MOVEMATRIX, cat_kaki_kiri.MOVEMATRIX, LIBS.degToRad((time - 10000) * -0.012));
-                glMatrix.mat4.rotateX(cat_kaki_kanan.MOVEMATRIX, cat_kaki_kanan.MOVEMATRIX, LIBS.degToRad((time - 10000) * 0.012));
-            } else if (time >= 11000 && time <= 12000) {
-                glMatrix.mat4.rotateX(cat_tangan_kanan.MOVEMATRIX, cat_tangan_kanan.MOVEMATRIX, LIBS.degToRad((-time + 12000) * -0.015));
-                glMatrix.mat4.rotateX(cat_tangan_kiri.MOVEMATRIX, cat_tangan_kiri.MOVEMATRIX, LIBS.degToRad((-time + 12000) * 0.015));
-                glMatrix.mat4.rotateX(cat_kaki_kiri.MOVEMATRIX, cat_kaki_kiri.MOVEMATRIX, LIBS.degToRad((-time + 12000) * -0.012));
-                glMatrix.mat4.rotateX(cat_kaki_kanan.MOVEMATRIX, cat_kaki_kanan.MOVEMATRIX, LIBS.degToRad((-time + 12000) * 0.012));
-            } else {
-                glMatrix.mat4.rotateX(cat_tangan_kanan.MOVEMATRIX, cat_tangan_kanan.MOVEMATRIX, LIBS.degToRad(0));
-                glMatrix.mat4.rotateX(cat_tangan_kiri.MOVEMATRIX, cat_tangan_kiri.MOVEMATRIX, LIBS.degToRad(0));
-                glMatrix.mat4.rotateX(cat_kaki_kiri.MOVEMATRIX, cat_kaki_kiri.MOVEMATRIX, LIBS.degToRad(0));
-                glMatrix.mat4.rotateX(cat_kaki_kanan.MOVEMATRIX, cat_kaki_kanan.MOVEMATRIX, LIBS.degToRad(0));
-            }
+            // if (time >= 4000 && time <= 5000) {
+            //     glMatrix.mat4.rotateX(cat_tangan_kanan.MOVEMATRIX, cat_tangan_kanan.MOVEMATRIX, LIBS.degToRad((time - 4000) * 0.015));
+            //     glMatrix.mat4.rotateX(cat_tangan_kiri.MOVEMATRIX, cat_tangan_kiri.MOVEMATRIX, LIBS.degToRad((time - 4000) * -0.015));
+            //     glMatrix.mat4.rotateX(cat_kaki_kanan.MOVEMATRIX, cat_kaki_kanan.MOVEMATRIX, LIBS.degToRad((time - 4000) * -0.015));
+            //     glMatrix.mat4.rotateX(cat_kaki_kiri.MOVEMATRIX, cat_kaki_kiri.MOVEMATRIX, LIBS.degToRad((time - 4000) * 0.015));
+            // } else if (time >= 5000 && time <= 6000) {
+            //     glMatrix.mat4.rotateX(cat_tangan_kanan.MOVEMATRIX, cat_tangan_kanan.MOVEMATRIX, LIBS.degToRad((-time + 6000) * 0.015));
+            //     glMatrix.mat4.rotateX(cat_tangan_kiri.MOVEMATRIX, cat_tangan_kiri.MOVEMATRIX, LIBS.degToRad((-time + 6000) * -0.015));
+            //     glMatrix.mat4.rotateX(cat_kaki_kiri.MOVEMATRIX, cat_kaki_kiri.MOVEMATRIX, LIBS.degToRad((-time + 6000) * 0.012));
+            //     glMatrix.mat4.rotateX(cat_kaki_kanan.MOVEMATRIX, cat_kaki_kanan.MOVEMATRIX, LIBS.degToRad((-time + 6000) * -0.012));
+            // } else if (time >= 6000 && time <= 7000) {
+            //     glMatrix.mat4.rotateX(cat_tangan_kanan.MOVEMATRIX, cat_tangan_kanan.MOVEMATRIX, LIBS.degToRad((time - 6000) * -0.015));
+            //     glMatrix.mat4.rotateX(cat_tangan_kiri.MOVEMATRIX, cat_tangan_kiri.MOVEMATRIX, LIBS.degToRad((time - 6000) * 0.015));
+            //     glMatrix.mat4.rotateX(cat_kaki_kiri.MOVEMATRIX, cat_kaki_kiri.MOVEMATRIX, LIBS.degToRad((time - 6000) * -0.012));
+            //     glMatrix.mat4.rotateX(cat_kaki_kanan.MOVEMATRIX, cat_kaki_kanan.MOVEMATRIX, LIBS.degToRad((time - 6000) * 0.012));
+            // } else if (time >= 7000 && time <= 8000) {
+            //     glMatrix.mat4.rotateX(cat_tangan_kanan.MOVEMATRIX, cat_tangan_kanan.MOVEMATRIX, LIBS.degToRad((-time + 8000) * -0.015));
+            //     glMatrix.mat4.rotateX(cat_tangan_kiri.MOVEMATRIX, cat_tangan_kiri.MOVEMATRIX, LIBS.degToRad((-time + 8000) * 0.015));
+            //     glMatrix.mat4.rotateX(cat_kaki_kiri.MOVEMATRIX, cat_kaki_kiri.MOVEMATRIX, LIBS.degToRad((-time + 8000) * -0.012));
+            //     glMatrix.mat4.rotateX(cat_kaki_kanan.MOVEMATRIX, cat_kaki_kanan.MOVEMATRIX, LIBS.degToRad((-time + 8000) * 0.012));
+            // } else if (time >= 8000 && time <= 9000) {
+            //     glMatrix.mat4.rotateX(cat_tangan_kanan.MOVEMATRIX, cat_tangan_kanan.MOVEMATRIX, LIBS.degToRad((time - 8000) * 0.015));
+            //     glMatrix.mat4.rotateX(cat_tangan_kiri.MOVEMATRIX, cat_tangan_kiri.MOVEMATRIX, LIBS.degToRad((time - 8000) * -0.015));
+            //     glMatrix.mat4.rotateX(cat_kaki_kanan.MOVEMATRIX, cat_kaki_kanan.MOVEMATRIX, LIBS.degToRad((time - 8000) * -0.015));
+            //     glMatrix.mat4.rotateX(cat_kaki_kiri.MOVEMATRIX, cat_kaki_kiri.MOVEMATRIX, LIBS.degToRad((time - 8000) * 0.015));
+            // } else if (time >= 9000 && time <= 10000) {
+            //     glMatrix.mat4.rotateX(cat_tangan_kanan.MOVEMATRIX, cat_tangan_kanan.MOVEMATRIX, LIBS.degToRad((-time + 10000) * 0.015));
+            //     glMatrix.mat4.rotateX(cat_tangan_kiri.MOVEMATRIX, cat_tangan_kiri.MOVEMATRIX, LIBS.degToRad((-time + 10000) * -0.015));
+            //     glMatrix.mat4.rotateX(cat_kaki_kiri.MOVEMATRIX, cat_kaki_kiri.MOVEMATRIX, LIBS.degToRad((-time + 10000) * 0.012));
+            //     glMatrix.mat4.rotateX(cat_kaki_kanan.MOVEMATRIX, cat_kaki_kanan.MOVEMATRIX, LIBS.degToRad((-time + 10000) * -0.012));
+            // } else if (time >= 10000 && time <= 11000) {
+            //     glMatrix.mat4.rotateX(cat_tangan_kanan.MOVEMATRIX, cat_tangan_kanan.MOVEMATRIX, LIBS.degToRad((time - 10000) * -0.015));
+            //     glMatrix.mat4.rotateX(cat_tangan_kiri.MOVEMATRIX, cat_tangan_kiri.MOVEMATRIX, LIBS.degToRad((time - 10000) * 0.015));
+            //     glMatrix.mat4.rotateX(cat_kaki_kiri.MOVEMATRIX, cat_kaki_kiri.MOVEMATRIX, LIBS.degToRad((time - 10000) * -0.012));
+            //     glMatrix.mat4.rotateX(cat_kaki_kanan.MOVEMATRIX, cat_kaki_kanan.MOVEMATRIX, LIBS.degToRad((time - 10000) * 0.012));
+            // } else if (time >= 11000 && time <= 12000) {
+            //     glMatrix.mat4.rotateX(cat_tangan_kanan.MOVEMATRIX, cat_tangan_kanan.MOVEMATRIX, LIBS.degToRad((-time + 12000) * -0.015));
+            //     glMatrix.mat4.rotateX(cat_tangan_kiri.MOVEMATRIX, cat_tangan_kiri.MOVEMATRIX, LIBS.degToRad((-time + 12000) * 0.015));
+            //     glMatrix.mat4.rotateX(cat_kaki_kiri.MOVEMATRIX, cat_kaki_kiri.MOVEMATRIX, LIBS.degToRad((-time + 12000) * -0.012));
+            //     glMatrix.mat4.rotateX(cat_kaki_kanan.MOVEMATRIX, cat_kaki_kanan.MOVEMATRIX, LIBS.degToRad((-time + 12000) * 0.012));
+            // } else {
+            //     glMatrix.mat4.rotateX(cat_tangan_kanan.MOVEMATRIX, cat_tangan_kanan.MOVEMATRIX, LIBS.degToRad(0));
+            //     glMatrix.mat4.rotateX(cat_tangan_kiri.MOVEMATRIX, cat_tangan_kiri.MOVEMATRIX, LIBS.degToRad(0));
+            //     glMatrix.mat4.rotateX(cat_kaki_kiri.MOVEMATRIX, cat_kaki_kiri.MOVEMATRIX, LIBS.degToRad(0));
+            //     glMatrix.mat4.rotateX(cat_kaki_kanan.MOVEMATRIX, cat_kaki_kanan.MOVEMATRIX, LIBS.degToRad(0));
+            // }
 
             // ============================================ Badtz Maru ====================================================================
 
