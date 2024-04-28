@@ -653,6 +653,10 @@ function main() {
       y += 0.006;
       curveObjects.push(ekor);
     }
+
+    curveObjects.forEach(obj => {
+        badan.addChild(obj);
+    });
     
     // Matriks
     var PROJMATRIX = LIBS.get_projection(40, CANVAS.width / CANVAS.height, 1, 100);
@@ -678,23 +682,9 @@ function main() {
                 THETA += dX;
                 PHI += dY;
             }
-            chococat.setIdentityMove();        
-
-            for (let i = 0; i < curveObjects.length; i++) {
-                curveObjects[i].setIdentityMove();
-            }
-
+            chococat.setIdentityMove();
             chococat.setRotateMove(PHI, THETA, 0);   
-
-            for (let i = 0; i < curveObjects.length; i++) {
-                curveObjects[i].setRotateMove(PHI, THETA, 0);
-            }
-
             chococat.setTranslateMove(0, -0.3, 0);
-
-            for (let i = 0; i < curveObjects.length; i++) {
-                curveObjects[i].setTranslateMove(0, -0.3, 0);
-            }
 
             for (let i = 0; i < chococat.child.length; i++) {
                 chococat.child[i].setIdentityMove();
@@ -833,10 +823,6 @@ function main() {
 
         for (let i = 0; i < chococat.child.length; i++) {
             chococat.child[i].setUniformMatrix4(PROJMATRIX, VIEWMATRIX);
-        }
-
-        for (let i = 0; i < curveObjects.length; i++) {
-            curveObjects[i].setUniformMatrix4(PROJMATRIX, VIEWMATRIX);
         }
 
         for (let i = 0; i < kepala.child.length; i++) {
