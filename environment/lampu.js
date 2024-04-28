@@ -243,7 +243,7 @@ function main() {
     var THETA = 0, PHI = 0;
 
     // variable untuk menghentikan benda dari bergerak setelah mouse dilepas
-    var AMORTIZATION = -0.45;
+    var AMORTIZATION = 0.95;
 
     var mouseDown = function (e) {
         drag = true;
@@ -562,320 +562,28 @@ function main() {
     // CIRCLE: mX, mY, mZ, pX, pY, pZ, r, g, b
     // HALF SPHERE: radius, r, g, b, mulXy, pX, pY, pZ
 
-    var world = new MyObject([], [], shader_vertex_source, shader_fragment_source);
-
-    var pohon = new MyObject([],[], shader_vertex_source, shader_fragment_source);
-
-    object = generateSphere(1.0, 29, 140, 27, 1, 1, 1, 5, 2, -3.5);
-    var daun1 = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
-
-    object = generateSphere(0.7, 29, 140, 27, 1, 1, 1, 6, 2, -3.5);
-    var daun2 = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
-
-    object = generateSphere(0.8, 29, 140, 27, 1, 1, 1, 4, 2, -3.5);
-    var daun3 = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
-
-    object = generateSphere(0.7, 29, 140, 27, 1, 1, 1, 5, 3, -3.5);
-    var daun4 = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
-
-    object = generateSphere(0.5, 29, 140, 27, 1, 1, 1, 6, 3, -3.5);
-    var daun5 = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
-
-    object = generateSphere(0.5, 29, 140, 27, 1, 1, 1, 4.1, 2.9, -3.5);
-    var daun6 = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
-
-    object = generateTabung(5, -1, -3.5, 5, 2, -3.5, 0.35, 0, 0.35, 0.2, 1.2, 0.1, 51, 39, 14)
-    var batang = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
-
-    object = generateSphere(0.15, 250, 0, 0, 1, 1, 1, 3.8, 1.8, -2.7);
-    var apel1 = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
-
-    object = generateSphere(0.15, 250, 0, 0, 1, 1, 1, 4.8, 2.1, -2.5);
-    var apel2 = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
-
-    object = generateSphere(0.15, 250, 0, 0, 1, 1, 1, 5.9, 1.8, -2.8);
-    var apel3 = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
-
-    object = generateSphere(0.15, 250, 0, 0, 1, 1, 1, 4.1, 2.7, -2.8);
-    var apel4 = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
-
-    object = generateSphere(0.15, 250, 0, 0, 1, 1, 1, 5.7, 2.7, -2.8);
-    var apel5 = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
-
-    pohon.addChild(daun1);
-    pohon.addChild(daun2);
-    pohon.addChild(daun3);
-    pohon.addChild(daun4);
-    pohon.addChild(daun5);
-    pohon.addChild(daun6);
-    pohon.addChild(batang);
-    pohon.addChild(apel1);
-    pohon.addChild(apel2);
-    pohon.addChild(apel3);
-    pohon.addChild(apel4);
-    pohon.addChild(apel5);
-
-    // pohon 2
-    var pohon2 = new MyObject([],[], shader_vertex_source, shader_fragment_source);
-
-    object = generateSphere(1.0, 61, 163, 57, 1, 1, 1, -4, 2, -2.5);
-    var daun1 = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
-
-    object = generateSphere(0.7, 61, 163, 57, 1, 1, 1, -5, 2, -2.5);
-    var daun2 = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
-
-    object = generateSphere(0.8, 61, 163, 57, 1, 1, 1, -3, 2, -2.5);
-    var daun3 = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
-
-    object = generateSphere(0.7, 61, 163, 57, 1, 1, 1, -4, 3, -2.5);
-    var daun4 = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
-
-    object = generateSphere(0.5, 61, 163, 57, 1, 1, 1, -5, 3, -2.5);
-    var daun5 = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
-
-    object = generateSphere(0.5, 61, 163, 57, 1, 1, 1, -3.1, 2.9, -2.5);
-    var daun6 = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
-
-    object = generateTabung(-4, -0.6, -2.5, -4, 2, -2.5, 0.3, 0, 0.3, 0.2, 1.2, 0.1, 51, 39, 14)
-    var batang = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
-
-    pohon2.addChild(daun1);
-    pohon2.addChild(daun2);
-    pohon2.addChild(daun3);
-    pohon2.addChild(daun4);
-    pohon2.addChild(daun5);
-    pohon2.addChild(daun6);
-    pohon2.addChild(batang);
-
-    // tanah
-    var tanah_vertex = [
-        // yellow
-        -3.5, -1, -2.5,     92/255, 59/255, 36/255, 
-        3.5, -1, -2.5,     92/255, 59/255, 36/255,
-        3.5,  -0.8, -2.5,     92/255, 59/255, 36/255,
-        -3.5,  -0.8, -2.5,     92/255, 59/255, 36/255,
-    
-        // blue
-        -3.5, -1, 2.5,     92/255, 59/255, 36/255,
-        3.5, -1, 2.5,     92/255, 59/255, 36/255,
-        3.5,  -0.8, 2.5,     92/255, 59/255, 36/255,
-        -3.5,  -0.8, 2.5,     92/255, 59/255, 36/255,
-    
-        // cyan
-        -3.5, -1, -2.5,     92/255, 59/255, 36/255,
-        -3.5,  -0.8, -2.5,     92/255, 59/255, 36/255,
-        -3.5,  -0.8,  2.5,     92/255, 59/255, 36/255,
-        -3.5, -1,  2.5,     92/255, 59/255, 36/255,
-    
-        // red
-        3.5, -1, -2.5,     92/255, 59/255, 36/255,
-        3.5,  -0.8, -2.5,     92/255, 59/255, 36/255,
-        3.5,  -0.8,  2.5,     92/255, 59/255, 36/255,
-        3.5, -1,  2.5,     92/255, 59/255, 36/255,
-    
-        // pink
-        -3.5, -1, -2.5,     92/255, 59/255, 36/255,
-        -3.5, -1,  2.5,     92/255, 59/255, 36/255,
-        3.5, -1,  2.5,     92/255, 59/255, 36/255,
-        3.5, -1, -2.5,     92/255, 59/255, 36/255,
-    
-        // green
-        -3.5, -0.8, -2.5,    25/255, 97/255, 29/255,
-        -3.5, -0.8,  2.5,    25/255, 97/255, 29/255,
-        3.5, -0.8,  2.5,     25/255, 97/255, 29/255,
-        3.5, -0.8, -2.5,     25/255, 97/255, 29/255,
-      ];
-
-    var balok_faces = [
-        0, 1, 2,
-        0, 2, 3,
-   
-        4, 5, 6,
-        4, 6, 7,
-   
-        8, 9, 10,
-        8, 10, 11,
-   
-        12, 13, 14,
-        12, 14, 15,
-   
-        16, 17, 18,
-        16, 18, 19,
-   
-        20, 21, 22,
-        20, 22, 23
-    ];
-
-    var tanah = new MyObject(tanah_vertex, balok_faces, shader_vertex_source, shader_fragment_source);
-
-    // kursi
-    var papan_vertex = [
-        -1, -0.45, -2,     66/255, 56/255, 43/255, 
-        1, -0.45, -2,     66/255, 56/255, 43/255,
-        1,  -0.35, -2,     66/255, 56/255, 43/255,
-        -1,  -0.35, -2,     66/255, 56/255, 43/255,
-    
-        -1, -0.45, -1.5,     66/255, 56/255, 43/255,
-        1, -0.45, -1.5,     66/255, 56/255, 43/255,
-        1,  -0.35, -1.5,     66/255, 56/255, 43/255,
-        -1,  -0.35, -1.5,     66/255, 56/255, 43/255,
-    
-        -1, -0.45, -2,     66/255, 56/255, 43/255,
-        -1,  -0.35, -2,     66/255, 56/255, 43/255,
-        -1,  -0.35,  -1.5,     66/255, 56/255, 43/255,
-        -1, -0.45,  -1.5,     66/255, 56/255, 43/255,
-    
-        1, -0.45, -2,     66/255, 56/255, 43/255,
-        1,  -0.35, -2,     66/255, 56/255, 43/255,
-        1,  -0.35,  -1.5,     66/255, 56/255, 43/255,
-        1, -0.45,  -1.5,     66/255, 56/255, 43/255,
-    
-        -1, -0.45, -2,     66/255, 56/255, 43/255,
-        -1, -0.45,  -1.5,     66/255, 56/255, 43/255,
-        1, -0.45,  -1.5,     66/255, 56/255, 43/255,
-        1, -0.45, -2,     66/255, 56/255, 43/255,
-    
-        -1, -0.35, -2,    92/255, 59/255, 36/255,
-        -1, -0.35,  -1.5,    92/255, 59/255, 36/255,
-        1, -0.35,  -1.5,     92/255, 59/255, 36/255,
-        1, -0.35, -2,     92/255, 59/255, 36/255,
-      ];
-
-    var tiang1_vertex = [
-        -1, -0.8, -2,     133/255, 133/255, 133/255, 
-        -0.9, -0.8, -2,     133/255, 133/255, 133/255,
-        -0.9,  -0.45, -2,     133/255, 133/255, 133/255,
-        -1,  -0.45, -2,     133/255, 133/255, 133/255,
-    
-        -1, -0.8, -1.5,     133/255, 133/255, 133/255,
-        -0.9, -0.8, -1.5,     133/255, 133/255, 133/255,
-        -0.9,  -0.45, -1.5,     133/255, 133/255, 133/255,
-        -1,  -0.45, -1.5,     133/255, 133/255, 133/255,
-    
-        -1, -0.8, -2,     133/255, 133/255, 133/255,
-        -1,  -0.45, -2,     133/255, 133/255, 133/255,
-        -1,  -0.45,  -1.5,     133/255, 133/255, 133/255,
-        -1, -0.8,  -1.5,     133/255, 133/255, 133/255,
-    
-        -0.9, -0.8, -2,     133/255, 133/255, 133/255,
-        -0.9,  -0.45, -2,     133/255, 133/255, 133/255,
-        -0.9,  -0.45,  -1.5,     133/255, 133/255, 133/255,
-        -0.9, -0.8,  -1.5,     133/255, 133/255, 133/255,
-    
-        -1, -0.8, -2,     133/255, 133/255, 133/255,
-        -1, -0.8,  -1.5,     133/255, 133/255, 133/255,
-        -0.9, -0.8,  -1.5,     133/255, 133/255, 133/255,
-        -0.9, -0.8, -2,     133/255, 133/255, 133/255,
-    
-        -1, -0.45, -2,    133/255, 133/255, 133/255,
-        -1, -0.45,  -1.5,    133/255, 133/255, 133/255,
-        -0.9, -0.45,  -1.5,     133/255, 133/255, 133/255,
-        -0.9, -0.45, -2,     133/255, 133/255, 133/255,
-      ];
-
-      var tiang2_vertex = [
-        1, -0.8, -2,     133/255, 133/255, 133/255, 
-        0.9, -0.8, -2,     133/255, 133/255, 133/255,
-        0.9,  -0.45, -2,     133/255, 133/255, 133/255,
-        1,  -0.45, -2,     133/255, 133/255, 133/255,
-    
-        1, -0.8, -1.5,     133/255, 133/255, 133/255,
-        0.9, -0.8, -1.5,     133/255, 133/255, 133/255,
-        0.9,  -0.45, -1.5,     133/255, 133/255, 133/255,
-        1,  -0.45, -1.5,     133/255, 133/255, 133/255,
-    
-        1, -0.8, -2,     133/255, 133/255, 133/255,
-        1,  -0.45, -2,     133/255, 133/255, 133/255,
-        1,  -0.45,  -1.5,     133/255, 133/255, 133/255,
-        1, -0.8,  -1.5,     133/255, 133/255, 133/255,
-    
-        0.9, -0.8, -2,     133/255, 133/255, 133/255,
-        0.9,  -0.45, -2,     133/255, 133/255, 133/255,
-        0.9,  -0.45,  -1.5,     133/255, 133/255, 133/255,
-        0.9, -0.8,  -1.5,     133/255, 133/255, 133/255,
-    
-        1, -0.8, -2,     133/255, 133/255, 133/255,
-        1, -0.8,  -1.5,     133/255, 133/255, 133/255,
-        0.9, -0.8,  -1.5,     133/255, 133/255, 133/255,
-        0.9, -0.8, -2,     133/255, 133/255, 133/255,
-    
-        1, -0.45, -2,    133/255, 133/255, 133/255,
-        1, -0.45,  -1.5,    133/255, 133/255, 133/255,
-        0.9, -0.45,  -1.5,     133/255, 133/255, 133/255,
-        0.9, -0.45, -2,     133/255, 133/255, 133/255,
-      ];
-
-    var kursi = new MyObject(papan_vertex, balok_faces, shader_vertex_source, shader_fragment_source);
-    var tiang1 = new MyObject(tiang1_vertex, balok_faces, shader_vertex_source, shader_fragment_source);
-    var tiang2 = new MyObject(tiang2_vertex, balok_faces, shader_vertex_source, shader_fragment_source);
-
-    kursi.addChild(tiang1);
-    kursi.addChild(tiang2);
-
-    var cone = new MyObject([],[], shader_vertex_source, shader_fragment_source);
-
-    object = generateCone(-2, 2, -0.1, -2, 2, -0.8, 0.2, 0.2, 240, 91, 5);
-    var cone_atas = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
-
-    object = generateTabung(-2, -0.8, -2, -2, -0.8, -2, 0.25, 0, 0.25, 0.25, 0.07, 0.25, 125, 52, 10)
-    var cone_bawah = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
-
-    cone.addChild(cone_atas);
-    cone.addChild(cone_bawah);
-
     var lampu = new MyObject([],[], shader_vertex_source, shader_fragment_source);
 
-    object = generateSphere(0.13, 235, 210, 52, 1, 1, 1, 1.4, 0.45, -1.5);
+    object = generateSphere(0.2, 235, 210, 52, 1, 1, 1, 0, 0, 0);
     var bola_lampu = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
 
-    object = generateTabung(1.4, 0.3, -1.5, 1.4, 0.3, -1.5, 0.15, 0, 0.15, 0.15, 0.1, 0.15, 0, 128, 128, 128)
+    object = generateTabung(0, -0.2, 0, 0, -0.2, 0, 0.25, 0, 0.25, 0.25, 0.15, 0.25, 0, 128, 128, 128)
     var bawah_bola = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
 
-    object = generateTabung(1.4, 0.25, -1.5, 1.4, 0.25, -1.5, 0.1, 0, 0.1, 0.1, 0.07, 0.1, 0, 128, 128, 128)
+    object = generateTabung(0, -0.27, 0, 0, -0.27, 0, 0.2, 0, 0.2, 0.2, 0.2, 0.2, 0, 128, 128, 128)
     var bawah_bola2 = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
 
-    object = generateTabung(1.4, 0.25, -1.5, 1.4, 0.25, -1.5, 0.04, 0, 0.04, 0.04, -1, 0.04, 0, 128, 128, 128)
-    var tiang_lampu = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
+    object = generateTabung(0, -0.25, 0, 0, -0.25, 0, 0.07, 0, 0.07, 0.07, -2, 0.07, 0, 128, 128, 128)
+    var tiang = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
 
-    object = generateTabung(1.4, -0.8, -1.5, 1.4, -0.8, -1.5, 0.15, 0, 0.15, 0.15, 0.05, 0.15, 0, 128, 128, 128)
+    object = generateTabung(0, -2.3, 0, 0, -2.3, 0, 0.25, 0, 0.25, 0.25, 0.05, 0.25, 0, 128, 128, 128)
     var bawah_tiang = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
-
-    var lampu2 = new MyObject([],[], shader_vertex_source, shader_fragment_source);
-
-    object = generateSphere(0.13, 235, 210, 52, 1, 1, 1, -1.4, 0.45, -1.5);
-    var bola_lampu2 = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
-
-    object = generateTabung(-1.4, 0.3, -1.5, -1.4, 0.3, -1.5, 0.15, 0, 0.15, 0.15, 0.1, 0.15, 0, 128, 128, 128)
-    var bawah_bola12 = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
-
-    object = generateTabung(-1.4, 0.25, -1.5, -1.4, 0.25, -1.5, 0.1, 0, 0.1, 0.1, 0.07, 0.1, 0, 128, 128, 128)
-    var bawah_bola22 = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
-
-    object = generateTabung(-1.4, 0.25, -1.5, -1.4, 0.25, -1.5, 0.04, 0, 0.04, 0.04, -1, 0.04, 0, 128, 128, 128)
-    var tiang_lampu2 = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
-
-    object = generateTabung(-1.4, -0.8, -1.5, -1.4, -0.8, -1.5, 0.15, 0, 0.15, 0.15, 0.05, 0.15, 0, 128, 128, 128)
-    var bawah_tiang2 = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
 
     lampu.addChild(bola_lampu);
     lampu.addChild(bawah_bola);
     lampu.addChild(bawah_bola2);
-    lampu.addChild(tiang_lampu);
+    lampu.addChild(tiang);
     lampu.addChild(bawah_tiang);
-
-    lampu2.addChild(bola_lampu2);
-    lampu2.addChild(bawah_bola12);
-    lampu2.addChild(bawah_bola22);
-    lampu2.addChild(tiang_lampu2);
-    lampu2.addChild(bawah_tiang2);
-
-    world.addChild(pohon);
-    world.addChild(pohon2);
-    world.addChild(tanah);
-    world.addChild(kursi);
-    world.addChild(cone);
-    world.addChild(lampu);
-    world.addChild(lampu2);
     
     // Matriks
     var PROJMATRIX = LIBS.get_projection(40, CANVAS.width / CANVAS.height, 1, 100);
@@ -902,115 +610,28 @@ function main() {
                 PHI += dY;
             }
 
-            world.setIdentityMove();        
-            world.setRotateMove(PHI, THETA, 0);  
-            world.setTranslateMove(0, 0, 0);
-
-            pohon.setScale(0.5);
-            pohon2.setScale(0.7);
-
-            for (let i = 0; i < world.child.length; i++) {
-                world.child[i].setIdentityMove();
-                world.child[i].setRotateMove(PHI, THETA, 0);
-            }
-
-            for (let i = 0; i < pohon.child.length; i++) {
-                pohon.child[i].setIdentityMove();
-                pohon.child[i].setRotateMove(PHI, THETA, 0);
-                pohon.child[i].setScale(0.5);
-            }
-
-            for (let i = 0; i < pohon2.child.length; i++) {
-                pohon2.child[i].setIdentityMove();
-                pohon2.child[i].setRotateMove(PHI, THETA, 0);
-                pohon2.child[i].setScale(0.7);
-            }
-
-            for (let i = 0; i < kursi.child.length; i++) {
-                kursi.child[i].setIdentityMove();
-                kursi.child[i].setRotateMove(PHI, THETA, 0);
-            }
-
-            for (let i = 0; i < cone.child.length; i++) {
-                cone.child[i].setIdentityMove();
-                cone.child[i].setRotateMove(PHI, THETA, 0);
-            }
+            lampu.setIdentityMove();        
+            lampu.setRotateMove(PHI, THETA, 0);  
+            lampu.setTranslateMove(0, 0, 0);
 
             for (let i = 0; i < lampu.child.length; i++) {
                 lampu.child[i].setIdentityMove();
                 lampu.child[i].setRotateMove(PHI, THETA, 0);
-                lampu2.child[i].setIdentityMove();
-                lampu2.child[i].setRotateMove(PHI, THETA, 0);
+                lampu.child[i].setTranslateMove(0, 0, 0);   
             }
-
-            if (time >= 1000 && time <= 3000) {
-                apel1.setTranslateMove(0, -(time - 1000) / 1550, 0);
-            } else if (time >= 3000 && time <= 5000) {
-                apel1.setTranslateMove(0, -(3000 - 1000) / 1550, 0);
-                apel2.setTranslateMove(0, -(time - 3000) / 1350, 0);
-            } else if (time >= 5000 && time <= 7000) {
-                apel1.setTranslateMove(0, -(3000 - 1000) / 1550, 0);
-                apel2.setTranslateMove(0, -(5000 - 3000) / 1350, 0);
-                apel3.setTranslateMove(0, -(time - 5000) / 1550, 0);
-            } else if (time > 7000) {
-                apel1.setTranslateMove(0, -(3000 - 1000) / 1550, 0);
-                apel2.setTranslateMove(0, -(5000 - 3000) / 1350, 0);
-                apel3.setTranslateMove(0, -(7000 - 5000) / 1550, 0);
-            }
-
-            glMatrix.mat4.rotateX(tanah.MOVEMATRIX, tanah.MOVEMATRIX, LIBS.degToRad(15));
-            glMatrix.mat4.rotateX(kursi.MOVEMATRIX, kursi.MOVEMATRIX, LIBS.degToRad(15));
-            glMatrix.mat4.rotateX(tiang1.MOVEMATRIX, tiang1.MOVEMATRIX, LIBS.degToRad(15));
-            glMatrix.mat4.rotateX(tiang2.MOVEMATRIX, tiang2.MOVEMATRIX, LIBS.degToRad(15));
-            glMatrix.mat4.rotateX(cone_atas.MOVEMATRIX, cone_atas.MOVEMATRIX, LIBS.degToRad(-75));
-            glMatrix.mat4.rotateX(cone_bawah.MOVEMATRIX, cone_bawah.MOVEMATRIX, LIBS.degToRad(15));
-            glMatrix.mat4.rotateX(bola_lampu.MOVEMATRIX, bola_lampu.MOVEMATRIX, LIBS.degToRad(15));
-            glMatrix.mat4.rotateX(bawah_bola.MOVEMATRIX, bawah_bola.MOVEMATRIX, LIBS.degToRad(15));
-            glMatrix.mat4.rotateX(bawah_bola2.MOVEMATRIX, bawah_bola2.MOVEMATRIX, LIBS.degToRad(15));
-            glMatrix.mat4.rotateX(tiang_lampu.MOVEMATRIX, tiang_lampu.MOVEMATRIX, LIBS.degToRad(15));
-            glMatrix.mat4.rotateX(bawah_tiang.MOVEMATRIX, bawah_tiang.MOVEMATRIX, LIBS.degToRad(15));
-            glMatrix.mat4.rotateX(bola_lampu2.MOVEMATRIX, bola_lampu2.MOVEMATRIX, LIBS.degToRad(15));
-            glMatrix.mat4.rotateX(bawah_bola12.MOVEMATRIX, bawah_bola12.MOVEMATRIX, LIBS.degToRad(15));
-            glMatrix.mat4.rotateX(bawah_bola22.MOVEMATRIX, bawah_bola22.MOVEMATRIX, LIBS.degToRad(15));
-            glMatrix.mat4.rotateX(tiang_lampu2.MOVEMATRIX, tiang_lampu2.MOVEMATRIX, LIBS.degToRad(15));
-            glMatrix.mat4.rotateX(bawah_tiang2.MOVEMATRIX, bawah_tiang2.MOVEMATRIX, LIBS.degToRad(15));
 
             time_prev = time;
         }
         GL.viewport(0, 0, CANVAS.width, CANVAS.height);
         GL.clear(GL.COLOR_BUFFER_BIT);
 
-        world.setUniformMatrix4(PROJMATRIX, VIEWMATRIX);
-        pohon.setUniformMatrix4(PROJMATRIX, VIEWMATRIX);
-        pohon2.setUniformMatrix4(PROJMATRIX, VIEWMATRIX);
-        kursi.setUniformMatrix4(PROJMATRIX, VIEWMATRIX);
-        tanah.setUniformMatrix4(PROJMATRIX, VIEWMATRIX);
-        cone.setUniformMatrix4(PROJMATRIX, VIEWMATRIX);
         lampu.setUniformMatrix4(PROJMATRIX, VIEWMATRIX);
-        lampu2.setUniformMatrix4(PROJMATRIX, VIEWMATRIX);
-
-        for (let i = 0; i < pohon.child.length; i++) {
-            pohon.child[i].setUniformMatrix4(PROJMATRIX, VIEWMATRIX);
-        }
-
-        for (let i = 0; i < pohon2.child.length; i++) {
-            pohon2.child[i].setUniformMatrix4(PROJMATRIX, VIEWMATRIX);
-        }
-
-        for (let i = 0; i < kursi.child.length; i++) {
-            kursi.child[i].setUniformMatrix4(PROJMATRIX, VIEWMATRIX);
-        }
-
-        for (let i = 0; i < cone.child.length; i++) {
-            cone.child[i].setUniformMatrix4(PROJMATRIX, VIEWMATRIX);
-        }
 
         for (let i = 0; i < lampu.child.length; i++) {
             lampu.child[i].setUniformMatrix4(PROJMATRIX, VIEWMATRIX);
-            lampu2.child[i].setUniformMatrix4(PROJMATRIX, VIEWMATRIX);
         }
 
-        world.draw();
+        lampu.draw();
         GL.flush();
         window.requestAnimationFrame(animate);
     }
