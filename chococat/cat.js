@@ -1,78 +1,66 @@
-// Fungsi untuk melakukan generate garis lengkung
-function normalizeScreen(x, y, width, height) {
-    var nx = 2 * x / width - 1
-    var ny = -2 * y / height + 1
-
-    return [nx, ny]
-}
-
-function generateBSpline(controlPoint, m, degree, z) {
+function generateBSpline(controlPoint, m, degree, xUp, yUp, zUp, r, g, b){
     var curves = [];
     var knotVector = []
-
-    var n = controlPoint.length / 2;
-
-
+   
+    var n = controlPoint.length/2;
+   
     // Calculate the knot values based on the degree and number of control points
-    for (var i = 0; i < n + degree + 1; i++) {
-        if (i < degree + 1) {
-            knotVector.push(0);
-        } else if (i >= n) {
-            knotVector.push(n - degree);
-        } else {
-            knotVector.push(i - degree);
-        }
+    for (var i = 0; i < n + degree+1; i++) {
+      if (i < degree + 1) {
+        knotVector.push(0);
+      } else if (i >= n) {
+        knotVector.push(n - degree);
+      } else {
+        knotVector.push(i - degree);
+      }
     }
 
-
-
-    var basisFunc = function (i, j, t) {
-        if (j == 0) {
-            if (knotVector[i] <= t && t < (knotVector[(i + 1)])) {
-                return 1;
-            } else {
-                return 0;
-            }
+    var basisFunc = function(i,j,t){
+        if (j == 0){
+          if(knotVector[i] <= t && t<(knotVector[(i+1)])){ 
+            return 1;
+          }else{
+            return 0;
+          }
         }
-
+   
         var den1 = knotVector[i + j] - knotVector[i];
         var den2 = knotVector[i + j + 1] - knotVector[i + 1];
-
+   
         var term1 = 0;
         var term2 = 0;
-
-
+   
+   
         if (den1 != 0 && !isNaN(den1)) {
-            term1 = ((t - knotVector[i]) / den1) * basisFunc(i, j - 1, t);
+          term1 = ((t - knotVector[i]) / den1) * basisFunc(i,j-1,t);
         }
-
+   
         if (den2 != 0 && !isNaN(den2)) {
-            term2 = ((knotVector[i + j + 1] - t) / den2) * basisFunc(i + 1, j - 1, t);
+          term2 = ((knotVector[i + j + 1] - t) / den2) * basisFunc(i+1,j-1,t);
         }
-
+   
         return term1 + term2;
     }
-
-
-    for (var t = 0; t < m; t++) {
-        var x = 0;
-        var y = 0;
-
-        var u = (t / m * (knotVector[controlPoint.length / 2] - knotVector[degree])) + knotVector[degree];
-
-        //C(t)
-        for (var key = 0; key < n; key++) {
-
-            var C = basisFunc(key, degree, u);
-            // console.log(C);
-            x += (controlPoint[key * 2] * C);
-            y += (controlPoint[key * 2 + 1] * C);
-            // console.log(t + " " + degree + " " + x + " " + y + " " + C);
-        }
-        curves.push(x);
-        curves.push(y);
-        curves.push(z, 252 / 255, 15 / 255, 192 / 255);
-
+   
+   
+    for(var t=0;t<m;t++){
+      var x=0;
+      var y=0;
+   
+      var u = (t/m * (knotVector[controlPoint.length/2] - knotVector[degree]) ) + knotVector[degree] ;
+   
+      //C(t)
+      for(var key =0;key<n;key++){
+   
+        var C = basisFunc(key,degree,u);
+        x+=(controlPoint[key*2] * C);
+        y+=(controlPoint[key*2+1] * C);
+      }
+      curves.push(x+xUp);
+      curves.push(y+yUp);
+      curves.push(zUp);
+      curves.push(r/255, g/255, b/255);
+   
     }
     // console.log(curves)
     return curves;
@@ -537,25 +525,6 @@ function main() {
         return [tabung_vertex, tabung_faces];
     }
 
-    var generateCurve = function (array, z) {
-        var curve = [];
-        var vertex = [];
-        var faces = [];
-
-        for (let i = 0; i < array.length;) {
-            var node = normalizeScreen(array[i], array[i + 1], CANVAS.width, CANVAS.height);
-            curve.push(node[0], node[1]);
-            i += 2;
-        }
-        vertex = generateBSpline(curve, 100, 2, z);
-
-        for (let i = 0; i < vertex.length / 6; i++) {
-            faces.push(i);
-        }
-
-        return [vertex, faces];
-    }
-
     var object;
 
     // SPHERE: radius, r, g, b, mulX, mulY, mulZ, pX, pY, pZ
@@ -657,13 +626,37 @@ function main() {
 
     var curveObjects = [];
 
-    // var z = 1.05;
-    // for (let i = 0; i <= 100; i++) {
-    //     object = generateCurve([540, 600, 700, 800, 900, 393], z);
-    //     var curveObject1 = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
-    //     curveObjects.push(curveObject1);
-    //     z-=0.001;
-    // }
+    var curve = [0.075, -0.4, 0.19, 0.51, 0.42, -0.59, -0.15, 0.05, 0.65, 0.05, 0.035, -0.44];
+    var y = -0.85;
+    for (let index = 0; index < curve.length; index++) {
+      var vertex = generateBSpline(curve, 100, 2, -0.2, y, 0.53, 227, 143, 227);
+      var faces = [];
+      for (let index = 0; index < vertex.length/6; index++) {
+        faces.push(index);
+      }
+      var bintang = new MyObject(vertex, faces, shader_vertex_source, shader_fragment_source);
+      y += 0.0035;
+      curveObjects.push(bintang);
+    }
+
+    var curve = [
+        1.344186046511628, 0.08369098712446355, 1.6372093023255814, -0.12017167381974247, 1.9813953488372094, -0.1759656652360515, 2.344186046511628, -0.19313304721030033, 2.683720930232558, -0.18240343347639487, 2.9209302325581397, -0.12660944206008584, 3.051162790697674, -0.05579399141630903, 3.2046511627906975, 0.3197424892703863, 3.07906976744186, 0.6545064377682404
+    ];
+    var y = -1.27;
+    for (let index = 0; index < curve.length; index++) {
+      var vertex = generateBSpline(curve,100, 2, -1.8, y, -0.1, 38, 36, 36);
+      var faces = [];
+      for (let index = 0; index < vertex.length/6; index++) {
+        faces.push(index);
+      }
+      var ekor = new MyObject(vertex, faces, shader_vertex_source, shader_fragment_source);
+      y += 0.006;
+      curveObjects.push(ekor);
+    }
+
+    curveObjects.forEach(obj => {
+        badan.addChild(obj);
+    });
     
     // Matriks
     var PROJMATRIX = LIBS.get_projection(40, CANVAS.width / CANVAS.height, 1, 100);
@@ -689,23 +682,9 @@ function main() {
                 THETA += dX;
                 PHI += dY;
             }
-            chococat.setIdentityMove();        
-
-            for (let i = 0; i < curveObjects.length; i++) {
-                curveObjects[i].setIdentityMove();
-            }
-
+            chococat.setIdentityMove();
             chococat.setRotateMove(PHI, THETA, 0);   
-
-            for (let i = 0; i < curveObjects.length; i++) {
-                curveObjects[i].setRotateMove(PHI, THETA, 0);
-            }
-
             chococat.setTranslateMove(0, -0.3, 0);
-
-            for (let i = 0; i < curveObjects.length; i++) {
-                curveObjects[i].setTranslateMove(0, -0.3, 0);
-            }
 
             for (let i = 0; i < chococat.child.length; i++) {
                 chococat.child[i].setIdentityMove();
@@ -844,10 +823,6 @@ function main() {
 
         for (let i = 0; i < chococat.child.length; i++) {
             chococat.child[i].setUniformMatrix4(PROJMATRIX, VIEWMATRIX);
-        }
-
-        for (let i = 0; i < curveObjects.length; i++) {
-            curveObjects[i].setUniformMatrix4(PROJMATRIX, VIEWMATRIX);
         }
 
         for (let i = 0; i < kepala.child.length; i++) {

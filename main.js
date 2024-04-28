@@ -78,6 +78,74 @@ function generateBSpline(controlPoint, m, degree, z) {
     return curves;
 }
 
+function generateBSpline2(controlPoint, m, degree, xUp, yUp, zUp, r, g, b){
+    var curves = [];
+    var knotVector = []
+   
+    var n = controlPoint.length/2;
+   
+    // Calculate the knot values based on the degree and number of control points
+    for (var i = 0; i < n + degree+1; i++) {
+      if (i < degree + 1) {
+        knotVector.push(0);
+      } else if (i >= n) {
+        knotVector.push(n - degree);
+      } else {
+        knotVector.push(i - degree);
+      }
+    }
+
+    var basisFunc = function(i,j,t){
+        if (j == 0){
+          if(knotVector[i] <= t && t<(knotVector[(i+1)])){ 
+            return 1;
+          }else{
+            return 0;
+          }
+        }
+   
+        var den1 = knotVector[i + j] - knotVector[i];
+        var den2 = knotVector[i + j + 1] - knotVector[i + 1];
+   
+        var term1 = 0;
+        var term2 = 0;
+   
+   
+        if (den1 != 0 && !isNaN(den1)) {
+          term1 = ((t - knotVector[i]) / den1) * basisFunc(i,j-1,t);
+        }
+   
+        if (den2 != 0 && !isNaN(den2)) {
+          term2 = ((knotVector[i + j + 1] - t) / den2) * basisFunc(i+1,j-1,t);
+        }
+   
+        return term1 + term2;
+    }
+   
+   
+    for(var t=0;t<m;t++){
+      var x=0;
+      var y=0;
+   
+      var u = (t/m * (knotVector[controlPoint.length/2] - knotVector[degree]) ) + knotVector[degree] ;
+   
+      //C(t)
+      for(var key =0;key<n;key++){
+   
+        var C = basisFunc(key,degree,u);
+        x+=(controlPoint[key*2] * C);
+        y+=(controlPoint[key*2+1] * C);
+      }
+      curves.push(x+xUp);
+      curves.push(y+yUp);
+      curves.push(zUp);
+      curves.push(r/255, g/255, b/255);
+   
+    }
+    // console.log(curves)
+    return curves;
+}
+
 var GL;
 class MyObject {
     object_vertex = [];
@@ -744,95 +812,129 @@ function main() {
 
     // ==================================================== ChocoCat Objects ======================================================================
     object = generateSphere(1.0, 20, 17, 17, 1.3, 1.1, 1, 0, 0.5, 0);
-    var kepala = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
+    var cat_kepala = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
 
     object = generateSphere(0.4, 257, 257, 257, 1, 0.9, 1, -0.4, 0.4, 0.6);
-    var mata_kiri_putih = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
+    var cat_mata_kiri_putih = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
 
     object = generateSphere(0.4, 257, 257, 257, 1, 0.9, 1, 0.4, 0.4, 0.6);
-    var mata_kanan_putih = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
+    var cat_mata_kanan_putih = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
 
     object = generateCircle(-0.4, 0.38, 1, 0.09, 0.09, 0, 0, 0, 0);
-    var mata_kiri_hitam = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
+    var cat_mata_kiri_hitam = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
 
     object = generateCircle(0.4, 0.38, 1, 0.09, 0.09, 0, 0, 0, 0);
-    var mata_kanan_hitam = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
+    var cat_mata_kanan_hitam = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
 
     object = generateSphere(0.35, 184, 131, 108, 0.5, 0.4, 1, 0, 0.15, 0.65);
-    var mulut = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
+    var cat_mulut = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
 
     object = generateSphere(0.75, 20, 17, 17, 1.0, 1.2, 0.7, 0, -0.8, 0);
-    var badan = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
+    var cat_badan = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
 
     object = generateSphere(1.0, 94, 146, 209, 0.75, 0.12, 0.52, 0, -0.48, 0);
-    var kalung = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
+    var cat_kalung = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
 
     object = generateSphere(0.32, 20, 17, 17, 1.4, 4, 0.7, 0.25, 0.8, 0);
-    var telinga_kanan = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
+    var cat_telinga_kanan = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
 
     object = generateSphere(0.32, 20, 17, 17, 1.4, 4, 0.7, -0.25, 0.8, 0);
-    var telinga_kiri = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
+    var cat_telinga_kiri = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
 
     object = generateSphere(0.22, 247, 226, 168, 1.3, 4, 0.7, 0.25, 1.05, 0.1);
-    var telinga_kanan_dalam = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
+    var cat_telinga_kanan_dalam = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
 
     object = generateSphere(0.22, 247, 226, 168, 1.3, 4, 0.7, -0.25, 1.05, 0.1);
-    var telinga_kiri_dalam = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
+    var cat_telinga_kiri_dalam = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
 
     object = generateSphere(0.42, 20, 20, 17, 0.48, 1.1, 0.4, 0.32, -1.2, 0);
-    var tangan_kanan = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
+    var cat_tangan_kanan = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
 
     object = generateSphere(0.42, 20, 20, 17, 0.48, 1.1, 0.4, -0.32, -1.2, 0);
-    var tangan_kiri = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
+    var cat_tangan_kiri = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
 
     // TABUNG mX1, mY1, mZ1, mX2, mY2, mZ2, rX1, rY1, rZ1, rX2, rY2, rZ2, r, g, b
     object = generateTabung(0.35, -2, 0, -0.1, 0, 0, 0.28, 0, 0.3, 0.2, 1.2, 0.1, 20, 20, 17)
-    var kaki_kanan = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
+    var cat_kaki_kanan = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
 
     object = generateTabung(-0.35, -2, 0, 0.1, 0, 0, 0.28, 0, 0.3, 0.2, 1.2, 0.1, 20, 20, 17)
-    var kaki_kiri = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
+    var cat_kaki_kiri = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
 
     object = generateTabung(0, 1, 0.45, 0, 1.3, 0.45, 0.025, 0, 0.025, 0.025, 0.2, 0.025, 20, 20, 17)
-    var kumis_kanan1 = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
+    var cat_kumis_kanan1 = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
 
     object = generateTabung(-0.25, 0.7, 0.45, -0.2, 1.2, 0.45, 0.025, 0, 0.025, 0.025, 0.2, 0.025, 20, 20, 17)
-    var kumis_kanan2 = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
+    var cat_kumis_kanan2 = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
 
     object = generateTabung(0, 1, 0.45, 0, 1.3, 0.45, 0.025, 0, 0.025, 0.025, 0.2, 0.025, 20, 20, 17)
-    var kumis_kiri1 = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
+    var cat_kumis_kiri1 = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
 
     object = generateTabung(0.25, 0.7, 0.45, 0.2, 1.2, 0.45, 0.025, 0, 0.025, 0.025, 0.2, 0.025, 20, 20, 17)
-    var kumis_kiri2 = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
+    var cat_kumis_kiri2 = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
 
     object = generateCone(-0.5, -0.8, 1.85, -0.25, -0.2, 0.9, 0.5, 0.5, 94, 146, 209);
-    var topi = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
+    var cat_topi = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
 
     object = generateSphere(0.07, 227, 195, 107, 1, 1, 1, -0.5, 1.87, 0.82);
-    var bola_topi = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
+    var cat_bola_topi = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
 
 
-    chocoCat.addChild(kepala);
-    chocoCat.addChild(badan);
-    kepala.addChild(mata_kiri_putih);
-    kepala.addChild(mata_kanan_putih);
-    kepala.addChild(mata_kiri_hitam);
-    kepala.addChild(mata_kanan_hitam);
-    kepala.addChild(mulut);
-    kepala.addChild(telinga_kiri);
-    kepala.addChild(telinga_kanan);
-    kepala.addChild(telinga_kanan_dalam);
-    kepala.addChild(telinga_kiri_dalam);
-    kepala.addChild(kumis_kanan1);
-    kepala.addChild(kumis_kanan2);
-    kepala.addChild(kumis_kiri1);
-    kepala.addChild(kumis_kiri2);
-    kepala.addChild(topi);
-    kepala.addChild(bola_topi);
-    badan.addChild(kalung);
-    badan.addChild(kaki_kanan);
-    badan.addChild(kaki_kiri);
-    badan.addChild(tangan_kanan);
-    badan.addChild(tangan_kiri);
+    chocoCat.addChild(cat_kepala);
+    chocoCat.addChild(cat_badan);
+    cat_kepala.addChild(cat_mata_kiri_putih);
+    cat_kepala.addChild(cat_mata_kanan_putih);
+    cat_kepala.addChild(cat_mata_kiri_hitam);
+    cat_kepala.addChild(cat_mata_kanan_hitam);
+    cat_kepala.addChild(cat_mulut);
+    cat_kepala.addChild(cat_telinga_kiri);
+    cat_kepala.addChild(cat_telinga_kanan);
+    cat_kepala.addChild(cat_telinga_kanan_dalam);
+    cat_kepala.addChild(cat_telinga_kiri_dalam);
+    cat_kepala.addChild(cat_kumis_kanan1);
+    cat_kepala.addChild(cat_kumis_kanan2);
+    cat_kepala.addChild(cat_kumis_kiri1);
+    cat_kepala.addChild(cat_kumis_kiri2);
+    cat_kepala.addChild(cat_topi);
+    cat_kepala.addChild(cat_bola_topi);
+    cat_badan.addChild(cat_kalung);
+    cat_badan.addChild(cat_kaki_kanan);
+    cat_badan.addChild(cat_kaki_kiri);
+    cat_badan.addChild(cat_tangan_kanan);
+    cat_badan.addChild(cat_tangan_kiri);
+
+    var cat_curve = [];
+
+    var curve = [0.075, -0.4, 0.19, 0.51, 0.42, -0.59, -0.15, 0.05, 0.65, 0.05, 0.035, -0.44];
+    var y = -0.85;
+    for (let index = 0; index < curve.length; index++) {
+      var vertex = generateBSpline2(curve, 100, 2, -0.2, y, 0.53, 227, 143, 227);
+      var faces = [];
+      for (let index = 0; index < vertex.length/6; index++) {
+        faces.push(index);
+      }
+      var bintang = new MyObject(vertex, faces, shader_vertex_source, shader_fragment_source);
+      y += 0.0035;
+      cat_curve.push(bintang);
+    }
+
+    var curve = [
+        1.344186046511628, 0.08369098712446355, 1.6372093023255814, -0.12017167381974247, 1.9813953488372094, -0.1759656652360515, 2.344186046511628, -0.19313304721030033, 2.683720930232558, -0.18240343347639487, 2.9209302325581397, -0.12660944206008584, 3.051162790697674, -0.05579399141630903, 3.2046511627906975, 0.3197424892703863, 3.07906976744186, 0.6545064377682404
+    ];
+    var y = -1.27;
+    for (let index = 0; index < curve.length; index++) {
+      var vertex = generateBSpline2(curve,100, 2, -1.8, y, -0.1, 38, 36, 36);
+      var faces = [];
+      for (let index = 0; index < vertex.length/6; index++) {
+        faces.push(index);
+      }
+      var ekor = new MyObject(vertex, faces, shader_vertex_source, shader_fragment_source);
+      y += 0.006;
+      cat_curve.push(ekor);
+    }
+
+    cat_curve.forEach(obj => {
+        cat_badan.addChild(obj);
+    });
     // ============================================================================================================================================
 
     // Matriks
@@ -934,6 +1036,30 @@ function main() {
             if (time >= 8800 && time <= 9000) {
                 badtz_mata_kanan.setScale(time / 9000);
                 badtz_mata_kiri.setScale(time / 9000);
+            }
+            if (time >= 2000 && time <= 2200) {
+                cat_mata_kanan_hitam.setScale((2000 - time) / 1500);
+                cat_mata_kiri_hitam.setScale((2000 - time) / 1500);
+                cat_mata_kanan_putih.setScale((2000 - time) / 1500);
+                cat_mata_kiri_putih.setScale((2000 - time) / 1500);
+            } 
+            if (time >= 2200 && time <= 2400) {
+                cat_mata_kanan_hitam.setScale(time / 2400);
+                cat_mata_kiri_hitam.setScale(time / 2400);
+                cat_mata_kanan_putih.setScale(time / 2400);
+                cat_mata_kiri_putih.setScale(time / 2400);
+            }
+            if (time >= 4000 && time <= 4200) {
+                cat_mata_kanan_hitam.setScale((4000 - time) / 1500);
+                cat_mata_kiri_hitam.setScale((4000 - time) / 1500);
+                cat_mata_kanan_putih.setScale((4000 - time) / 1500);
+                cat_mata_kiri_putih.setScale((4000 - time) / 1500);
+            } 
+            if (time >= 4200 && time <= 4400) {
+                cat_mata_kanan_hitam.setScale(time / 4400);
+                cat_mata_kiri_hitam.setScale(time / 4400);
+                cat_mata_kanan_putih.setScale(time / 4400);
+                cat_mata_kiri_putih.setScale(time / 4400);
             }
 
             // pindah posisi badtz maru ke kiri
@@ -1190,39 +1316,28 @@ function main() {
             }
 
             // ChocoCat
-            glMatrix.mat4.rotateX(telinga_kiri.MOVEMATRIX, telinga_kiri.MOVEMATRIX, LIBS.degToRad(10));
-            glMatrix.mat4.rotateZ(telinga_kiri.MOVEMATRIX, telinga_kiri.MOVEMATRIX, LIBS.degToRad(32));
+            glMatrix.mat4.rotateX(cat_telinga_kiri.MOVEMATRIX, cat_telinga_kiri.MOVEMATRIX, LIBS.degToRad(10));
+            glMatrix.mat4.rotateZ(cat_telinga_kiri.MOVEMATRIX, cat_telinga_kiri.MOVEMATRIX, LIBS.degToRad(32));
 
-            glMatrix.mat4.rotateX(telinga_kanan.MOVEMATRIX, telinga_kanan.MOVEMATRIX, LIBS.degToRad(10));
-            glMatrix.mat4.rotateZ(telinga_kanan.MOVEMATRIX, telinga_kanan.MOVEMATRIX, LIBS.degToRad(-32));
+            glMatrix.mat4.rotateX(cat_telinga_kanan.MOVEMATRIX, cat_telinga_kanan.MOVEMATRIX, LIBS.degToRad(10));
+            glMatrix.mat4.rotateZ(cat_telinga_kanan.MOVEMATRIX, cat_telinga_kanan.MOVEMATRIX, LIBS.degToRad(-32));
 
-            glMatrix.mat4.rotateX(telinga_kanan_dalam.MOVEMATRIX, telinga_kanan_dalam.MOVEMATRIX, LIBS.degToRad(10));
-            glMatrix.mat4.rotateZ(telinga_kanan_dalam.MOVEMATRIX, telinga_kanan_dalam.MOVEMATRIX, LIBS.degToRad(-32));
+            glMatrix.mat4.rotateX(cat_telinga_kanan_dalam.MOVEMATRIX, cat_telinga_kanan_dalam.MOVEMATRIX, LIBS.degToRad(10));
+            glMatrix.mat4.rotateZ(cat_telinga_kanan_dalam.MOVEMATRIX, cat_telinga_kanan_dalam.MOVEMATRIX, LIBS.degToRad(-32));
 
-            glMatrix.mat4.rotateX(telinga_kiri_dalam.MOVEMATRIX, telinga_kiri_dalam.MOVEMATRIX, LIBS.degToRad(10));
-            glMatrix.mat4.rotateZ(telinga_kiri_dalam.MOVEMATRIX, telinga_kiri_dalam.MOVEMATRIX, LIBS.degToRad(32));
+            glMatrix.mat4.rotateX(cat_telinga_kiri_dalam.MOVEMATRIX, cat_telinga_kiri_dalam.MOVEMATRIX, LIBS.degToRad(10));
+            glMatrix.mat4.rotateZ(cat_telinga_kiri_dalam.MOVEMATRIX, cat_telinga_kiri_dalam.MOVEMATRIX, LIBS.degToRad(32));
 
-            glMatrix.mat4.rotateZ(tangan_kanan.MOVEMATRIX, tangan_kanan.MOVEMATRIX, LIBS.degToRad(25));
-            glMatrix.mat4.rotateZ(tangan_kiri.MOVEMATRIX, tangan_kiri.MOVEMATRIX, LIBS.degToRad(-25));
+            glMatrix.mat4.rotateZ(cat_tangan_kanan.MOVEMATRIX, cat_tangan_kanan.MOVEMATRIX, LIBS.degToRad(25));
+            glMatrix.mat4.rotateZ(cat_tangan_kiri.MOVEMATRIX, cat_tangan_kiri.MOVEMATRIX, LIBS.degToRad(-25));
 
-            glMatrix.mat4.rotateZ(kumis_kanan1.MOVEMATRIX, kumis_kanan1.MOVEMATRIX, LIBS.degToRad(-80));
-            glMatrix.mat4.rotateZ(kumis_kanan2.MOVEMATRIX, kumis_kanan2.MOVEMATRIX, LIBS.degToRad(-105));
+            glMatrix.mat4.rotateZ(cat_kumis_kanan1.MOVEMATRIX, cat_kumis_kanan1.MOVEMATRIX, LIBS.degToRad(-80));
+            glMatrix.mat4.rotateZ(cat_kumis_kanan2.MOVEMATRIX, cat_kumis_kanan2.MOVEMATRIX, LIBS.degToRad(-105));
 
-            glMatrix.mat4.rotateZ(kumis_kiri1.MOVEMATRIX, kumis_kiri1.MOVEMATRIX, LIBS.degToRad(80));
-            glMatrix.mat4.rotateZ(kumis_kiri2.MOVEMATRIX, kumis_kiri2.MOVEMATRIX, LIBS.degToRad(105));
+            glMatrix.mat4.rotateZ(cat_kumis_kiri1.MOVEMATRIX, cat_kumis_kiri1.MOVEMATRIX, LIBS.degToRad(80));
+            glMatrix.mat4.rotateZ(cat_kumis_kiri2.MOVEMATRIX, cat_kumis_kiri2.MOVEMATRIX, LIBS.degToRad(105));
 
-            glMatrix.mat4.rotateX(topi.MOVEMATRIX, topi.MOVEMATRIX, LIBS.degToRad(-90));
-
-            kepala.setScale(0.5)
-            for (let i = 0; i < kepala.child.length; i++) {
-                kepala.child[i].setScale(0.5)
-            }
-
-            badan.setScale(0.5)
-            for (let i = 0; i < badan.child.length; i++) {
-                badan.child[i].setScale(0.5)
-            }
-
+            glMatrix.mat4.rotateX(cat_topi.MOVEMATRIX, cat_topi.MOVEMATRIX, LIBS.degToRad(-90));
             time_prev = time;
         }
         GL.viewport(0, 0, CANVAS.width, CANVAS.height);
@@ -1235,6 +1350,10 @@ function main() {
         chocoCat.draw();
         for (let i = 0; i < curveObjects.length; i++) {
             curveObjects[i].drawLine();
+        }
+
+        for (let i = 0; i < cat_curve.length; i++) {
+            cat_curve[i].drawLine();
         }
 
         // tangan_kiri.draw();
