@@ -1572,11 +1572,11 @@ function main() {
                 badtz_mata_kanan.setScale(time / 9000);
                 badtz_mata_kiri.setScale(time / 9000);
             }
-            if (time >= 10500 && time <= 11800) {
+            if (time >= 10500 && time <= 10800) {
                 badtz_mata_kanan.setScale((10500 - time) / 300);
                 badtz_mata_kiri.setScale((10500 - time) / 300)
             }
-            if (time >= 11800 && time <= 12000) {
+            if (time >= 10800 && time <= 11000) {
                 badtz_mata_kanan.setScale(time / 12000);
                 badtz_mata_kiri.setScale(time / 12000);
             }
@@ -1588,11 +1588,11 @@ function main() {
                 badtz_mata_kanan.setScale(time / 15000);
                 badtz_mata_kiri.setScale(time / 15000);
             }
-            if (time >= 17500 && time <= 18800) {
+            if (time >= 17500 && time <= 17800) {
                 badtz_mata_kanan.setScale((17500 - time) / 300);
                 badtz_mata_kiri.setScale((17500 - time) / 300)
             }
-            if (time >= 18800 && time <= 19000) {
+            if (time >= 17800 && time <= 18000) {
                 badtz_mata_kanan.setScale(time / 19000);
                 badtz_mata_kiri.setScale(time / 19000);
             }
@@ -1604,11 +1604,11 @@ function main() {
                 badtz_mata_kanan.setScale(time / 21000);
                 badtz_mata_kiri.setScale(time / 21000);
             }
-            if (time >= 22500 && time <= 23800) {
+            if (time >= 22500 && time <= 22800) {
                 badtz_mata_kanan.setScale((22500 - time) / 300);
                 badtz_mata_kiri.setScale((22500 - time) / 300)
             }
-            if (time >= 23800 && time <= 24000) {
+            if (time >= 22800 && time <= 23000) {
                 badtz_mata_kanan.setScale(time / 24000);
                 badtz_mata_kiri.setScale(time / 24000);
             }
