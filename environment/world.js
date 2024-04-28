@@ -884,6 +884,36 @@ function main() {
     bush.addChild(daun_bush2);
     bush.addChild(daun_bush3);
 
+    var awan = new MyObject([],[], shader_vertex_source, shader_fragment_source);
+
+    object = generateSphere(0.6, 235, 232, 232, 1.5, 0.5, 1, 1, 3, -4);
+    var awan11 = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
+
+    object = generateSphere(0.5, 235, 232, 232, 1.3, 0.3, 1, 0, 3, -4);
+    var awan12 = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
+
+    object = generateSphere(0.5, 235, 232, 232, 1.8, 0.2, 1, 2, 3, -4);
+    var awan13 = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
+
+    var awan2 = new MyObject([],[], shader_vertex_source, shader_fragment_source);
+
+    object = generateSphere(0.6, 235, 232, 232, 1.2, 0.6, 1, 0, 1.5, -4);
+    var awan21 = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
+
+    object = generateSphere(0.5, 235, 232, 232, 1.1, 0.5, 1, -1, 1.5, -4);
+    var awan22 = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
+
+    object = generateSphere(0.5, 235, 232, 232, 1, 0.3, 1, 0.8, 1.5, -4);
+    var awan23 = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
+
+    awan.addChild(awan11);
+    awan.addChild(awan12);
+    awan.addChild(awan13);
+
+    awan2.addChild(awan21);
+    awan2.addChild(awan22);
+    awan2.addChild(awan23);
+
     world.addChild(pohon);
     world.addChild(pohon2);
     world.addChild(tanah);
@@ -892,6 +922,8 @@ function main() {
     world.addChild(lampu);
     world.addChild(lampu2);
     world.addChild(bush);
+    world.addChild(awan);
+    world.addChild(awan2);
     
     // Matriks
     var PROJMATRIX = LIBS.get_projection(40, CANVAS.width / CANVAS.height, 1, 100);
@@ -964,6 +996,16 @@ function main() {
                 bush.child[i].setRotateMove(PHI, THETA, 0);
             }
 
+            for (let i = 0; i < awan.child.length; i++) {
+                awan.child[i].setIdentityMove();
+                awan.child[i].setRotateMove(PHI, THETA, 0);
+            }
+
+            for (let i = 0; i < awan.child.length; i++) {
+                awan2.child[i].setIdentityMove();
+                awan2.child[i].setRotateMove(PHI, THETA, 0);
+            }
+
             if (time >= 1000 && time <= 3000) {
                 apel1.setTranslateMove(0, -(time - 1000) / 1550, 0);
             } else if (time >= 3000 && time <= 5000) {
@@ -977,6 +1019,33 @@ function main() {
                 apel1.setTranslateMove(0, -(3000 - 1000) / 1550, 0);
                 apel2.setTranslateMove(0, -(5000 - 3000) / 1350, 0);
                 apel3.setTranslateMove(0, -(7000 - 5000) / 1550, 0);
+            }
+
+            if (time >= 1000 && time <= 10000) {
+                awan11.setTranslateMove(-(time - 1000) / 3500, 0, 0);
+                awan12.setTranslateMove(-(time - 1000) / 3500, 0, 0);
+                awan13.setTranslateMove(-(time - 1000) / 3500, 0, 0);
+                awan21.setTranslateMove((time - 1000) / 3500, 0, 0);
+                awan22.setTranslateMove((time - 1000) / 3500, 0, 0);
+                awan23.setTranslateMove((time - 1000) / 3500, 0, 0);
+            } 
+
+            if (time > 10000) {
+                awan11.setTranslateMove(-(10000 - 1000) / 3500, 0, 0);
+                awan12.setTranslateMove(-(10000 - 1000) / 3500, 0, 0);
+                awan13.setTranslateMove(-(10000 - 1000) / 3500, 0, 0);
+                awan21.setTranslateMove((10000 - 1000) / 3500, 0, 0);
+                awan22.setTranslateMove((10000 - 1000) / 3500, 0, 0);
+                awan23.setTranslateMove((10000 - 1000) / 3500, 0, 0);
+            }
+            
+            if (time >= 10000 && time <= 22000) {
+                awan11.setTranslateMove((time - 10000) / 3500, 0, 0);
+                awan12.setTranslateMove((time - 10000) / 3500, 0, 0);
+                awan13.setTranslateMove((time - 10000) / 3500, 0, 0);
+                awan21.setTranslateMove(-(time - 10000) / 3500, 0, 0);
+                awan22.setTranslateMove(-(time - 10000) / 3500, 0, 0);
+                awan23.setTranslateMove(-(time - 10000) / 3500, 0, 0);
             }
 
             glMatrix.mat4.rotateX(tanah.MOVEMATRIX, tanah.MOVEMATRIX, LIBS.degToRad(15));
@@ -1010,6 +1079,8 @@ function main() {
         lampu.setUniformMatrix4(PROJMATRIX, VIEWMATRIX);
         lampu2.setUniformMatrix4(PROJMATRIX, VIEWMATRIX);
         bush.setUniformMatrix4(PROJMATRIX, VIEWMATRIX);
+        awan.setUniformMatrix4(PROJMATRIX, VIEWMATRIX);
+        awan2.setUniformMatrix4(PROJMATRIX, VIEWMATRIX);
 
         for (let i = 0; i < pohon.child.length; i++) {
             pohon.child[i].setUniformMatrix4(PROJMATRIX, VIEWMATRIX);
@@ -1034,6 +1105,14 @@ function main() {
 
         for (let i = 0; i < bush.child.length; i++) {
             bush.child[i].setUniformMatrix4(PROJMATRIX, VIEWMATRIX);
+        }
+
+        for (let i = 0; i < awan.child.length; i++) {
+            awan.child[i].setUniformMatrix4(PROJMATRIX, VIEWMATRIX);
+        }
+
+        for (let i = 0; i < awan.child.length; i++) {
+            awan2.child[i].setUniformMatrix4(PROJMATRIX, VIEWMATRIX);
         }
 
         world.draw();
