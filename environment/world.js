@@ -812,10 +812,22 @@ function main() {
     kursi.addChild(tiang1);
     kursi.addChild(tiang2);
 
+    var cone = new MyObject([],[], shader_vertex_source, shader_fragment_source);
+
+    object = generateCone(-2, 1.5, -0.1, -2, 1.5, -0.8, 0.2, 0.2, 240, 91, 5);
+    var cone_atas = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
+
+    object = generateTabung(-2, -0.8, -1.5, -2, -0.8, -1.5, 0.25, 0, 0.25, 0.25, 0.07, 0.25, 125, 52, 10)
+    var cone_bawah = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
+
+    cone.addChild(cone_atas);
+    cone.addChild(cone_bawah);
+
     world.addChild(pohon);
     world.addChild(pohon2);
     world.addChild(tanah);
     world.addChild(kursi);
+    world.addChild(cone);
     
     // Matriks
     var PROJMATRIX = LIBS.get_projection(40, CANVAS.width / CANVAS.height, 1, 100);
@@ -871,6 +883,11 @@ function main() {
                 kursi.child[i].setRotateMove(PHI, THETA, 0);
             }
 
+            for (let i = 0; i < cone.child.length; i++) {
+                cone.child[i].setIdentityMove();
+                cone.child[i].setRotateMove(PHI, THETA, 0);
+            }
+
             if (time >= 1000 && time <= 3000) {
                 apel1.setTranslateMove(0, -(time - 1000) / 1550, 0);
             } else if (time >= 3000 && time <= 5000) {
@@ -890,6 +907,8 @@ function main() {
             glMatrix.mat4.rotateX(kursi.MOVEMATRIX, kursi.MOVEMATRIX, LIBS.degToRad(15));
             glMatrix.mat4.rotateX(tiang1.MOVEMATRIX, tiang1.MOVEMATRIX, LIBS.degToRad(15));
             glMatrix.mat4.rotateX(tiang2.MOVEMATRIX, tiang2.MOVEMATRIX, LIBS.degToRad(15));
+            glMatrix.mat4.rotateX(cone_atas.MOVEMATRIX, cone_atas.MOVEMATRIX, LIBS.degToRad(-75));
+            glMatrix.mat4.rotateX(cone_bawah.MOVEMATRIX, cone_bawah.MOVEMATRIX, LIBS.degToRad(15));
 
             time_prev = time;
         }
@@ -901,6 +920,7 @@ function main() {
         pohon2.setUniformMatrix4(PROJMATRIX, VIEWMATRIX);
         kursi.setUniformMatrix4(PROJMATRIX, VIEWMATRIX);
         tanah.setUniformMatrix4(PROJMATRIX, VIEWMATRIX);
+        cone.setUniformMatrix4(PROJMATRIX, VIEWMATRIX);
 
         for (let i = 0; i < pohon.child.length; i++) {
             pohon.child[i].setUniformMatrix4(PROJMATRIX, VIEWMATRIX);
@@ -912,6 +932,10 @@ function main() {
 
         for (let i = 0; i < kursi.child.length; i++) {
             kursi.child[i].setUniformMatrix4(PROJMATRIX, VIEWMATRIX);
+        }
+
+        for (let i = 0; i < cone.child.length; i++) {
+            cone.child[i].setUniformMatrix4(PROJMATRIX, VIEWMATRIX);
         }
 
         world.draw();
