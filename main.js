@@ -3612,6 +3612,27 @@ function main() {
 
             // ===================================================================================================================================
 
+            // ========================================================= Curve berputar ==========================================================            
+            if (time >= 35000 && time <= 55000) {
+                curveObjects.forEach(obj => {
+                    glMatrix.mat4.translate(obj.MOVEMATRIX, obj.MOVEMATRIX, [0, 0.0, 0.0]);
+                    glMatrix.mat4.rotateY(obj.MOVEMATRIX, obj.MOVEMATRIX, time / 1000);
+                    glMatrix.mat4.translate(obj.MOVEMATRIX, obj.MOVEMATRIX, [2, 0.0, 0.0]);
+                });
+
+                cat_curve.forEach(obj => {
+                    glMatrix.mat4.translate(obj.MOVEMATRIX, obj.MOVEMATRIX, [0, 0.0, 0.0]);
+                    glMatrix.mat4.rotateY(obj.MOVEMATRIX, obj.MOVEMATRIX, time / 1000);
+                    glMatrix.mat4.translate(obj.MOVEMATRIX, obj.MOVEMATRIX, [2, 0.0, 0.0]);
+                });
+
+                rory_curveObjects.forEach(obj => {
+                    glMatrix.mat4.translate(obj.MOVEMATRIX, obj.MOVEMATRIX, [0, 0.0, 0.0]);
+                    glMatrix.mat4.rotateY(obj.MOVEMATRIX, obj.MOVEMATRIX, time / 1000);
+                    glMatrix.mat4.translate(obj.MOVEMATRIX, obj.MOVEMATRIX, [2, 0.0, 0.0]);
+                });
+            }
+
             // ============================================ Badtz Maru ====================================================================            
 
             badtz_kepala.setScale(0.3)
