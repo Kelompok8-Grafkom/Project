@@ -209,13 +209,6 @@ class MyObject {
         LIBS.translateX(this.MOVEMATRIX, x);
     }
 
-    setPosition(x, y, z) {
-        LIBS.setPosition(this.MOVEMATRIX, x, y, z);
-        this.child.forEach(obj => {
-            obj.setPosition(x, y, z);
-        });
-    }
-
     setScale(s) {
         var scale = LIBS.scale(s);
         this.scaling(scale);
@@ -563,43 +556,134 @@ function main() {
         return [vertex, faces];
     }
 
+    var object;
+
+    // SPHERE: radius, r, g, b, mulX, mulY, mulZ, pX, pY, pZ
+    // CIRCLE: mX, mY, mZ, pX, pY, pZ, r, g, b
+    // HALF SPHERE: radius, r, g, b, mulXy, pX, pY, pZ
+
+    var world = new MyObject([], [], shader_vertex_source, shader_fragment_source);
+
+    var pohon = new MyObject([],[], shader_vertex_source, shader_fragment_source);
+
+    object = generateSphere(1.0, 29, 140, 27, 1, 1, 1, 5, 2, -3.5);
+    var daun1 = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
+
+    object = generateSphere(0.7, 29, 140, 27, 1, 1, 1, 6, 2, -3.5);
+    var daun2 = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
+
+    object = generateSphere(0.8, 29, 140, 27, 1, 1, 1, 4, 2, -3.5);
+    var daun3 = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
+
+    object = generateSphere(0.7, 29, 140, 27, 1, 1, 1, 5, 3, -3.5);
+    var daun4 = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
+
+    object = generateSphere(0.5, 29, 140, 27, 1, 1, 1, 6, 3, -3.5);
+    var daun5 = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
+
+    object = generateSphere(0.5, 29, 140, 27, 1, 1, 1, 4.1, 2.9, -3.5);
+    var daun6 = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
+
+    object = generateTabung(5, -1, -3.5, 5, 2, -3.5, 0.35, 0, 0.35, 0.2, 1.2, 0.1, 51, 39, 14)
+    var batang = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
+
+    object = generateSphere(0.15, 250, 0, 0, 1, 1, 1, 3.8, 1.8, -2.7);
+    var apel1 = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
+
+    object = generateSphere(0.15, 250, 0, 0, 1, 1, 1, 4.8, 2.1, -2.5);
+    var apel2 = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
+
+    object = generateSphere(0.15, 250, 0, 0, 1, 1, 1, 5.9, 1.8, -2.8);
+    var apel3 = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
+
+    object = generateSphere(0.15, 250, 0, 0, 1, 1, 1, 4.1, 2.7, -2.8);
+    var apel4 = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
+
+    object = generateSphere(0.15, 250, 0, 0, 1, 1, 1, 5.7, 2.7, -2.8);
+    var apel5 = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
+
+    pohon.addChild(daun1);
+    pohon.addChild(daun2);
+    pohon.addChild(daun3);
+    pohon.addChild(daun4);
+    pohon.addChild(daun5);
+    pohon.addChild(daun6);
+    pohon.addChild(batang);
+    pohon.addChild(apel1);
+    pohon.addChild(apel2);
+    pohon.addChild(apel3);
+    pohon.addChild(apel4);
+    pohon.addChild(apel5);
+
+    // pohon 2
+    var pohon2 = new MyObject([],[], shader_vertex_source, shader_fragment_source);
+
+    object = generateSphere(1.0, 61, 163, 57, 1, 1, 1, -4, 2, -2.5);
+    var daun1 = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
+
+    object = generateSphere(0.7, 61, 163, 57, 1, 1, 1, -5, 2, -2.5);
+    var daun2 = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
+
+    object = generateSphere(0.8, 61, 163, 57, 1, 1, 1, -3, 2, -2.5);
+    var daun3 = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
+
+    object = generateSphere(0.7, 61, 163, 57, 1, 1, 1, -4, 3, -2.5);
+    var daun4 = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
+
+    object = generateSphere(0.5, 61, 163, 57, 1, 1, 1, -5, 3, -2.5);
+    var daun5 = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
+
+    object = generateSphere(0.5, 61, 163, 57, 1, 1, 1, -3.1, 2.9, -2.5);
+    var daun6 = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
+
+    object = generateTabung(-4, -0.6, -2.5, -4, 2, -2.5, 0.3, 0, 0.3, 0.2, 1.2, 0.1, 51, 39, 14)
+    var batang = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
+
+    pohon2.addChild(daun1);
+    pohon2.addChild(daun2);
+    pohon2.addChild(daun3);
+    pohon2.addChild(daun4);
+    pohon2.addChild(daun5);
+    pohon2.addChild(daun6);
+    pohon2.addChild(batang);
+
     // tanah
     var tanah_vertex = [
         // yellow
-        -2.5, -1, -2.5,     92/255, 59/255, 36/255, 
-        2.5, -1, -2.5,     92/255, 59/255, 36/255,
-        2.5,  -0.8, -2.5,     92/255, 59/255, 36/255,
-        -2.5,  -0.8, -2.5,     92/255, 59/255, 36/255,
+        -3.5, -1, -2.5,     92/255, 59/255, 36/255, 
+        3.5, -1, -2.5,     92/255, 59/255, 36/255,
+        3.5,  -0.8, -2.5,     92/255, 59/255, 36/255,
+        -3.5,  -0.8, -2.5,     92/255, 59/255, 36/255,
     
         // blue
-        -2.5, -1, 2.5,     92/255, 59/255, 36/255,
-        2.5, -1, 2.5,     92/255, 59/255, 36/255,
-        2.5,  -0.8, 2.5,     92/255, 59/255, 36/255,
-        -2.5,  -0.8, 2.5,     92/255, 59/255, 36/255,
+        -3.5, -1, 2.5,     92/255, 59/255, 36/255,
+        3.5, -1, 2.5,     92/255, 59/255, 36/255,
+        3.5,  -0.8, 2.5,     92/255, 59/255, 36/255,
+        -3.5,  -0.8, 2.5,     92/255, 59/255, 36/255,
     
         // cyan
-        -2.5, -1, -2.5,     92/255, 59/255, 36/255,
-        -2.5,  -0.8, -2.5,     92/255, 59/255, 36/255,
-        -2.5,  -0.8,  2.5,     92/255, 59/255, 36/255,
-        -2.5, -1,  2.5,     92/255, 59/255, 36/255,
+        -3.5, -1, -2.5,     92/255, 59/255, 36/255,
+        -3.5,  -0.8, -2.5,     92/255, 59/255, 36/255,
+        -3.5,  -0.8,  2.5,     92/255, 59/255, 36/255,
+        -3.5, -1,  2.5,     92/255, 59/255, 36/255,
     
         // red
-        2.5, -1, -2.5,     92/255, 59/255, 36/255,
-        2.5,  -0.8, -2.5,     92/255, 59/255, 36/255,
-        2.5,  -0.8,  2.5,     92/255, 59/255, 36/255,
-        2.5, -1,  2.5,     92/255, 59/255, 36/255,
+        3.5, -1, -2.5,     92/255, 59/255, 36/255,
+        3.5,  -0.8, -2.5,     92/255, 59/255, 36/255,
+        3.5,  -0.8,  2.5,     92/255, 59/255, 36/255,
+        3.5, -1,  2.5,     92/255, 59/255, 36/255,
     
         // pink
-        -2.5, -1, -2.5,     92/255, 59/255, 36/255,
-        -2.5, -1,  2.5,     92/255, 59/255, 36/255,
-        2.5, -1,  2.5,     92/255, 59/255, 36/255,
-        2.5, -1, -2.5,     92/255, 59/255, 36/255,
+        -3.5, -1, -2.5,     92/255, 59/255, 36/255,
+        -3.5, -1,  2.5,     92/255, 59/255, 36/255,
+        3.5, -1,  2.5,     92/255, 59/255, 36/255,
+        3.5, -1, -2.5,     92/255, 59/255, 36/255,
     
         // green
-        -2.5, -0.8, -2.5,    25/255, 97/255, 29/255,
-        -2.5, -0.8,  2.5,    25/255, 97/255, 29/255,
-        2.5, -0.8,  2.5,     25/255, 97/255, 29/255,
-        2.5, -0.8, -2.5,     25/255, 97/255, 29/255,
+        -3.5, -0.8, -2.5,    25/255, 97/255, 29/255,
+        -3.5, -0.8,  2.5,    25/255, 97/255, 29/255,
+        3.5, -0.8,  2.5,     25/255, 97/255, 29/255,
+        3.5, -0.8, -2.5,     25/255, 97/255, 29/255,
       ];
 
     var tanah_faces = [
@@ -624,6 +708,10 @@ function main() {
 
     var tanah = new MyObject(tanah_vertex, tanah_faces, shader_vertex_source, shader_fragment_source);
 
+    world.addChild(pohon);
+    world.addChild(pohon2);
+    world.addChild(tanah);
+    
     // Matriks
     var PROJMATRIX = LIBS.get_projection(40, CANVAS.width / CANVAS.height, 1, 100);
     var VIEWMATRIX = LIBS.get_I4();
@@ -649,9 +737,44 @@ function main() {
                 PHI += dY;
             }
 
-            tanah.setIdentityMove();        
-            tanah.setRotateMove(PHI, THETA, 0);  
-            tanah.setTranslateMove(0, 0, 0);
+            world.setIdentityMove();        
+            world.setRotateMove(PHI, THETA, 0);  
+            world.setTranslateMove(0, 0, 0);
+
+            pohon.setScale(0.5);
+            pohon2.setScale(0.7);
+
+            for (let i = 0; i < world.child.length; i++) {
+                world.child[i].setIdentityMove();
+                world.child[i].setRotateMove(PHI, THETA, 0);
+            }
+
+            for (let i = 0; i < pohon.child.length; i++) {
+                pohon.child[i].setIdentityMove();
+                pohon.child[i].setRotateMove(PHI, THETA, 0);
+                pohon.child[i].setScale(0.5);
+            }
+
+            for (let i = 0; i < pohon2.child.length; i++) {
+                pohon2.child[i].setIdentityMove();
+                pohon2.child[i].setRotateMove(PHI, THETA, 0);
+                pohon2.child[i].setScale(0.7);
+            }
+
+            if (time >= 1000 && time <= 3000) {
+                apel1.setTranslateMove(0, -(time - 1000) / 1550, 0);
+            } else if (time >= 3000 && time <= 5000) {
+                apel1.setTranslateMove(0, -(3000 - 1000) / 1550, 0);
+                apel2.setTranslateMove(0, -(time - 3000) / 1350, 0);
+            } else if (time >= 5000 && time <= 7000) {
+                apel1.setTranslateMove(0, -(3000 - 1000) / 1550, 0);
+                apel2.setTranslateMove(0, -(5000 - 3000) / 1350, 0);
+                apel3.setTranslateMove(0, -(time - 5000) / 1550, 0);
+            } else if (time > 7000) {
+                apel1.setTranslateMove(0, -(3000 - 1000) / 1550, 0);
+                apel2.setTranslateMove(0, -(5000 - 3000) / 1350, 0);
+                apel3.setTranslateMove(0, -(7000 - 5000) / 1550, 0);
+            }
 
             glMatrix.mat4.rotateX(tanah.MOVEMATRIX, tanah.MOVEMATRIX, LIBS.degToRad(15));
 
@@ -660,9 +783,20 @@ function main() {
         GL.viewport(0, 0, CANVAS.width, CANVAS.height);
         GL.clear(GL.COLOR_BUFFER_BIT);
 
+        world.setUniformMatrix4(PROJMATRIX, VIEWMATRIX);
+        pohon.setUniformMatrix4(PROJMATRIX, VIEWMATRIX);
+        pohon2.setUniformMatrix4(PROJMATRIX, VIEWMATRIX);
         tanah.setUniformMatrix4(PROJMATRIX, VIEWMATRIX);
 
-        tanah.draw();
+        for (let i = 0; i < pohon.child.length; i++) {
+            pohon.child[i].setUniformMatrix4(PROJMATRIX, VIEWMATRIX);
+        }
+
+        for (let i = 0; i < pohon2.child.length; i++) {
+            pohon2.child[i].setUniformMatrix4(PROJMATRIX, VIEWMATRIX);
+        }
+
+        world.draw();
         GL.flush();
         window.requestAnimationFrame(animate);
     }
