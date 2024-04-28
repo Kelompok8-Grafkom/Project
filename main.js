@@ -1409,6 +1409,21 @@ function main() {
     lampu2.addChild(tiang_lampu2);
     lampu2.addChild(bawah_tiang2);
 
+    var bush = new MyObject([],[], shader_vertex_source, shader_fragment_source);
+
+    object = generateSphere(0.3, 29, 56, 28, 1, 1, 1, -2.55, -0.4, -1);
+    var daun_bush = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
+
+    object = generateSphere(0.2, 29, 56, 28, 1.3, 1, 1, -2.25, -0.4, -1.2);
+    var daun_bush2 = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
+
+    object = generateSphere(0.2, 29, 56, 28, 1.2, 1, 1, -2.95, -0.5, -1);
+    var daun_bush3 = new MyObject(object[0], object[1], shader_vertex_source, shader_fragment_source);
+
+    bush.addChild(daun_bush);
+    bush.addChild(daun_bush2);
+    bush.addChild(daun_bush3);
+
     world.addChild(pohon);
     world.addChild(pohon2);
     world.addChild(tanah);
@@ -1416,6 +1431,7 @@ function main() {
     world.addChild(cone);
     world.addChild(lampu);
     world.addChild(lampu2);
+    world.addChild(bush);
     // ============================================================================================================================================
 
     // Matriks
@@ -2698,20 +2714,26 @@ function main() {
             }
 
             // ======================================================= Apel Jatuh ================================================================
-            if (time >= 1000 && time <= 3000) {
-                apel1.setTranslateMove(0, -(time - 1000) / 1550, 0);
-            } else if (time >= 3000 && time <= 5000) {
-                apel1.setTranslateMove(0, -(3000 - 1000) / 1550, 0);
-                apel2.setTranslateMove(0, -(time - 3000) / 1350, 0);
-            } else if (time >= 5000 && time <= 7000) {
-                apel1.setTranslateMove(0, -(3000 - 1000) / 1550, 0);
-                apel2.setTranslateMove(0, -(5000 - 3000) / 1350, 0);
-                apel3.setTranslateMove(0, -(time - 5000) / 1550, 0);
-            } else if (time > 7000) {
-                apel1.setTranslateMove(0, -(3000 - 1000) / 1550, 0);
-                apel2.setTranslateMove(0, -(5000 - 3000) / 1350, 0);
-                apel3.setTranslateMove(0, -(7000 - 5000) / 1550, 0);
+            if (time >= 4000 && time <= 6000) {
+                apel3.setTranslateMove(0, -(time - 4000) / 770, 0);
+            } else if (time >= 10000 && time <= 12000) {
+                apel2.setTranslateMove(0, -(time - 10000) / 680, 0);
+            } else if (time >= 16000 && time <= 18000) {
+                apel1.setTranslateMove(0, -(time - 16000) / 770, 0);
+            } 
+            
+            if (time > 6000) {
+                apel3.setTranslateMove(0, -2000 / 770, 0);
             }
+
+            if (time > 12000) {
+                apel2.setTranslateMove(0, -2000 / 680, 0);
+            }
+
+            if (time > 18000) {
+                apel1.setTranslateMove(0, -2000 / 770, 0);
+            }
+            
 
             // ===================================================================================================================================
 
